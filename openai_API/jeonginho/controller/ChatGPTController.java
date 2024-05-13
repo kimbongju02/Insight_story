@@ -17,7 +17,7 @@ import java.util.Map;
  * selectChoice 메서드 : 이전 프롬프트(소설, 선택지) 기반으로 이어지는 다음 이야기와 선택지를 반환
  * */
 
-@RestController // Spring REST 컨트롤러 선언
+@Controller // Spring REST 컨트롤러 선언
 public class ChatGPTController {
     @Autowired
     private ChatGPTService chatGPTService;
@@ -33,7 +33,7 @@ public class ChatGPTController {
 
     // GPT
     @PostMapping("/generate_story")
-    public String postGenerateStory(@RequestBody Map<String, String> requestBody, Model model) {
+    public String postGenerateStory(@Requestparam Map<String, String> requestBody, Model model) {
 
         // 클라이언트에서 전달한 데이터 추출
         String main = requestBody.get("main"); // 주인공
@@ -62,7 +62,8 @@ public class ChatGPTController {
         // generate_story.html로 이동하여 렌더링하기 전에
         // Postman으로 체킹
         // initialStory 즉시 반환.
-        return initialStory;
+//        return initialStory;
+        // return "generate_story";
     }
 
 
