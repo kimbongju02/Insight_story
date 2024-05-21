@@ -8,9 +8,6 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
-import java.util.ArrayList;
-import java.util.List;
-
 /**
  * ChatGPTServiceImpl
  * ChatGPTService 인터페이스의 구현체
@@ -55,34 +52,41 @@ public class ChatGPTServiceImpl implements ChatGPTService {
                 .getContent();
     }
 
-    @Override // 선택지를 생성하는 메서드
-    public List<String> generateChoices(String story) {
-        List<String> choices = new ArrayList<>();
-
-        // 선택지 생성 로직 구현
-        choices.add("선택지 1 :");
-        choices.add("선택지 2 :");
-        choices.add("선택지 3 :");
-        return choices;
+    @Override // 추가
+    public String prompt(String background, String main, String sub1, String sub2, String setting) {
+//        return String.format("배경은 %s이고 등장인물은 주인공(%s)과 %s,%s이 나오는 %s장르의 소설을 만들어줘 대화도 있으면 좋겠어."
+//                + " 추가적으로 긴 내용의 소설을 부탁할게. \n"
+//                + "또한 끝에 사용자에게 스토리의 방향성을 제시하는 선택지(3개)도 넣어줘. \n"
+//                + "조건을 정리해줄게.\n" +
+//                "1. 이 조건은 앞으로 쭉 이어진다.\n" +
+//                "2. 선택지는 번호와 함께 내용을 보여줘야 한다. \n" +
+//                "3. 처음에 선택지를 고를 때부터 카운트를 시작한다\n" +
+//                "4. 카운트가 5가 되면 이야기를 완결낸다. \n" +
+//                "그럼 이제 이야기를 만들어봐\n\n###\n\n", background, main, sub1, sub2, setting);
+        return String.format("[조건]\n" +
+                "내가 배경, 인물, 장르를 제시하면, 너는 내가 제시한 요소를 기반으로 소설을 만들어줘. \n" +
+                "대신에, 소설을 다 만들면 안 돼. 그리고 인물간 대화도 필요해. 또한 중간 중간에 내가 선택해서 그에 따라 소설을 이어갈 수 \n" +
+                "있도록 끊고 선택지(3개)를 제공해줘. \n" +
+                "\n" +
+                "아래는 예시야 참고해서 맨 마지막 설정사항들을 이용하여 스토리를 만들어봐" +
+                "[예제]\n" +
+                "{여자 아이, 중세시대, 로맨스 판타지}\n" +
+                "{중세시대 무렵, 어느 한 부자집 여자아이는 부모님의 사랑을 듬뿍 받으며 잘 살고 있었다. \n" +
+                "그 여자아이에게는 한 명의 남자 소꿉 친구가 있었고, 그 소꿉친구는 여자아이를 좋아하고 있었다.\n" +
+                "하지만, 여자아이는 나라의 왕자를 좋아하고 있었다. 어느날, 여자아이는 파티에 가게 되었는데,\n" +
+                "함께 갈 사람을 고르려고 한다.}\n" +
+                "{여자 아이는 누구에게 초대장을 보낼까? \n" +
+                "1: 소꿉친구 2: 왕자 3: 보내지 않고 혼자 파티에 간다}\n" +
+                "\n" +
+                "설정사항 - 배경 : %s, 주인공 : %s, 등장인물1 : %s, 등장인물2 : %s, 장르 : %s", background, main, sub1, sub2, setting);
     }
 
-    @Override //초기 프롬프트를 생성하는 메서드
-    public String firstPrompt(String background, String main, String sub1, String sub2, String setting) {
-        return String.format("배경은 %s이고 등장인물은 주인공(%s)과 %s,%s이 나오는 %s장르의 소설을 만들어줘 대화도 있으면 좋겠어."
-                + " 추가적으로 긴 내용의 소설을 부탁할게. "
-                + "또한 끝에 사용자에게 스토리의 방향성을 제시하는 선택지(3개)도 넣어줘\n\n###\n\n", background, main, sub1, sub2, setting);
-    }
-
-    @Override //다음 스토리(프롬프트)를 생성하는 메서드
-    public String nextPrompt(String prevStory, String choice) {
+    @Override // 추가
+    public String continuePrompt(String prevStory, String choice) {
         return String.format("이전 스토리는 %s이고 이전 스토리에 대한 선택지로는 %s번을 선택할게. 선택한 선택지와 이전 스토리를 기반으로"
                 + "소설을 이어서 작성해줘. 대신 자극적인 내용도 있어야 해. 또한 등장인물간 대화는 필수야."
-                + "추가적으로 끝에 마찬가지로 사용자에게 스토리의 방향성을 제시하는 선택지(3개도) 꼭 넣어줘.\n\n###\n\n", prevStory, choice);
-    }
-
-    @Override //엔딩 스토리(프롬프트)를 생성하는 메서드
-    public String finalPrompt(String prevStory) {
-        return String.format("이전 스토리는 %s이고 이때까지의 스토리를 종합시킨다음 완결을 내줘. 그리고 이때까지 만든 소설을 다 합쳐서 보여줘." +
-                "추가로 선택지는 더이상 필요없어.", prevStory);
+                + "추가적으로 끝에 마찬가지로 사용자에게 스토리의 방향성을 제시하는 선택지(3개도) 꼭 넣어줘. \n" +
+                "- 조건을 정리해줄게.\n" +
+                "1. 선택지는 번호와 함께 내용을 보여줘야 한다. \n", prevStory, choice);
     }
 }
