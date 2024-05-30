@@ -11,4 +11,8 @@ public class basic_mapping {
         return "root_page";
     }
 	
+	@GetMapping("/content")
+    public String content() {
+        return "Content"; // Content.html 파일명
+    }
 }
