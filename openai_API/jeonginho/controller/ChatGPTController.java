@@ -2,11 +2,13 @@ package jeonginho.chatgptapi.controller;
 
 import jeonginho.chatgptapi.service.ChatGPTService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.HashMap;
 import java.util.Map;
 /**
  * ChatGPTController
@@ -16,7 +18,7 @@ import java.util.Map;
  * selectChoice 메서드 : 이전 프롬프트(소설, 선택지) 기반으로 이어지는 다음 이야기와 선택지를 반환
  * */
 
-@Controller// Spring 컨트롤러 선언
+@RestController// Spring 컨트롤러 선언
 @RequestMapping("/")
 public class ChatGPTController {
     @Autowired
@@ -36,35 +38,61 @@ public class ChatGPTController {
         return "generateStory";
     }
 
-    // Post
     @PostMapping(value = "/generateStory")
-    public String postGenerateStory(@RequestParam Map<String, String> requestBody, Model model) {
-        // @RequestParam 어노테이션을 사용하여 각각의 파라미터를 받아서 처리.
-
-        // 클라이언트에서 전달한 데이터 추출
-        String main = requestBody.get("main"); // 주인공
-        String sub1 = requestBody.get("sub1"); // 등장인물1
-        String sub2 = requestBody.get("sub2"); // 등장인물2
-        String background = requestBody.get("background"); // 소설의 배경 ex) 중세시대, 학교, 카페 등
-        String setting = requestBody.get("setting"); // 소설 장르 ex) 로맨스, 판타지, 호러 등
-
-        // 사용자 입력을 기반으로 초기 이야기 생성
-        String initialPrompt = chatGPTService.prompt(background, main
-                , sub1, sub2, setting);
+    public String postGenerateStory(@RequestParam Map<String, String> requestBody) {
+        // 프롬프트 기반 초기 스토리 작성
+        String initialPrompt = chatGPTService.prompt();
         String initialStory = chatGPTService.generateText(initialPrompt);
         System.out.println("initialStory: " + initialStory);
 
+        // 줄거리, 대화, 선택지 - JSON 형태의 문자열로 반환
+        String jsonResponse = "{\"Main\": \"" + initialStory + "\"}";
 
-        // 선택지를 통해 스토리를 이어나가기 위해 현재 이야기를 업데이트(변수화)
-        prevStory = initialStory;
+        // JSON 형식 출력문(문자열) 반환
+        return jsonResponse;
+    }
 
-        // 이야기와 선택지를 모델에 추가
-        model.addAttribute("story", initialStory);
+//    // Post
+//    @PostMapping(value = "/generateStory")
+//    public String postGenerateStory(@RequestParam Map<String, String> requestBody, Model model) {
+//        // @RequestParam 어노테이션을 사용하여 각각의 파라미터를 받아서 처리.
+//
+////        // 클라이언트에서 전달한 데이터 추출
+////        String main = requestBody.get("main"); // 주인공
+////        String sub1 = requestBody.get("sub1"); // 등장인물1
+////        String sub2 = requestBody.get("sub2"); // 등장인물2
+////        String background = requestBody.get("background"); // 소설의 배경 ex) 중세시대, 학교, 카페 등
+////        String setting = requestBody.get("setting"); // 소설 장르 ex) 로맨스, 판타지, 호러 등
+//
+//        // 사용자 입력을 기반으로 초기 이야기 생성
+//        String initialPrompt = chatGPTService.prompt();
+//        String initialStory = chatGPTService.generateText(initialPrompt);
+//        System.out.println("initialStory: " + initialStory);
+//
+//
+//        // 선택지를 통해 스토리를 이어나가기 위해 현재 이야기를 업데이트(변수화)
+//        prevStory = initialStory;
+//
+//        // 이야기와 선택지를 모델에 추가
+//        model.addAttribute("story", initialStory);
+//
+//        // generate_story.html로 이동하여 렌더링하기 전에
+//        // Postman으로 체킹
+//        // initialStory 즉시 반환.
+//        return initialStory;
+////        return "generateStory";
+//    }
 
-        // generate_story.html로 이동하여 렌더링하기 전에
-        // Postman으로 체킹
-        // initialStory 즉시 반환.
-        return initialStory;
-//        return "generateStory";
+    @PostMapping("/generateStorys")
+    public ResponseEntity<?> select(@RequestParam Map<String, String> requestBody, Model model) {
+        String choice = requestBody.get("choice");
+
+        String continuePrompt = chatGPTService.continuePrompt(prevStory, choice);
+        String nextStory = chatGPTService.generateText(continuePrompt);
+
+        prevStory = nextStory;
+
+        ResponseEntity<String> currentStory = ResponseEntity.ok().body(nextStory);
+        return currentStory;
     }
 }
