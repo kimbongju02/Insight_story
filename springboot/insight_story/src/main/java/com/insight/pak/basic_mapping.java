@@ -11,4 +11,13 @@ public class basic_mapping {
         return "root_page";
     }
 	
+	@GetMapping("/content")
+    public String content() {
+        return "Content"; // Content.html 파일명
+    }
+	
+	@GetMapping("/index")
+    public String test() {
+        return "index"; // Content.html 파일명
+    }
 }
