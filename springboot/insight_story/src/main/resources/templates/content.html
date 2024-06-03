@@ -93,6 +93,18 @@
                 displayStory(data.story);
             });
     }
+    // 서버에서 받은 JSON 데이터
+    var jsonData = {
+        "story": "줄거리 내용",
+        "dialog": "대화 내용",
+        "choice": "선택지"
+    };
+
+    // JSON 데이터를 문자열로 변환
+    var jsonString = JSON.stringify(jsonData, null, 2);
+
+    // HTML 요소에 JSON 문자열 삽입
+    document.getElementById("output").innerText = jsonString;
 </script>
 </body>
 </html>

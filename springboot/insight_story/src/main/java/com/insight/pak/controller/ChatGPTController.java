@@ -5,16 +5,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.Map;
 
 /**
+ * 컨트롤러
  * ChatGPTController
- * Rest 컨트롤러
  *
  * postGenerateStory 메서드 : 프롬프트를 생성하여 소설과 선택지를 만들어 텍스트로 반환
  * selectChoice 메서드 : 이전 프롬프트(소설, 선택지) 기반으로 이어지는 다음 이야기와 선택지를 반환
@@ -41,30 +38,18 @@ public class ChatGPTController {
         return "content";
     }
 
-//    @PostMapping(value = "/generateStory")
-//    public String postGenerateStory(@RequestParam Map<String, String> requestBody) {
-//        // 프롬프트 기반 초기 스토리 작성
-//        String initialPrompt = chatGPTService.prompt();
-//        String initialStory = chatGPTService.generateText(initialPrompt);
-//        System.out.println("initialStory: " + initialStory);
-//
-//        // 줄거리, 대화, 선택지 - JSON 형태의 문자열로 반환
-//        String jsonResponse = "{\"Main\": \"" + initialStory + "\"}";
-//
-//        // JSON 형식 출력문(문자열) 반환
-//        return jsonResponse;
-//    }
-
+    // 응답
     // Post
     @PostMapping(value = "/content")
     public String postGenerateStory(@RequestParam Map<String, String> requestBody, Model model) {
         // @RequestParam 어노테이션을 사용하여 각각의 파라미터를 받아서 처리
 
         // 사용자 입력을 기반으로 초기 이야기 생성
-        String initialPrompt = chatGPTService.prompt();
+        String initialPrompt = chatGPTService.storyPrompt()
+                + chatGPTService.dialogPrompt()
+                + chatGPTService.choicePrompt();
         String initialStory = chatGPTService.generateText(initialPrompt);
-        System.out.println("initialStory: " + initialStory);
-
+        System.out.println(initialStory);
 
         // 선택지를 통해 스토리를 이어나가기 위해 현재 이야기를 업데이트(변수화)
         prevStory = initialStory;
@@ -75,7 +60,6 @@ public class ChatGPTController {
         // generate_story.html로 이동하여 렌더링하기 전에
         // Postman으로 체킹
         // initialStory 즉시 반환.
-//        return initialStory;
         return "content";
     }
 
