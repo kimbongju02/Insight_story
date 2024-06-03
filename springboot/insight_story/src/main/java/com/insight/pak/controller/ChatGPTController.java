@@ -7,6 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.HashMap;
 import java.util.Map;
 
 /**
@@ -62,6 +63,32 @@ public class ChatGPTController {
         // initialStory 즉시 반환.
         return "content";
     }
+
+//    @PostMapping("/content")
+//    public String postGenerateStory(@RequestParam Map<String, String> requestBody, Model model) {
+//        String inputDetails = requestBody.get("inputDetails");
+//        String initialPrompt = chatGPTService.storyPrompt(inputDetails);
+//        String initialStory = chatGPTService.generateText(initialPrompt);
+//
+//        String dialogPrompt = chatGPTService.dialogPrompt(initialStory);
+//        String dialog = chatGPTService.generateText(dialogPrompt);
+//
+//        String choicesPrompt = chatGPTService.choicePrompt(initialStory);
+//        String choices = chatGPTService.generateText(choicesPrompt);
+//
+//        Map<String, String> storyComponents = new HashMap<>();
+//        storyComponents.put("story", initialStory);
+//        storyComponents.put("dialog", dialog);
+//        storyComponents.put("choices", choices);
+//
+//        prevStoryComponents = storyComponents;
+//
+//        model.addAttribute("story", initialStory);
+//        model.addAttribute("dialog", dialog);
+//        model.addAttribute("choices", choices);
+//
+//        return "content"; // "content.html" 템플릿을 렌더링
+//    }
 
     @PostMapping("/generateStorys")
     public ResponseEntity<?> select(@RequestParam Map<String, String> requestBody, Model model) {

@@ -105,17 +105,17 @@ public class ChatGPTServiceImpl implements ChatGPTService {
                 "배경: 조선시대, " +
                 "장르: 로맨스\n" +
                 "위 조건과 입력문을 참고하여 줄거리를 만들어줘. 양식을 말해줄게." +
-                "양식은 #줄거리# 출력 이후에 줄거리 내용이 출력되어야 해.");
+                "딕셔너리로 출력해줘.");
     }
 
     @Override
     public String dialogPrompt() {
-        return String.format("위 줄거리에 해당하는 대화내용을 출력해줘 대화내용은 우선 #대화내용# 출력 이후에 인물이름 : 대화내용 형식으로 출력해야해.");
+        return String.format("위 줄거리에 해당하는 대화내용을 출력해줘 대화내용은 인물이름 : 대화내용 방식 딕셔너리 형식으로 출력해야 해.");
     }
 
     @Override
     public String choicePrompt() {
-        return String.format("위 줄거리와 대화내용을 기반으로 선택지 세개를 출력해줘. 양식은 우선 #선택지# 출력 이후에 선택지1 : 내용 선택지2 : 내용 선택지3 : 내용 을 출력해줘.");
+        return String.format("위 줄거리와 대화내용을 기반으로 선택지 세개를 출력해줘. 양식은 선택지1 : 내용 선택지2 : 내용 선택지3 : 방식으로 딕셔너리 형식으로 출력해줘.");
     }
 
     @Override // 추가
