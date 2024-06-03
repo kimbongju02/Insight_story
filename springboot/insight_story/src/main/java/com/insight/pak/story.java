@@ -22,6 +22,6 @@ public class story {
     @Column(length = 500)
     private String summary;
     
-    @Column
-    private Integer image;
+    @Column(length = 300)
+    private String link;
 }

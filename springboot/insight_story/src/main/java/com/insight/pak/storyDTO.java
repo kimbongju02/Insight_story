@@ -10,5 +10,5 @@ public class storyDTO {
 	String name;
 	String prompt;
 	String summary;
-	Integer image;
+	String link;
 }
