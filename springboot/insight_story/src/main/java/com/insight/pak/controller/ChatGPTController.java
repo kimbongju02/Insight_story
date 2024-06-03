@@ -43,24 +43,28 @@ public class ChatGPTController {
     // Post
     @PostMapping(value = "/content")
     public String postGenerateStory(@RequestParam Map<String, String> requestBody, Model model) {
-        // @RequestParam 어노테이션을 사용하여 각각의 파라미터를 받아서 처리
+        // 줄거리
+        String synopsis = "조선시대 양반집의 딸인 홍설은 역모죄로 인해 남장 광대로 살아가고 있다. 어느 날, 홍설은 조선시대의 잘생긴 남자 김우빈을 만나 친해진다. "
+                + "그러나 홍설의 집안은 김우빈의 집안을 현대 왕을 몰아내려 하기 때문에 두 사람은 서먹한 사이다. 한편, 김우빈과 홍설은 저작거리에서 만나 친해짐과 동시에 홍설과 이율은 "
+                + "어렸을 때 만났지만 서로 못 알아보는 상태이다. 이제 홍설은 김우빈과 이율 중 한 명과 파트너가 되어 파티에 참석하려 한다.";
 
-        // 사용자 입력을 기반으로 초기 이야기 생성
-        String initialPrompt = chatGPTService.storyPrompt()
-                + chatGPTService.dialogPrompt()
-                + chatGPTService.choicePrompt();
-        String initialStory = chatGPTService.generateText(initialPrompt);
-        System.out.println(initialStory);
+        // 대화내용
+        Map<String, Object> story = new HashMap<>();
+        story.put("김우빈", "홍설아, 넌 왜 항상 저 모습으로 다니냐?");
+        story.put("홍설1", "지금의 모습이 날 편하게 해. 그래서 너한테도 평범하게 다가갈 수 있어.");
+        story.put("김우빈1", "하지만 난 그런 네 모습을 좋아하지 않아. 너에게 포근한 듯 따스한 여유를 느끼고 싶어.");
+        story.put("이율1", "홍설아, 네가 그런 모습을 하게 된 이유가 뭐야?");
+        story.put("홍설2", "우리 집안이 양반집으로 몰리면서 망한 거야. 이렇게 다니면 더이상 저주 받지 않는데.");
+        story.put("이율2", "나도 네가 김우빈이 좋아하는 여자라는 걸 알고 있어. 정말 너무 아쉽지만.. 난 응원할게.");
 
-        // 선택지를 통해 스토리를 이어나가기 위해 현재 이야기를 업데이트(변수화)
-        prevStory = initialStory;
+        // 선택지
+        String choice = "홍설을 도와줄 사람을 선택해주세요. 김우빈, 이율";
 
-        // 이야기와 선택지를 모델에 추가
-        model.addAttribute("story", initialStory);
-
-        // generate_story.html로 이동하여 렌더링하기 전에
-        // Postman으로 체킹
-        // initialStory 즉시 반환.
+        // 전체 이야기 Map
+        story.put("줄거리", synopsis);
+        story.put("선택지", choice);
+        model.addAttribute("story", story);
+        System.out.println(story);
         return "content";
     }
 
