@@ -4,14 +4,15 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
-public class storyService {
+public class StoryService {
     @Autowired
-    private storyRepository storyRepository;
-    public List<story> getAllStory() {
+    private StoryRepository storyRepository;
+    private StoryDTO storyDTO;
+    public List<StoryDTO> getAllStory() {
         return storyRepository.findAll();
     }
 
-    public story getStoryById(int id) {
+    public StoryDTO getStoryById(int id) {
         return storyRepository.findById(id).get();
     }
 }
