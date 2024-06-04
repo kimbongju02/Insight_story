@@ -64,7 +64,8 @@ public class ChatGPTController {
         story.put("줄거리", synopsis);
         story.put("선택지", choice);
         model.addAttribute("story", story);
-        System.out.println(story);
+        System.out.println("-----------------story print ---------------------");
+        System.out.println(story.get("줄거리"));
         return "content";
     }
 

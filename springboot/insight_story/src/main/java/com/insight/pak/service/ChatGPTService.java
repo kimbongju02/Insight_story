@@ -1,5 +1,8 @@
 package com.insight.pak.service;
 
+import org.springframework.stereotype.Service;
+
+@Service
 public interface ChatGPTService {
     String generateText(String prompt);
     String prompt();
