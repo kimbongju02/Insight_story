@@ -7,7 +7,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 public class StoryService {
     @Autowired
     private StoryRepository storyRepository;
-    private StoryDTO storyDTO;
     public List<Story> getAllStory() {
         return storyRepository.findAll();
     }

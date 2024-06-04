@@ -8,7 +8,6 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface StoryRepository extends JpaRepository<Story, Integer> {
-
     Story findById(Integer id);
     List<Story> findAll();
 }
