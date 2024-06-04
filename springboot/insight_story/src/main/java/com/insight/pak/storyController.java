@@ -8,18 +8,14 @@ import org.springframework.stereotype.Controller;
 @Controller
 public class StoryController {
 	private StoryService storyService;
-	private StoryDTO storyDTO;
 	public void getAllStory(Model model) {
-		List<storyDTO> story = storyService.getAllStory();
+		List<Story> story = storyService.getAllStory();
 		model.addAttribute("story", story);
 	}
 
 	public void getStoryById(int id, Model model) {
-		storyDTO story = storyService.getStoryById(id);
+		Story story = storyService.getStoryById(id);
 		model.addAttribute("selectStory", story);
-		story.getPrompt();	
+		
 	}
 }
-SortCategory
-sort_category
-sortCategory

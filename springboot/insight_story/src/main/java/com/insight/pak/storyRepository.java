@@ -7,8 +7,8 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface storyRepository extends JpaRepository<story, Integer> {
+public interface StoryRepository extends JpaRepository<Story, Integer> {
 
-    storyDTO findById(Integer id);
-    List<storyDTO> findAll();
+    Story findById(Integer id);
+    List<Story> findAll();
 }

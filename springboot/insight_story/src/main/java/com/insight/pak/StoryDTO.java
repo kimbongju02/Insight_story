@@ -5,7 +5,7 @@ import lombok.Setter;
 
 @Setter
 @Getter
-public class storyDTO {
+public class StoryDTO {
 	Integer id;
 	String name;
 	String prompt;
