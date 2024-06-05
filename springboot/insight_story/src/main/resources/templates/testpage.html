@@ -11,50 +11,32 @@
     <div class="navbar-logo">
         <img src="insight-logo.png" alt="로고">
         <p>Insight story</p>
-        <form id="storyForm" th:action="@{/testpage}" method="post">
-            <input type="text" name="mainCharacter" placeholder="Main Character Name" required>
-            <input type="text" name="supportingCharacter1" placeholder="Supporting Character 1 Name" required>
-            <input type="text" name="supportingCharacter2" placeholder="Supporting Character 2 Name" required>
-            <button type="submit">생성하기</button>
-        </form>
     </div>
 </div>
 <div class="container">
     <div class="main">
         <div class="chat-container">
             <div class="chat">
+                <!--
                 <div class="my-chat-bubble">
                     <p>Hello!</p>
                 </div>
                 <div class="story">
-                    <p>-----------------------------story-----------------------------</p>
-<!--                    <p th:text="${story[홍설1]}"></p>-->
-                    <p th:if="${story != null}" th:text="${story}"></p>
                 </div>
                 <div class="chat-bubbles">
-                    <div th:if="${story != null}">
-                        <div th:each="entry : ${dialogues}">
-                            <div class="chat-bubble">
-                                <p>
-                                    <span th:text="${entry.key} + ':'"></span>
-                                    <span th:text="${entry.value}"></span>
-                                </p>
-                            </div>
-                        </div>
-                    </div>
                 </div>
                 <div class = "chat-bubble">
-<!--                    <p th:if="${story != null}" th:text="${story[선택지][첫번째]}"></p>-->
                 </div>
                 <div class="my-chat-bubble">
                     <p>How was your day?</p>
-                </div>  
+                </div>
+                -->
             </div>
         </div>
         <div class="options">
-            <button onclick="insertText('선택지 1')">Option 1</button>
-            <button onclick="insertText('선택지 2')">Option 2</button>
-            <button onclick="insertText('선택지 3')">Option 3</button>
+            <button id='option1'></button>
+            <button id='option2'></button>
+            <button id='option3'></button>
         </div>
     </div>
     <div class="history">
@@ -86,19 +68,94 @@
 </div>
 </div>
 <script>
+    const chat_div = document.querySelector('.chat');
+    const buttons = document.querySelectorAll('button');
+
     window.onload = function() {
+
+        // fetch('/api/story')
+        fetch('/api/story')
+        .then(response => response.json())
+        .then(data => {
+            console.log(data);
+            add_story(data['story']);
+            add_dialogue(data['dialogue']);
+            add_option(data['choice1'], data['choice2'], data['choice3']);
+        })
+        .catch(error => console.error('Error:', error));
+
         var historyContainer = document.querySelector('.history');
         historyContainer.scrollTop = historyContainer.scrollHeight;
     };
+
     function insertText(text) {
-        var chatContainer = document.querySelector('.chat');
         var newChatBubble = document.createElement('div');
         newChatBubble.classList.add('my-chat-bubble');
         newChatBubble.innerHTML = `<p>${text}</p>`;
-        chatContainer.appendChild(newChatBubble);
-        // 스크롤을 맨 아래로 이동
-        chatContainer.scrollTop = chatContainer.scrollHeight;
+        chat_div.appendChild(newChatBubble);
     }
+
+    function add_story(story) {
+        const story_container = document.createElement('div');
+        story_container.classList.add('story');
+        story_container.textContent = story;
+        chat_div.appendChild(story_container);
+    }
+
+    function add_dialogue(dialogue){
+        dialogue.forEach(item =>{
+            const dialogue_container = document.createElement('div');
+            dialogue_container.classList.add('chat-bubble')
+            dialogue_container.textContent = item.name + ": " + item.content;
+            chat_div.appendChild(dialogue_container);
+        })
+    }
+
+    function add_option(choice1, choice2, choice3){
+        const option1 = document.getElementById('option1');
+        const option2 = document.getElementById('option2');
+        const option3 = document.getElementById('option3');
+        
+        option1.textContent = choice1;
+        option2.textContent = choice2;
+        option3.textContent = choice3;
+    }
+
+    document.addEventListener('DOMContentLoaded', function() {
+        buttons.forEach(button => {
+            button.addEventListener('click', function() {
+                const buttonId = this.id;
+                const click_button = document.getElementById(buttonId);
+                const my_select_option = document.createElement('div');
+                my_select_option.classList.add('my-chat-bubble');
+                my_select_option.textContent = click_button.textContent;
+                chat_div.appendChild(my_select_option);
+    
+                fetch('/select_choice', {
+                    method: 'POST',
+                    body: JSON.stringify({
+                        choice: this.textContent
+                    }),
+                    headers: {
+                        'Content-Type': 'application/json'
+                    }
+                })
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('Network response was not ok');
+                    }
+                    return response.json();
+                })
+                .then(data => {
+                    console.log('POST 요청 성공:', data);
+                })
+                .catch(error => {
+                    console.error('에러 발생:', error);
+                });
+            });
+        });
+    });
+    
 </script>
 </body>
 </html>

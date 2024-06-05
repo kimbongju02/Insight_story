@@ -1,6 +1,6 @@
 package com.insight.pak.dto;
 
-import com.fasterxml.jackson.annotation.JsonAnySetter;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 import java.util.*;
 
@@ -10,7 +10,7 @@ public class StoryResponse {
     private String choice1;
     private String choice2;
     private String choice3;
-    private Map<String, String> dialogues = new LinkedHashMap<>();
+    private List<Map<String, String>> dialogue;
 
     public String getStory() {
         return story;
@@ -52,14 +52,12 @@ public class StoryResponse {
         this.choice3 = choice3;
     }
 
-    public Map<String, String> getDialogues() {
-        return dialogues;
+    public List<Map<String, String>> getDialogue() {
+        return dialogue;
     }
 
-    @JsonAnySetter
-    public void setDialogue(String name, String dialogue) {
-        if (!name.equals("story") && !name.equals("question") && !name.equals("choice1") && !name.equals("choice2") && !name.equals("choice3")) {
-            this.dialogues.put(name, dialogue);
-        }
+     @JsonProperty("dialogue")
+    public void setDialogue(List<Map<String, String>> dialogue) {
+        this.dialogue = dialogue;
     }
 }
