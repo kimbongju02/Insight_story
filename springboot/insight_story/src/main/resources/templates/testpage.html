@@ -11,7 +11,10 @@
     <div class="navbar-logo">
         <img src="insight-logo.png" alt="로고">
         <p>Insight story</p>
-        <form id="storyForm" th:action="@{/content}" method="post">
+        <form id="storyForm" th:action="@{/testpage}" method="post">
+            <input type="text" name="mainCharacter" placeholder="Main Character Name" required>
+            <input type="text" name="supportingCharacter1" placeholder="Supporting Character 1 Name" required>
+            <input type="text" name="supportingCharacter2" placeholder="Supporting Character 2 Name" required>
             <button type="submit">생성하기</button>
         </form>
     </div>
@@ -26,13 +29,22 @@
                 <div class="story">
                     <p>-----------------------------story-----------------------------</p>
 <!--                    <p th:text="${story[홍설1]}"></p>-->
-                    <p th:if="${story != null}" th:text="${story[줄거리]}"></p>
+                    <p th:if="${story != null}" th:text="${story}"></p>
+                </div>
+                <div class="chat-bubbles">
+                    <div th:if="${story != null}">
+                        <div th:each="entry : ${dialogues}">
+                            <div class="chat-bubble">
+                                <p>
+                                    <span th:text="${entry.key} + ':'"></span>
+                                    <span th:text="${entry.value}"></span>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
                 </div>
                 <div class = "chat-bubble">
-                    <p th:if="${story != null}" th:text="${story[대화내용][홍설1]}"></p>
-                </div>
-                <div class = "chat-bubble">
-                    <p th:if="${story != null}" th:text="${story[선택지][첫번째]}"></p>
+<!--                    <p th:if="${story != null}" th:text="${story[선택지][첫번째]}"></p>-->
                 </div>
                 <div class="my-chat-bubble">
                     <p>How was your day?</p>

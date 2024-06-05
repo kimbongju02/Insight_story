@@ -72,6 +72,12 @@ body {
     overflow-y: auto;
 }
 
+.chat-bubbles {
+    display: flex;
+    flex-direction: column;
+    gap: 10px; /* 대화 사이의 간격 */
+}
+
 .chat-bubble {
     background-color: cornflowerblue;
     color: #fff;
@@ -79,6 +85,11 @@ body {
     padding: 1px 16px;
     margin: 10px;
     border-radius: 10px 10px 10px 0px;
+}
+
+.chat-bubble span:first-child {
+    font-weight: bold;
+    margin-right: 5px;
 }
 
 .my-chat-bubble {
