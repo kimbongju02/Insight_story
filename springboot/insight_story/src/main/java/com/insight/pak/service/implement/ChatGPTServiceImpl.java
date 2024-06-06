@@ -34,7 +34,6 @@ public class ChatGPTServiceImpl implements ChatGPTService {
          * model : 챗봇 모델의 상태를 나타내는 정보 파라미터
          * prompt : 챗봇에 입력될 문장이나 질문 파라미터
          * */
-        System.out.println("------------------- chat gpt request -----------------");
         ChatGPTRequest request = new ChatGPTRequest(model, prompt);
 
         /**
@@ -43,9 +42,7 @@ public class ChatGPTServiceImpl implements ChatGPTService {
          * request : 요청 객체 파라미터
          * ChatGPTResponse.class : 요청을 보낸 후 받을 응답의 타입 클래스 파라미터
          * */
-        System.out.println("------------------- chat gpt response--------------");
         ChatGPTResponse response = restTemplate.postForObject(apiURL, request, ChatGPTResponse.class);
-        System.out.println("------------------- chat gpt response end--------------");
 
         // 생성된 텍스트를 반환.
         return response
@@ -81,7 +78,7 @@ public class ChatGPTServiceImpl implements ChatGPTService {
         "}\n" +
         "],\n" +
         "\"question\": \"이야기를 계속하려면, 홍설은 누구에게 더 가까이 다가갈까요?\",\n" +
-        "\"choice1\": \"김우빈\",/n" +
+        "\"choice1\": \"김우빈\",\n" +
         "\"choice2\": \"이율\",\n" +
         "\"choice3\": \"아무에게도 다가가지 않는다\"\n" +
         "}\n\n" +

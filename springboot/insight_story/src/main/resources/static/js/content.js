@@ -24,6 +24,16 @@ function laod_start_story(){
     .catch(error => console.error('Error:', error));
 }
 
+function load_next_story(){
+    fetch('generate_storys')
+    .then(response => response.json())
+    .then(data => {
+        save_data(data);
+        create_chat_div(data);
+    })
+    .catch(error => console.error('Error:', error));
+}
+
 async function create_chat_div(data) {
     const part = document.createElement('div');
     part.id = 'part-' + part_cnt;
@@ -94,30 +104,26 @@ function select_button_event(part){
                 part.appendChild(my_select_option);
                 add_history(select_button_text);
 
-                fetch('/select_choice', {
+                fetch("/generate/story", {
                     method: 'POST',
                     body: JSON.stringify({
+                        data: data_history[part_cnt],
                         choice: select_button_text
                     }),
                     headers: {
                         'Content-Type': 'application/json'
                     }
                 })
-                .then(response => {
-                    if (!response.ok) {
-                        throw new Error('Network response was not ok');
-                    }
-                })
+                .then(response => response.json())
                 .then(data => {
-                    console.log('POST Request success:', data);
+                    save_data(data);
+                    create_chat_div(data);
                 })
                 .catch(error => {
                     console.error('error occur:', error);
                 });
 
                 options.innerHTML = ''; 
-                
-                laod_start_story();
             });
         });
     });
@@ -156,22 +162,27 @@ function add_history(select_button_text){
             document.querySelectorAll('.options button').forEach(button => button.remove());
             delete_data_history(part_cnt);
             part_cnt -= 1;
-        }
-        do{
-            const partElement = document.getElementById('part-' + part_cnt);
-            const historyElement = document.getElementById('history-' + part_cnt);
+        }else{
+            do{
+                const partElement = document.getElementById('part-' + part_cnt);
+                const historyElement = document.getElementById('history-' + part_cnt);
+                
+                if(partElement){
+                    partElement.remove();
+                }
+                if(historyElement){
+                    historyElement.remove();
+                }
+                document.querySelectorAll('.options button').forEach(button => button.remove());
+                delete_data_history(part_cnt);
 
-            partElement.remove();
-            historyElement.remove();
-            document.querySelectorAll('.options button').forEach(button => button.remove());
-            delete_data_history(part_cnt);
-
-            if(part_cnt === select_part_num){
-                break;
+                if(part_cnt === select_part_num){
+                    break;
+                }
+                part_cnt -= 1;
             }
-            part_cnt -= 1;
+            while(part_cnt != (select_part_num))
         }
-        while(part_cnt != (select_part_num-1))
     });
 }
 
