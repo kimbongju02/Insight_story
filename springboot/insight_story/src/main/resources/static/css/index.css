@@ -1,0 +1,135 @@
+@font-face {
+    font-family: 'Pretendard-Regular';
+    src: url('https://fastly.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Regular.woff') format('woff');
+    font-weight: 400;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'HSSanTokki20-Regular';
+    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/2405@1.0/HSSanTokki20-Regular.woff2') format('woff2');
+    font-weight: normal;
+    font-style: normal;
+}
+
+a{
+    text-decoration-line: none;
+}
+
+body{
+    margin: 0;
+    width: 100%;
+}
+
+#header{
+    height: 75px;
+    background-color: rgb(128, 128, 255);
+}
+
+.logo{
+    height: 75px;
+    width: 270px;
+    float: left;
+}
+
+.logo>a>img{
+    height: 75px;
+    width: 250px;
+}
+
+#contents{
+    height: 750px;
+    background-color: rgb(255, 255, 255);
+}
+
+
+.box{
+    margin : 60px 0px 0px 345px;
+    width: 1222px;
+    height: 700px;
+    border : 1px solid rgb(183, 183, 183);
+    border-radius : 10px;
+    box-shadow: 0px 0px 5px 1px gray;
+}
+
+.box:hover{
+    background-color: rgb(0, 255, 255);
+}
+
+.img_box{
+    width: 487px;
+    height: 700px;
+    border-radius : 10px 0px 0px 10px;
+    background-color: rgb(255, 255, 128);
+    text-align: center;
+    line-height: 700px;
+    font-family: 'HSSanTokki20-Regular';
+    font-size: 40px;
+    float: left;
+}
+
+.keyword_box{
+    width: 720px;
+    height: 152px;
+    padding : 0px 15px 0px 0px;
+    border-radius : 0px 10px 0px 0px;
+    background-color: rgb(255, 255, 255);
+    line-height: 154px;
+    font-family: 'HSSanTokki20-Regular';
+    font-size: 100px;
+    color: blue;
+    display: inline-flex;
+    justify-content: flex-end;
+}
+
+.story_box{
+    width: 720px;
+    height: 440px;
+    padding : 0px 15px 0px 0px;
+    background-color: rgb(255, 255, 255);
+    text-align: right;
+    line-height: 20px;
+    font-family: 'Pretendard-Regular';
+    font-size: 20px;
+    display: inline-flex;
+    justify-content: flex-end;
+    word-wrap: break-word;
+}
+
+.start_box{
+    width: 735px;
+    height: 108px;
+    border-radius : 0px 0px 10px 0px;
+    background-color: rgb(255, 255, 255);
+    text-align: center;
+    line-height: 548px;
+    font-family: 'HSSanTokki20-Regular';
+    font-size: 40px;
+    display: inline-flex;
+    justify-content: flex-end;
+}
+
+.start{
+    width: 260px;
+    height: 70px;
+    margin: 20px 15px 0px 0px;
+    border-radius: 60px;
+    background-color: rgb(153, 185, 232);
+    text-align: center;
+    line-height: 74px;
+    font-family: 'HSSanTokki20-Regular';
+    font-size: 40px;
+}
+
+.start:hover{
+    width: 260px;
+    height: 70px;
+    margin: 20px 15px 0px 0px;
+    border-radius: 60px;
+    background-color: rgb(0, 0, 255);
+    text-align: center;
+    line-height: 74px;
+    font-family: 'HSSanTokki20-Regular';
+    font-size: 40px;
+    color: white;
+}
