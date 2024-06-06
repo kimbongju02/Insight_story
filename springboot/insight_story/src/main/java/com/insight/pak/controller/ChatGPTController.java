@@ -1,5 +1,9 @@
 package com.insight.pak.controller;
 
+import com.fasterxml.jackson.core.JsonParseException;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.insight.pak.dto.StoryResponse;
 import com.insight.pak.service.ChatGPTService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -7,20 +11,40 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.HashMap;
 import java.util.Map;
+
 
 /**
  * 컨트롤러
  * ChatGPTController
- *
+ * <p>
  * postGenerateStory 메서드 : 프롬프트를 생성하여 소설과 선택지를 만들어 텍스트로 반환
  * selectChoice 메서드 : 이전 프롬프트(소설, 선택지) 기반으로 이어지는 다음 이야기와 선택지를 반환
- * */
+ */
 
 @Controller// Spring 컨트롤러 선언
-@RequestMapping("/")
 public class ChatGPTController {
+    String test_story = "{\r\n" + //
+                "\"story\": \"현대 대학교에서는 다양한 인물들의 이야기가 교차하고 있었다. 서윤지는 성실하고 조용한 성격으로 대학교 3학년 생활을 시작했다. 그녀는 유학 후 돌아와서 주변 사람들과의 관계에 얽히면서 새로운 시작을 하게 되었다. 한편, 강준호는 차가운 성격과 뛰어난 두뇌를 가지고 있었다. 겉보기에는 완벽해 보이지만 그의 내면에는 어두운 면모가 있었다. 그는 서윤지와의 관계에서 특별한 흥미를 느끼기 시작했다. 또 다른 캐릭터, 이태민은 윤지의 고등학교 동창으로 활발하고 사교적인 성격을 가졌다. 오랜만에 윤지를 만나 그녀를 돕고 보호하려 한다.\",\r\n" + //
+                "\"dialogue\": [\r\n" + //
+                "{\r\n" + //
+                "\"name\": \"이태민\",\r\n" + //
+                "\"content\": \"윤지야, 오랜만이야. 너무 반가워.\"\r\n" + //
+                "},\r\n" + //
+                "{\r\n" + //
+                "\"name\": \"서윤지\",\r\n" + //
+                "\"content\": \"태민이, 너무 오랜만이다. 고마워.\"\r\n" + //
+                "},\r\n" + //
+                "{\r\n" + //
+                "\"name\": \"강준호\",\r\n" + //
+                "\"content\": \"안녕, 윤지야.\"\r\n" + //
+                "}\r\n" + //
+                "],\r\n" + //
+                "\"question\": \"이야기를 계속하려면, 윤지는 누구에게 더 가까이 다가갈까요?\",\r\n" + //
+                "\"choice1\": \"강준호\",\r\n" + //
+                "\"choice2\": \"이태민\",\r\n" + //
+                "\"choice3\": \"아무에게도 다가가지 않는다\"\r\n" + //
+                "}";
 
     @Autowired
     private ChatGPTService chatGPTService;
@@ -33,40 +57,50 @@ public class ChatGPTController {
         return chatGPTService.generateText(prompt);
     }
 
-    // 조회
-    @GetMapping("/")
-    public String getGenerateStory() {
-        return "content";
+    // content 페이지 조회
+    @GetMapping("/testpage")
+    public String getGenerateStory(){
+        return "testpage";
+    }
+    @PostMapping(value = "/testpage")
+    public String postGenerateStory(){
+        return "testpage";
     }
 
-    // 응답
-    // Post
-    @PostMapping(value = "/content")
-    public String postGenerateStory(@RequestParam Map<String, String> requestBody, Model model) {
-        // 줄거리
-        String synopsis = "조선시대 양반집의 딸인 홍설은 역모죄로 인해 남장 광대로 살아가고 있다. 어느 날, 홍설은 조선시대의 잘생긴 남자 김우빈을 만나 친해진다. "
-                + "그러나 홍설의 집안은 김우빈의 집안을 현대 왕을 몰아내려 하기 때문에 두 사람은 서먹한 사이다. 한편, 김우빈과 홍설은 저작거리에서 만나 친해짐과 동시에 홍설과 이율은 "
-                + "어렸을 때 만났지만 서로 못 알아보는 상태이다. 이제 홍설은 김우빈과 이율 중 한 명과 파트너가 되어 파티에 참석하려 한다.";
+    @ResponseBody
+    @GetMapping("/api/story")
+    public StoryResponse getStory() throws JsonProcessingException {
+        String initialPrompt = chatGPTService.Prompt();
+        //String initialStory = chatGPTService.generateText(initialPrompt);
+        String initialStory = test_story;
+        System.out.println("initialStory: " + initialStory);
 
-        // 대화내용
-        Map<String, Object> story = new HashMap<>();
-        story.put("김우빈", "홍설아, 넌 왜 항상 저 모습으로 다니냐?");
-        story.put("홍설1", "지금의 모습이 날 편하게 해. 그래서 너한테도 평범하게 다가갈 수 있어.");
-        story.put("김우빈1", "하지만 난 그런 네 모습을 좋아하지 않아. 너에게 포근한 듯 따스한 여유를 느끼고 싶어.");
-        story.put("이율1", "홍설아, 네가 그런 모습을 하게 된 이유가 뭐야?");
-        story.put("홍설2", "우리 집안이 양반집으로 몰리면서 망한 거야. 이렇게 다니면 더이상 저주 받지 않는데.");
-        story.put("이율2", "나도 네가 김우빈이 좋아하는 여자라는 걸 알고 있어. 정말 너무 아쉽지만.. 난 응원할게.");
+        // JSON 형식 확인
+        try {
+            new ObjectMapper().readTree(initialStory);
+        } catch (JsonParseException e) {
+            System.out.println("JSON 형식 오류: " + e.getMessage());
+        }
 
-        // 선택지
-        String choice = "홍설을 도와줄 사람을 선택해주세요. 김우빈, 이율";
+        // 선택지를 통해 스토리를 이어나가기 위해 현재 이야기를 업데이트(변수화)
+        prevStory = initialStory;
 
-        // 전체 이야기 Map
-        story.put("줄거리", synopsis);
-        story.put("선택지", choice);
-        model.addAttribute("story", story);
-        System.out.println("-----------------story print ---------------------");
-        System.out.println(story.get("줄거리"));
-        return "content";
+        ObjectMapper objectMapper = new ObjectMapper();
+        StoryResponse storyResponse = new StoryResponse();
+        try{
+            // JSON 데이터를 객체로 변환
+            storyResponse = objectMapper.readValue(initialStory, StoryResponse.class);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        
+        return storyResponse;
+    }
+
+    @ResponseBody
+    @PostMapping("/select_choice")
+    public void selectChoice(@RequestBody String choice){
+        System.out.println("choice: " + choice);
     }
 
     @PostMapping("/generateStorys")
@@ -81,5 +115,4 @@ public class ChatGPTController {
         ResponseEntity<String> currentStory = ResponseEntity.ok().body(nextStory);
         return currentStory;
     }
-
 }
