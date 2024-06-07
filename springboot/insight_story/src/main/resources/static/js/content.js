@@ -104,14 +104,12 @@ function select_button_event(part){
 };
 
 function create_next_story(){
-    console.log("data_history["+(part_cnt-1)+"]: " + JSON.stringify(data_history[part_cnt-1], null, 2));
-    console.log("choice_history["+(part_cnt-1)+"]: " + JSON.stringify(choice_history[part_cnt-1], null, 2));
     fetch("/generate/story", {
         method: 'POST',
         body: JSON.stringify({
             //data: data_history[part_cnt-1],
-            data: JSON.stringify(data_history[part_cnt-1]),
-            choice: choice_history[part_cnt-1],
+            data: JSON.stringify(data_history[part_cnt]),
+            choice: choice_history[part_cnt],
         }),
         headers: {
             'Content-Type': 'application/json'
@@ -158,11 +156,11 @@ function add_history(select_button_text){
         const prev_data = data_history[select_part_num];
         console.log("select_part_num: " + select_part_num+" part_cnt: " + part_cnt);
 
-        document.getElementById('part-' + part_cnt).remove();
-        do{
-            part_cnt -= 1;
-            const partElement = document.getElementById('part-' + (part_cnt));
-            const historyElement = document.getElementById('history-' + (part_cnt));
+        document.querySelectorAll('.options button').forEach(button => button.remove());
+        for(let i=part_cnt; i>=select_part_num; i--){
+            console.log("delete part_cnt: " + i);
+            const partElement = document.getElementById('part-' + (i));
+            const historyElement = document.getElementById('history-' + (i));
             
             if(partElement){
                 partElement.remove();
@@ -170,12 +168,10 @@ function add_history(select_button_text){
             if(historyElement){
                 historyElement.remove();
             }
-            document.querySelectorAll('.options button').forEach(button => button.remove());
-            delete_data_history(part_cnt);
-            delete_choice_history(part_cnt);
+            delete_data_history(i);
+            delete_choice_history(i);
         }
-        while(part_cnt != select_part_num)
-        
+        part_cnt = select_part_num;
         create_chat_div(prev_data)
     });
 }
@@ -191,7 +187,7 @@ function delete_data_history(part_cnt){
 }
 
 function save_choice_history(choice){
-    choice_history[part_cnt-1] = choice;
+    choice_history[part_cnt] = choice;
     console.log(choice_history);
 }
 

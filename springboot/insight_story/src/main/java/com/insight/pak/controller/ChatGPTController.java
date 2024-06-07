@@ -105,7 +105,7 @@ public class ChatGPTController {
         String continuePrompt = chatGPTService.continuePrompt(data, choice);
         //String nextStory = chatGPTService.generateText(continuePrompt);
         String nextStory = test_story;
-        System.out.println("-------------------send choice---------------------\n"+nextStory);
+        System.out.println("-------------------send data---------------------\n"+nextStory);
 
         // JSON 형식 확인
         try {
