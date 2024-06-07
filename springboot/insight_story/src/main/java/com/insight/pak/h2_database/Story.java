@@ -1,27 +1,30 @@
-package com.insight.pak;
+package com.insight.pak.h2_database;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import lombok.Getter;
+import lombok.Setter;
 
+@Getter
+@Setter
 @Entity
 public class Story {
-	@Id
+    @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(nullable = false)
     private Integer id;
 
-	@Column(length = 30)
+    @Column(length = 100)
     private String name;
-    
-	@Column(length = 500)
+
+    @Column(length = 3000)
     private String prompt;
 
-    @Column(length = 500)
+    @Column(length = 1000)
     private String summary;
-    
-    @Column(length = 300)
-    private String link;
+
+    @Column(length = 100)
+    private String image;
 }
