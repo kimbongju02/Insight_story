@@ -3,6 +3,7 @@ package com.insight.pak.service.implement;
 import com.insight.pak.dto.ChatGPTRequest;
 import com.insight.pak.dto.ChatGPTResponse;
 import com.insight.pak.service.ChatGPTService;
+import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
@@ -24,8 +25,20 @@ public class ChatGPTServiceImpl implements ChatGPTService {
     @Value("${openai.api.url}")
     private String apiURL;
 
+    private static final String API_KEY = "openAiApiKey";
+
     @Autowired
     private RestTemplate restTemplate;
+
+    @Override
+    public void saveApiKey(HttpSession session, String apiKey) {
+        session.setAttribute(API_KEY, apiKey);
+    }
+
+    @Override
+    public String getApiKey(HttpSession session) {
+        return (String) session.getAttribute(API_KEY);
+    }
 
     @Override // API 호출하여 텍스트로 반환.
     public String generateText(String prompt) {
@@ -34,7 +47,6 @@ public class ChatGPTServiceImpl implements ChatGPTService {
          * model : 챗봇 모델의 상태를 나타내는 정보 파라미터
          * prompt : 챗봇에 입력될 문장이나 질문 파라미터
          * */
-        System.out.println("------------------- chat gpt request -----------------");
         ChatGPTRequest request = new ChatGPTRequest(model, prompt);
 
         /**
@@ -43,9 +55,7 @@ public class ChatGPTServiceImpl implements ChatGPTService {
          * request : 요청 객체 파라미터
          * ChatGPTResponse.class : 요청을 보낸 후 받을 응답의 타입 클래스 파라미터
          * */
-        System.out.println("------------------- chat gpt response--------------");
         ChatGPTResponse response = restTemplate.postForObject(apiURL, request, ChatGPTResponse.class);
-        System.out.println("------------------- chat gpt response end--------------");
 
         // 생성된 텍스트를 반환.
         return response

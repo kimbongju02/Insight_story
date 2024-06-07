@@ -1,6 +1,7 @@
 package com.insight.pak.config;
 
-import org.springframework.beans.factory.annotation.Value;
+import jakarta.servlet.http.HttpSession;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.client.RestTemplate;
@@ -15,15 +16,22 @@ import org.springframework.web.client.RestTemplate;
 
 @Configuration
 public class ChatGPTConfig {
-    @Value("${openai.api.key}")
-    private String openAiKey;
+
+    private final HttpSession httpSession;
+
+    @Autowired
+    public ChatGPTConfig(HttpSession httpSession) {
+        this.httpSession = httpSession;
+    }
 
     @Bean
-    public RestTemplate restTemplate(){
+    public RestTemplate restTemplate() {
         RestTemplate restTemplate = new RestTemplate();
         restTemplate.getInterceptors().add(((request, body, execution) -> {
-            request.getHeaders().add("Authorization",
-                    "Bearer "+openAiKey);
+            String apiKey = (String) httpSession.getAttribute("openAiApiKey");
+            if (apiKey != null) {
+                request.getHeaders().add("Authorization", "Bearer " + apiKey);
+            }
             return execution.execute(request, body);
         }));
 
