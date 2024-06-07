@@ -4,6 +4,7 @@ const history = document.querySelector('.history');
 
 var part_cnt = 0;
 const data_history = {};
+const choice_history = {};
 
 window.onload = function() {
 
@@ -18,17 +19,6 @@ function laod_start_story(){
     fetch('/api/story')
     .then(response => response.json())
     .then(data => {
-        save_data(data);
-        create_chat_div(data);
-    })
-    .catch(error => console.error('Error:', error));
-}
-
-function load_next_story(){
-    fetch('generate_storys')
-    .then(response => response.json())
-    .then(data => {
-        save_data(data);
         create_chat_div(data);
     })
     .catch(error => console.error('Error:', error));
@@ -42,7 +32,9 @@ async function create_chat_div(data) {
     await add_story(part, data['story']);
     await add_dialogue(part, data['dialogue']);
     await add_option(data['choice1'], data['choice2'], data['choice3']);
+    
     select_button_event(part);
+    save_data_history(data);
 }
 
 function add_story(part, story) {
@@ -94,8 +86,6 @@ function select_button_event(part){
         const buttons = document.querySelectorAll('.options button');
         buttons.forEach(button => {
             button.addEventListener('click', function() {
-                part_cnt += 1;
-
                 const click_button = document.getElementById(this.id);
                 const my_select_option = document.createElement('div');
                 my_select_option.classList.add('my-chat-bubble');
@@ -104,30 +94,37 @@ function select_button_event(part){
                 part.appendChild(my_select_option);
                 add_history(select_button_text);
 
-                fetch("/generate/story", {
-                    method: 'POST',
-                    body: JSON.stringify({
-                        data: data_history[part_cnt],
-                        choice: select_button_text
-                    }),
-                    headers: {
-                        'Content-Type': 'application/json'
-                    }
-                })
-                .then(response => response.json())
-                .then(data => {
-                    save_data(data);
-                    create_chat_div(data);
-                })
-                .catch(error => {
-                    console.error('error occur:', error);
-                });
+                create_next_story();
+                part_cnt += 1;
 
                 options.innerHTML = ''; 
             });
         });
     });
 };
+
+function create_next_story(){
+    console.log("data_history["+(part_cnt-1)+"]: " + JSON.stringify(data_history[part_cnt-1], null, 2));
+    console.log("choice_history["+(part_cnt-1)+"]: " + JSON.stringify(choice_history[part_cnt-1], null, 2));
+    fetch("/generate/story", {
+        method: 'POST',
+        body: JSON.stringify({
+            //data: data_history[part_cnt-1],
+            data: JSON.stringify(data_history[part_cnt-1]),
+            choice: choice_history[part_cnt-1],
+        }),
+        headers: {
+            'Content-Type': 'application/json'
+        }
+    })
+    .then(response => response.json())
+    .then(data => {
+        create_chat_div(data);
+    })
+    .catch(error => {
+        console.error('error occur:', error);
+    });
+}
 
 function one_word_one_time(div, story){
     return new Promise((resolve) => {
@@ -154,39 +151,36 @@ function add_history(select_button_text){
     history.appendChild(history_container);
     history_container.textContent = select_button_text;
 
+    save_choice_history(select_button_text);
+
     history_container.addEventListener('click', function() {
         const select_part_num = parseInt(this.getAttribute('data-value'));
-        if(part_cnt === select_part_num){
-            document.getElementById('part-' + part_cnt).remove();
-            document.getElementById('history-' + part_cnt).remove();
+        const prev_data = data_history[select_part_num];
+        console.log("select_part_num: " + select_part_num+" part_cnt: " + part_cnt);
+
+        document.getElementById('part-' + part_cnt).remove();
+        do{
+            part_cnt -= 1;
+            const partElement = document.getElementById('part-' + (part_cnt));
+            const historyElement = document.getElementById('history-' + (part_cnt));
+            
+            if(partElement){
+                partElement.remove();
+            }
+            if(historyElement){
+                historyElement.remove();
+            }
             document.querySelectorAll('.options button').forEach(button => button.remove());
             delete_data_history(part_cnt);
-            part_cnt -= 1;
-        }else{
-            do{
-                const partElement = document.getElementById('part-' + part_cnt);
-                const historyElement = document.getElementById('history-' + part_cnt);
-                
-                if(partElement){
-                    partElement.remove();
-                }
-                if(historyElement){
-                    historyElement.remove();
-                }
-                document.querySelectorAll('.options button').forEach(button => button.remove());
-                delete_data_history(part_cnt);
-
-                if(part_cnt === select_part_num){
-                    break;
-                }
-                part_cnt -= 1;
-            }
-            while(part_cnt != (select_part_num))
+            delete_choice_history(part_cnt);
         }
+        while(part_cnt != select_part_num)
+        
+        create_chat_div(prev_data)
     });
 }
 
-function save_data(data){
+function save_data_history(data){
     data_history[part_cnt] = data;
     console.log(data_history);
 }
@@ -194,4 +188,14 @@ function save_data(data){
 function delete_data_history(part_cnt){
     delete data_history[part_cnt];
     console.log(data_history);
+}
+
+function save_choice_history(choice){
+    choice_history[part_cnt-1] = choice;
+    console.log(choice_history);
+}
+
+function delete_choice_history(part_cnt){
+    delete choice_history[part_cnt];
+    console.log(choice_history);
 }

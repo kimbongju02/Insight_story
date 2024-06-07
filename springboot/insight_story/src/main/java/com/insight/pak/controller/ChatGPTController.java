@@ -7,17 +7,12 @@ import com.insight.pak.dto.StoryRequest;
 import com.insight.pak.dto.StoryResponse;
 import com.insight.pak.service.ChatGPTService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-
-import java.util.Map;
-
 
 /**
  * 컨트롤러
@@ -54,7 +49,6 @@ public class ChatGPTController {
     @Autowired
     private ChatGPTService chatGPTService;
 
-    private String prevStory; // 이전 이야기를 유지하는 변수
     // API 구동 테스트를 위한 GET 메서드
     @GetMapping("/chat") // GET 요청에 대한 핸들러 메서드. "/chat"
     public String chat(@RequestParam(name = "prompt") String prompt) {
@@ -76,7 +70,9 @@ public class ChatGPTController {
     @GetMapping("/api/story")
     public StoryResponse getStory() throws JsonProcessingException {
         String initialPrompt = chatGPTService.Prompt();
-        String initialStory = chatGPTService.generateText(initialPrompt);
+        String initialStory = test_story;
+        //String initialStory = chatGPTService.generateText(initialPrompt);
+        System.out.println("-------------------send data---------------------\n"+initialStory);
 
         // JSON 형식 확인
         try {
@@ -103,9 +99,13 @@ public class ChatGPTController {
     public StoryResponse get_next_story(@RequestBody StoryRequest storyRequest)  throws JsonProcessingException {
         String data = storyRequest.getData();
         String choice = storyRequest.getChoice();
+        System.out.println("-------------------recieve data---------------------\n"+data);
+        System.out.println("-------------------recieve choice---------------------\n"+choice);
 
         String continuePrompt = chatGPTService.continuePrompt(data, choice);
-        String nextStory = chatGPTService.generateText(continuePrompt);
+        //String nextStory = chatGPTService.generateText(continuePrompt);
+        String nextStory = test_story;
+        System.out.println("-------------------send choice---------------------\n"+nextStory);
 
         // JSON 형식 확인
         try {

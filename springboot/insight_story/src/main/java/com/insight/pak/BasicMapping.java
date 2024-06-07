@@ -39,7 +39,6 @@ public class BasicMapping {
     public String saveApiKey(@RequestParam("apiKey") String apiKey, HttpSession session, Model model) {
         chatGPTService.saveApiKey(session, apiKey);
         model.addAttribute("apiKey", apiKey);
-        System.out.println("주입된 API_KEY:" + apiKey);
-        return "apikey_test";
+        return "testpage";
     }
 }
