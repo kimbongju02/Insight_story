@@ -91,7 +91,7 @@ public class ChatGPTServiceImpl implements ChatGPTService {
         "}\n" +
         "],\n" +
         "\"question\": \"이야기를 계속하려면, 홍설은 누구에게 더 가까이 다가갈까요?\",\n" +
-        "\"choice1\": \"김우빈\",/n" +
+        "\"choice1\": \"김우빈\",\n" +
         "\"choice2\": \"이율\",\n" +
         "\"choice3\": \"아무에게도 다가가지 않는다\"\n" +
         "}\n\n" +

@@ -3,6 +3,7 @@ package com.insight.pak.controller;
 import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.insight.pak.dto.StoryRequest;
 import com.insight.pak.dto.StoryResponse;
 import com.insight.pak.service.ChatGPTService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -70,13 +71,12 @@ public class ChatGPTController {
         return "testpage";
     }
 
+    // 지정된 prompt를 통해서 시작 이야기 생성
     @ResponseBody
     @GetMapping("/api/story")
     public StoryResponse getStory() throws JsonProcessingException {
         String initialPrompt = chatGPTService.Prompt();
-        //String initialStory = chatGPTService.generateText(initialPrompt);
-        String initialStory = test_story;
-        System.out.println("initialStory: " + initialStory);
+        String initialStory = chatGPTService.generateText(initialPrompt);
 
         // JSON 형식 확인
         try {
@@ -84,9 +84,6 @@ public class ChatGPTController {
         } catch (JsonParseException e) {
             System.out.println("JSON 형식 오류: " + e.getMessage());
         }
-
-        // 선택지를 통해 스토리를 이어나가기 위해 현재 이야기를 업데이트(변수화)
-        prevStory = initialStory;
 
         ObjectMapper objectMapper = new ObjectMapper();
         StoryResponse storyResponse = new StoryResponse();
@@ -99,23 +96,33 @@ public class ChatGPTController {
         
         return storyResponse;
     }
-
+    
+    // html에서 이전 스토리의 json 형태와 선택지를 전달받아 다음 이야기와 선택지를 생성
     @ResponseBody
-    @PostMapping("/select_choice")
-    public void selectChoice(@RequestBody String choice){
-        System.out.println("choice: " + choice);
-    }
+    @PostMapping("/generate/story")
+    public StoryResponse get_next_story(@RequestBody StoryRequest storyRequest)  throws JsonProcessingException {
+        String data = storyRequest.getData();
+        String choice = storyRequest.getChoice();
 
-    @PostMapping("/generateStorys")
-    public ResponseEntity<?> select(@RequestParam Map<String, String> requestBody, Model model) {
-        String choice = requestBody.get("choice");
-
-        String continuePrompt = chatGPTService.continuePrompt(prevStory, choice);
+        String continuePrompt = chatGPTService.continuePrompt(data, choice);
         String nextStory = chatGPTService.generateText(continuePrompt);
 
-        prevStory = nextStory;
+        // JSON 형식 확인
+        try {
+            new ObjectMapper().readTree(nextStory);
+        } catch (JsonParseException e) {
+            System.out.println("JSON 형식 오류: " + e.getMessage());
+        }
 
-        ResponseEntity<String> currentStory = ResponseEntity.ok().body(nextStory);
-        return currentStory;
+        ObjectMapper objectMapper = new ObjectMapper();
+        StoryResponse storyResponse = new StoryResponse();
+        try{
+            // JSON 데이터를 객체로 변환
+            storyResponse = objectMapper.readValue(nextStory, StoryResponse.class);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        
+        return storyResponse;
     }
 }
