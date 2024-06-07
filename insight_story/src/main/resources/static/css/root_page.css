@@ -1,0 +1,83 @@
+@font-face {
+    font-family: 'Pretendard-Regular';
+    src: url('https://fastly.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Regular.woff') format('woff');
+    font-weight: 400;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'HSSanTokki20-Regular';
+    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/2405@1.0/HSSanTokki20-Regular.woff2') format('woff2');
+    font-weight: normal;
+    font-style: normal;
+}
+
+a{
+	text-decoration-line: none;
+}
+
+body{
+	margin: 0;
+	width: 100%;
+}
+
+#header{
+	height: 75px;
+	background-color: #FFFFFF;
+}
+
+.logo{
+	height: 75px;
+	width: 270px;
+	float: left;
+}
+
+.logo>a>img{
+	height: 75px;
+	width: 250px;
+}
+
+#contents{
+	height: 852px;
+	background-color: #FFFFFF;
+}
+
+.container{
+	display: flex;
+}
+
+.left_box{
+  margin : 37px 0px 0px 420px;
+  width: 510px;
+  height: 232px;
+  border-radius : 10px;
+  background-color: #E6E6FA;
+  float: left;
+  text-align: center;
+  line-height: 236px;
+  font-family: 'HSSanTokki20-Regular';
+  font-size: 90px;
+}
+
+.left_box:hover{
+	background-color: #6495ED;
+	color: #FFFFFF;
+}
+
+.right_box{
+  margin : 37px 0px 0px 180px;
+  width: 510px;
+  height: 232px;
+  border-radius : 10px;
+  background-color:  #E6E6FA;
+  text-align: center;
+  line-height: 236px;
+  font-family: 'HSSanTokki20-Regular';
+  font-size: 90px;
+}
+
+.right_box:hover{
+	background-color: #6495ED;
+	color: #FFFFFF;
+}
+
