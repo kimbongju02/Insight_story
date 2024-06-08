@@ -1,0 +1,92 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}">
+    <title>Content page</title>
+</head>
+<body>
+<div class="navbar">
+    <div class="navbar-logo">
+        <img src="insight-logo.png" alt="로고">
+        <p>Insight story</p>
+        <form id="storyForm" th:action="@{/content}" method="post">
+            <button type="submit">생성하기</button>
+        </form>
+    </div>
+</div>
+<div class="container">
+    <div class="main">
+        <div class="chat-container">
+            <div class="chat">
+                <div class="my-chat-bubble">
+                    <p>Hello!</p>
+                </div>
+                <div class="story">
+                    <p>-----------------------------story-----------------------------</p>
+<!--                    <p th:text="${story[홍설1]}"></p>-->
+                    <p th:if="${story != null}" th:text="${story[줄거리]}"></p>
+                </div>
+                <div class = "chat-bubble">
+                    <p th:if="${story != null}" th:text="${story[대화내용][홍설1]}"></p>
+                </div>
+                <div class = "chat-bubble">
+                    <p th:if="${story != null}" th:text="${story[선택지][첫번째]}"></p>
+                </div>
+                <div class="my-chat-bubble">
+                    <p>How was your day?</p>
+                </div>  
+            </div>
+        </div>
+        <div class="options">
+            <button onclick="insertText('선택지 1')">Option 1</button>
+            <button onclick="insertText('선택지 2')">Option 2</button>
+            <button onclick="insertText('선택지 3')">Option 3</button>
+        </div>
+    </div>
+    <div class="history">
+        <div class="info-box">
+            <p>history1</p>
+        </div>
+        <div class="info-box">
+            <p>history2</p>
+        </div>
+        <div class="info-box">
+            <p>history3</p>
+        </div>
+        <div class="info-box">
+            <p>history4</p>
+        </div>
+        <div class="info-box">
+            <p>history5</p>
+        </div>
+        <div class="info-box">
+            <p>history6</p>
+        </div>
+        <div class="info-box">
+            <p>history7</p>
+        </div>
+        <div class="info-box">
+            <p>history8</p>
+        </div>
+    </div>
+</div>
+</div>
+<script>
+    window.onload = function() {
+        var historyContainer = document.querySelector('.history');
+        historyContainer.scrollTop = historyContainer.scrollHeight;
+    };
+    function insertText(text) {
+        var chatContainer = document.querySelector('.chat');
+        var newChatBubble = document.createElement('div');
+        newChatBubble.classList.add('my-chat-bubble');
+        newChatBubble.innerHTML = `<p>${text}</p>`;
+        chatContainer.appendChild(newChatBubble);
+        // 스크롤을 맨 아래로 이동
+        chatContainer.scrollTop = chatContainer.scrollHeight;
+    }
+</script>
+</body>
+</html>
