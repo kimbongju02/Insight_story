@@ -2,7 +2,8 @@ body {
     font-family: Arial, sans-serif;
     margin: 0;
     padding: 0;
-    background-color: #f0f0f0;
+    background-color:#FEFEFF;
+   
 }
 
 .navbar {
@@ -41,6 +42,25 @@ body {
     overflow-y: auto;
     display: flex;
     flex-direction: column-reverse;
+    
+     box-sizing: border-box;
+	            
+	background: #FDFDFF;
+	border: 1px solid #E1E2FF;
+	border-radius: 20px;
+	
+	margin-left: 30px;
+}
+
+.history::-webkit-scrollbar {
+    width: 8px;  /* 스크롤바의 너비 */
+}
+
+.history::-webkit-scrollbar-thumb {
+    height: 30%; /* 스크롤바의 길이 */
+    background: #EFEFEF; /* 스크롤바의 색상 */
+    
+    border-radius: 10px;
 }
 
 .info-box {
@@ -63,13 +83,42 @@ body {
     flex: 1;
     display: flex;
     flex-direction: column;
-    padding: 20px 0;
     overflow-y: auto;
 }
 
 .chat {
     flex: 1;
     overflow-y: auto;
+    box-sizing: border-box;
+    background: url('/background_image.png') center center / cover no-repeat fixed;
+    border: 1px solid #E1E2FF;
+    border-radius: 20px;
+    position: relative;
+    z-index: 1;
+}
+
+.chat::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: inherit;
+    opacity: 0.5; /* 배경 이미지의 투명도 설정 */
+    z-index: -1;
+    border-radius: 20px;
+}
+
+.chat::-webkit-scrollbar {
+    width: 8px;  /* 스크롤바의 너비 */
+}
+
+.chat::-webkit-scrollbar-thumb {
+    height: 30%; /* 스크롤바의 길이 */
+    background: #EFEFEF; /* 스크롤바의 색상 */
+    
+    border-radius: 10px;
 }
 
 .chat-bubbles {
@@ -82,7 +131,7 @@ body {
     background-color: cornflowerblue;
     color: #fff;
     max-width: 35%;
-    padding: 1px 16px;
+    padding: 8px;
     margin: 10px;
     border-radius: 10px 10px 10px 0px;
 }
@@ -95,7 +144,7 @@ body {
 .my-chat-bubble {
     background-color: lavender;
     max-width: 40%;
-    padding: 1px 16px;
+    padding: 8px;
     margin: 10px;
     border-radius: 10px 10px 0 10px;
     margin-left: 60%;
