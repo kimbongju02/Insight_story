@@ -6,41 +6,7 @@
 	<link rel="stylesheet" href="css/root_page.css">
 	<!-- alert 창 꾸미기 -->
 	<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script> 
-	<script>
-	    // 모달 열기
-	    window.onload = function() {
-	        var modal = document.getElementById("keyModal");
-	        modal.style.display = "block";
-
-	        // 모달 창이 로드되었을 때 메시지 수신
-	        window.addEventListener('message', function(event) {
-				if (event.data === 'closeModal') {
-					modal.style.display = "none";
-				} else if (event.data === 'error') {
-					swal({
-						title: "오류!",
-						text: `OpenAi API Key는 정확히 56자여야 합니다!
-						키를 다시 확인해 주세요.`,
-						icon: "warning",
-						button: "확인",
-						dangerMode: true
-					});
-				} else if (event.data === 'success') {
-					swal({
-					  title: "확인 완료!",
-					  text: "OpenAi API Key가 확인되었습니다!",
-					  icon: "success",
-					  button: "확인",
-					});
-				}
-	        });
-	    };
-		
-		function goToNextPage(keyword) {
-		           window.location.href = '/index?keyword=' + encodeURIComponent(keyword);
-		        }
-				
-	</script>
+	<script src='js/root_page.js'></script>
 </head>
   <body>
 	<div class="navbar">
@@ -54,26 +20,30 @@
 	
 	<div id="contents"> 
 		<div class="container">
-			<div class="left_box" onclick="goToNextPage('martial-arts')" style="cursor:pointer;">
-				#무협
+			<div class="left_box"  th:id='${story_list[0].id}' th:text='${story_list[0].name}' 
+			th:style="'background-image: url(' + ${story_list[0].image} + ')'" onclick="goToNextPage('0')" style="cursor:pointer;">
 			</div>
-			<div class="right_box" onclick="goToNextPage('horror')" style="cursor:pointer;">
-				#공포
+			<div class="right_box" th:id='${story_list[1].id}' th:text='${story_list[1].name}' 
+			th:style="'background-image: url(' + ${story_list[1].image} + ')'" onclick="goToNextPage('1')" style="cursor:pointer;">
 			</div>
 		</div>
 		<div class="container">
-			<div class="left_box" onclick="goToNextPage('fantasy')" style="cursor:pointer;">
+			<div class="left_box" th:id='${story_list[2].id}' th:text='${story_list[2].name}' 
+			th:style="'background-image: url(' + ${story_list[2].image} + ')'" onclick="goToNextPage('2')" style="cursor:pointer;">
 				#판타지
 			</div>
-			<div class="right_box" onclick="goToNextPage('romance')" style="cursor:pointer;">
+			<div class="right_box" th:id='${story_list[3].id}' th:text='${story_list[3].name}' 
+			th:style="'background-image: url(' + ${story_list[3].image} + ')'" onclick="goToNextPage('3')" style="cursor:pointer;">
 				#로맨스
 			</div>
 		</div>
 		<div class="container">
-			<div class="left_box" onclick="goToNextPage('mystery')" style="cursor:pointer;">
+			<div class="left_box" th:id='${story_list[4].id}' th:text='${story_list[4].name}' 
+			th:style="'background-image: url(' + ${story_list[4].image} + ')'" onclick="goToNextPage('4')" style="cursor:pointer;">
 				#추리
 			</div>
-			<div class="right_box" onclick="goToNextPage('sf')" style="cursor:pointer;">
+			<div class="right_box" th:id='${story_list[5].id}' th:text='${story_list[5].name}' 
+			th:style="'background-image: url(' + ${story_list[5].image} + ')'" onclick="goToNextPage('5')" style="cursor:pointer;">
 				#SF
 			</div>
 		</div>

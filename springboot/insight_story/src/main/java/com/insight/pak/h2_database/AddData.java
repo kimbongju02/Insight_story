@@ -90,7 +90,7 @@ public class AddData {
         story2.setId(0);
         story2.setImage(image2);
         story2.setSummary(summary2);
-        story2.setPrompt(prompt);
+        story2.setPrompt(prompt2);
         story2.setName(name2);
         
         this.storyRepository.save(story2);
@@ -99,7 +99,7 @@ public class AddData {
         story3.setId(0);
         story3.setImage(image3);
         story3.setSummary(summary3);
-        story3.setPrompt(prompt);
+        story3.setPrompt(prompt3);
         story3.setName(name3);
         
         this.storyRepository.save(story3);
@@ -108,7 +108,7 @@ public class AddData {
         story4.setId(0);
         story4.setImage(image4);
         story4.setSummary(summary4);
-        story4.setPrompt(prompt);
+        story4.setPrompt(prompt4);
         story4.setName(name4);
         
         this.storyRepository.save(story4);
@@ -117,7 +117,7 @@ public class AddData {
         story5.setId(0);
         story5.setImage(image5);
         story5.setSummary(summary5);
-        story5.setPrompt(prompt);
+        story5.setPrompt(prompt5);
         story5.setName(name5);
         
         this.storyRepository.save(story5);
@@ -126,7 +126,7 @@ public class AddData {
         story6.setId(0);
         story6.setImage(image6);
         story6.setSummary(summary6);
-        story6.setPrompt(prompt);
+        story6.setPrompt(prompt6);
         story6.setName(name6);
         
         this.storyRepository.save(story6);

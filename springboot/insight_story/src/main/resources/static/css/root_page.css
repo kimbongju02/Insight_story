@@ -83,31 +83,6 @@ body{
   
 }
 
-/* 각 박스마다 다른 배경 이미지 */
-.container:nth-child(1) .left_box{
-	background-image: url('/img/1.jpg');
-}
-        
-.container:nth-child(2) .left_box{
-	background-image: url('/img/2.jpg');
-}
-
-.container:nth-child(3) .left_box{
-	background-image: url('/img/3.jpg');
-}
-
-.container:nth-child(1) .right_box{
-	background-image: url('/img/4.jpg');
-}
-
-.container:nth-child(2) .right_box{
-	background-image: url('/img/5.jpg');
-}
-
-.container:nth-child(3) .right_box{
-	background-image: url('/img/6.jpg');
-}
-
 /* 호버 속성 */
 .left_box:hover{
 	filter: none;

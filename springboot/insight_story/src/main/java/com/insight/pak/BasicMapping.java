@@ -1,12 +1,17 @@
 package com.insight.pak;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.insight.pak.h2_database.Story;
+import com.insight.pak.h2_database.StoryController;
 import com.insight.pak.service.ChatGPTService;
 
 import jakarta.servlet.http.HttpSession;
@@ -16,14 +21,15 @@ public class BasicMapping {
 
     @Autowired
     private ChatGPTService chatGPTService;
-
-    // rootpage 조회
+    @Autowired
+    private StoryController storyController;
 
     @GetMapping("/")
-    public String main() {
+    public String main(Model model) {
+        List<Story> story_list = storyController.load_all_data();
+        model.addAttribute("story_list", story_list);
         return "root_page";
     }
-    // Index 조회
 
     @GetMapping("/content")
     public String content() {
@@ -31,11 +37,8 @@ public class BasicMapping {
     }
 	
 	@GetMapping("/index")
-    public String indexPage(@RequestParam(name = "keyword", required = false) String keyword, Model model) {
-        if (keyword != null && !keyword.isEmpty()) {
-            model.addAttribute("keyword", keyword);
-        }
-        return "index"; // index.html 템플릿을 렌더링합니다.
+    public String indexPage(@RequestParam String story_num) {
+        return "/index?story_num=%story_num" +story_num; // index.html 템플릿을 렌더링합니다.
     }
 	
 	@GetMapping("/api_key")
