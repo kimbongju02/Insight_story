@@ -22,7 +22,7 @@ public class Story {
     @Column(length = 3000)
     private String prompt;
 
-    @Column(length = 1000)
+    @Column(length = 3000)
     private String summary;
 
     @Column(length = 100)

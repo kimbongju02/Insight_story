@@ -1173,3 +1173,6 @@ Caused by: org.h2.mvstore.MVStoreException: The file is locked: C:/Users/kimbo/g
 	at org.h2.mvstore.SingleFileStore.open(SingleFileStore.java:81)
 	at org.h2.mvstore.MVStore.<init>(MVStore.java:286)
 	... 64 more
+2024-06-09 14:07:49.402314+09:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "STORY" not found (this database is empty); SQL statement:
+select s1_0.id,s1_0.image,s1_0.name,s1_0.prompt,s1_0.summary from story s1_0 where s1_0.id=? [42104-224]
