@@ -5,131 +5,151 @@
     font-style: normal;
 }
 
-@font-face {
-    font-family: 'HSSanTokki20-Regular';
-    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/2405@1.0/HSSanTokki20-Regular.woff2') format('woff2');
-    font-weight: normal;
-    font-style: normal;
-}
 
 a{
-    text-decoration-line: none;
+	text-decoration-line: none;
 }
 
 body{
-    margin: 0;
-    width: 100%;
+	margin: 0;
+	width: 100%;
 }
 
-#header{
-    height: 75px;
-    background-color: rgb(128, 128, 255);
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 2px 100px;
+    background-color:white;
 }
 
-.logo{
-    height: 75px;
-    width: 270px;
-    float: left;
+.navbar-logo {
+    display: flex;
+    align-items: center;
 }
 
-.logo>a>img{
-    height: 75px;
-    width: 250px;
+.navbar-logo img {
+    max-width: 12%;
+}
+
+.navbar-logo p {
+    font-size: 1.3rem;
+    font-weight: 700;
+    padding: 0 0 0 5px;
 }
 
 #contents{
-    height: 750px;
-    background-color: rgb(255, 255, 255);
+	height: 750px;
+	background-color: rgb(255, 255, 255);
 }
 
 
 .box{
-    margin : 60px 0px 0px 345px;
-    width: 1222px;
-    height: 700px;
-    border : 1px solid rgb(183, 183, 183);
-    border-radius : 10px;
-    box-shadow: 0px 0px 5px 1px gray;
-}
-
-.box:hover{
-    background-color: rgb(0, 255, 255);
+  margin : 60px 0px 0px 345px;
+  width: 1222px;
+  height: 700px;
+  border : 1px solid rgb(183, 183, 183);
+  border-radius : 10px;
+  box-shadow: 0px 0px 5px 1px gray;
 }
 
 .img_box{
-    width: 487px;
-    height: 700px;
-    border-radius : 10px 0px 0px 10px;
-    background-color: rgb(255, 255, 128);
-    text-align: center;
-    line-height: 700px;
-    font-family: 'HSSanTokki20-Regular';
-    font-size: 40px;
-    float: left;
+  width: 487px;
+  height: 700px;
+  border-radius : 10px 0px 0px 10px;
+  background-size: cover;
+  background-position: center;
+  opacity: 0.7;
+  float: left;
+}
+.span_box{
+	width: 727px;
+	height: 30px;
+	display: inline-flex;
+	justify-content: flex-end;
+	align-items: center;
+	 }
+  
+.close{
+  width: 120px;
+  height: 7px;
+  padding : 23px 0px 0px 0px;
+  border-radius : 0px 10px 0px 10px;
+  background-color: #FFF;
+  color:  #d4d4d5;
+  line-height: 154px;
+  font-family: 'Pretendard-Regular';
+  font-size: 50px;
+  display: inline-flex;
+  justify-content: flex-end;
+  align-items: center;
 }
 
 .keyword_box{
-    width: 720px;
-    height: 152px;
-    padding : 0px 15px 0px 0px;
-    border-radius : 0px 10px 0px 0px;
-    background-color: rgb(255, 255, 255);
-    line-height: 154px;
-    font-family: 'HSSanTokki20-Regular';
-    font-size: 100px;
-    color: blue;
-    display: inline-flex;
-    justify-content: flex-end;
+  width: 727px;
+  height: 125px;
+  border-radius : 0px 10px 0px 0px;
+  background-color: #FFF;
+  line-height: 154px;
+  font-family: 'Pretendard-Regular';
+  font-size: 50px;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .story_box{
-    width: 720px;
-    height: 440px;
-    padding : 0px 15px 0px 0px;
-    background-color: rgb(255, 255, 255);
-    text-align: right;
-    line-height: 20px;
-    font-family: 'Pretendard-Regular';
-    font-size: 20px;
-    display: inline-flex;
-    justify-content: flex-end;
-    word-wrap: break-word;
+width: 735px;
+  height: 408px;
+  padding : 8px 0px 0px 0px;
+  background-color: #FFF;
+  text-align: center;
+  line-height: 20px;
+  font-family: 'Pretendard-Regular';
+  font-size: 20px;
+  display: inline-flex;
+  justify-content: center;
+  align-items: flex-start;
+  word-wrap: break-word;
 }
 
 .start_box{
-    width: 735px;
-    height: 108px;
-    border-radius : 0px 0px 10px 0px;
-    background-color: rgb(255, 255, 255);
-    text-align: center;
-    line-height: 548px;
-    font-family: 'HSSanTokki20-Regular';
-    font-size: 40px;
-    display: inline-flex;
-    justify-content: flex-end;
+  width: 735px;
+  height: 108px;
+  border-radius : 0px 0px 10px 0px;
+  background-color: #FFF;
+  text-align: center;
+  line-height: 548px;
+  font-family: 'Pretendard-Regular';
+  font-size: 40px;
+  display: inline-flex;
+  justify-content: flex-end;
 }
 
 .start{
-    width: 260px;
-    height: 70px;
-    margin: 20px 15px 0px 0px;
-    border-radius: 60px;
-    background-color: rgb(153, 185, 232);
-    text-align: center;
-    line-height: 74px;
-    font-family: 'HSSanTokki20-Regular';
-    font-size: 40px;
+	width: 260px;
+	height: 70px;
+	margin: 20px 15px 0px 0px;
+	border-radius: 60px;
+	background-color: #6495ED;
+	color: white;
+	text-align: center;
+	line-height: 74px;
+	font-family: 'Pretendard-Regular';
+	font-size: 40px;
+	transition: background-color 0.3s ease;
 }
 
 .start:hover{
-    width: 260px;
-    height: 70px;
-    margin: 20px 15px 0px 0px;
-    border-radius: 60px;
-    background-color: rgb(0, 0, 255);
-    text-align: center;
-    line-height: 74px;
-    font-family: 'HSSanTokki20-Regular';
-    font-size: 40px;
-    color: white;
+	width: 260px;
+	height: 70px;
+	margin: 20px 15px 0px 0px;
+	border-radius: 60px;
+	background-color: #0056b3;
+	color: white;
+	text-align: center;
+	line-height: 74px;
+	font-family: 'Pretendard-Regular';
+	font-size: 40px;
+	
 }

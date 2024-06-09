@@ -25,9 +25,22 @@ public class BasicMapping {
     }
     // Index 조회
 
-    @GetMapping("/index") //GET 요청에 대한 핸들러 메서드.
-    public String getIndex() {
-        return "index";
+    @GetMapping("/content")
+    public String content() {
+        return "content"; // Content.html 파일명
+    }
+	
+	@GetMapping("/index")
+    public String indexPage(@RequestParam(name = "keyword", required = false) String keyword, Model model) {
+        if (keyword != null && !keyword.isEmpty()) {
+            model.addAttribute("keyword", keyword);
+        }
+        return "index"; // index.html 템플릿을 렌더링합니다.
+    }
+	
+	@GetMapping("/api_key")
+    public String apikey() {
+        return "api_key"; // Content.html 파일명
     }
 
     @GetMapping("/saveApiKey")
