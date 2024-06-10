@@ -5,6 +5,7 @@ const history = document.querySelector('.history');
 var part_cnt = 0;
 const data_history = {};
 const choice_history = {};
+var option_cnt=0;
 
 window.onload = function() {
 
@@ -25,6 +26,7 @@ function laod_start_story(){
 }
 
 async function create_chat_div(data) {
+    await disable_history();
     const part = document.createElement('div');
     part.id = 'part-' + part_cnt;
     part.setAttribute('data-value', part_cnt);
@@ -35,6 +37,21 @@ async function create_chat_div(data) {
     
     select_button_event(part);
     save_data_history(data);
+    enable_history();
+}
+
+function disable_history(){
+    const history_button = document.querySelectorAll('.history button');
+    history_button.forEach(function(button){
+        button.disabled = true;
+    })
+}
+
+function enable_history(){
+    const history_button = document.querySelectorAll('.history button');
+    history_button.forEach(function(button){
+        button.disabled = false;
+    })
 }
 
 function add_story(part, story) {
@@ -65,10 +82,12 @@ function add_option(choice1, choice2, choice3){
         const option2_container = document.createElement('button');
         const option3_container = document.createElement('button');
 
-        option1_container.id = 'option1';
-        option2_container.id = 'option2';
-        option3_container.id = 'option3';
-
+        option1_container.id = 'option'+option_cnt;
+        option_cnt+=1;
+        option2_container.id = 'option'+option_cnt;
+        option_cnt+=1;
+        option3_container.id = 'option'+option_cnt;
+        option_cnt+=1;
         options.appendChild(option1_container);
         options.appendChild(option2_container);
         options.appendChild(option3_container);

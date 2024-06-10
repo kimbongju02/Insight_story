@@ -21,19 +21,8 @@
 		<a href="https://mixedcode.com/blog/detail?pid=6" target="_blank" style="cursor:pointer;">OpenAi API Key 발급 방법
 	</div>
 	
-    <script>
-        var submitButton = document.getElementById("submitButton");
+    <script src='/js/api_key.js'>
 
-        // 확인 버튼 클릭 시 입력값 확인
-        submitButton.onclick = function() {
-            var apiKey = document.getElementById("apiKeyInput").value;
-            if (apiKey.length === 56) {
-                window.parent.postMessage('closeModal', '*');
-                window.parent.postMessage('success', '*');
-            } else {
-                window.parent.postMessage('error', '*');
-            }
-        };
     </script>
 </body>
 </html>

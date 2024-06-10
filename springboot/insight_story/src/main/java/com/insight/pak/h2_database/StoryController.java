@@ -15,21 +15,15 @@ import lombok.RequiredArgsConstructor;
 @Controller
 public class StoryController {
     @Autowired
-    private final StoryService storyService;
+    private StoryService storyService;
 
-    @GetMapping("/main/page")
-    public String main_page(Model model){
-        List<Story> storyList = storyService.find_all();
-        model.addAttribute("storyList", storyList);
-        System.out.println("storyList: " + storyList.get(0).getName() + " " + storyList.get(0).getPrompt() + " " + storyList.get(0).getSummary() + " " + storyList.get(0).getImage() + " " + storyList.get(0).getId());
-        return "root_page";
+    public List<Story> load_all_data(){
+        List<Story> story_list = storyService.find_all();
+        return story_list;
     }
 
-    @GetMapping("/story/page/{id}")
-    public String story_page(Model model, @PathVariable("id") Integer id){
-        Story story = storyService.find_id(id);
-        model.addAttribute("story", story);
-        System.out.println("story: " + story);
-        return "index";
+    public Story load_select_story(String id){
+        Story story = storyService.find_id(Integer.parseInt(id));
+        return story;
     }
 }
