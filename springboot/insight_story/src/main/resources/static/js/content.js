@@ -49,15 +49,27 @@ function add_story(part, story) {
 function add_dialogue(part, dialogue){
     return new Promise(async (resolve) => {
         for (const item of dialogue) {
+            // 이름 컨테이너 생성
+            const name_container = document.createElement('div');
+            name_container.classList.add('name');
+            name_container.textContent = item.name;
+
+            // 대화 컨테이너 생성
             const dialogue_container = document.createElement('div');
             dialogue_container.classList.add('chat-bubble');
-            const dialogue_text = item.name + ": " + item.content;
+            const dialogue_text = item.content;
+            
+            // 이름과 대화 컨테이너를 파트에 추가
+            part.appendChild(name_container);
             part.appendChild(dialogue_container);
+
+            // 대화 내용을 한 글자씩 추가
             await one_word_one_time(dialogue_container, dialogue_text);
         }
         resolve();
     });
 }
+
 
 function add_option(choice1, choice2, choice3){
     return new Promise((resolve) => {
