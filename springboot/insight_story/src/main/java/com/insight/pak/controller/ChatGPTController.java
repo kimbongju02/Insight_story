@@ -7,8 +7,10 @@ import com.insight.pak.dto.StoryRequest;
 import com.insight.pak.dto.StoryResponse;
 import com.insight.pak.h2_database.StoryController;
 import com.insight.pak.service.ChatGPTService;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -60,8 +62,9 @@ public class ChatGPTController {
     }
 
     // content 페이지 조회
-    @GetMapping("/testpage")
-    public String getGenerateStory(){
+    @GetMapping("/content/{id}")
+    public String getGenerateStory(@PathVariable("id") String id,Model model){
+        model.addAttribute("story_id", id);
         return "testpage";
     }
     @PostMapping(value = "/testpage")
@@ -71,7 +74,7 @@ public class ChatGPTController {
 
     // 지정된 prompt를 통해서 시작 이야기 생성
     @ResponseBody
-    @GetMapping("/content/{id}")
+    @GetMapping("/generate/init/{id}")
     public StoryResponse getStory(@PathVariable("id") String id) throws JsonProcessingException {
         String select_story_prompt = storyController.load_select_story(id).getPrompt();
 

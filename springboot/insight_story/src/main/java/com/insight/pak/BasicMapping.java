@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.insight.pak.h2_database.Story;
 import com.insight.pak.h2_database.StoryController;
@@ -53,15 +54,15 @@ public class BasicMapping {
     public String getSaveApiKey() {
         return "apikey_test";
     }
-
+ 
+    @ResponseBody
     @PostMapping("/saveApiKey")
-    public String saveApiKey(@RequestParam("apiKey") String apiKey, HttpSession session, Model model) {
+    public String saveApiKey(@RequestBody String api_key, HttpSession session, Model model) {
         try{
-            chatGPTService.saveApiKey(session, apiKey);
+            chatGPTService.saveApiKey(session, api_key);
+            return "s";
         }catch(Exception e){
-            model.addAttribute("apikey_response", e);
-            return "error";
+            return "e";
         }
-        return "testpage";
     }
 }

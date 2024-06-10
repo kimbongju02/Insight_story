@@ -1,6 +1,7 @@
 const chat_div = document.querySelector('.chat');
 const options = document.querySelector('.options');
 const history = document.querySelector('.history');
+const story_id = document.querySelector('.container').id;
 
 var part_cnt = 0;
 const data_history = {};
@@ -8,16 +9,15 @@ const choice_history = {};
 var option_cnt=0;
 
 window.onload = function() {
-
-    laod_start_story();
+    laod_start_story(story_id);
 
     var historyContainer = document.querySelector('.history');
     historyContainer.scrollTop = historyContainer.scrollHeight;
 };
 
-function laod_start_story(){
+function laod_start_story(id){
     // fetch('/api/story')
-    fetch('/api/story')
+    fetch('/generate/init/'+id)
     .then(response => response.json())
     .then(data => {
         create_chat_div(data);

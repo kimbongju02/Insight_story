@@ -19,7 +19,7 @@
 	
 	<div id="contents"> 
 		<div class="container">
-			<div class="box">
+			<div class="box" th:id='${story.id}'>
 				<div id="image_box" >
 					<img class="img_box" th:src="${story.image}">
 				</div>
@@ -33,7 +33,7 @@
 					<p id="storyDisplay" th:text='${story.summary}'></p>
 				</div>
 				<div class="start_box">
-					<div class="start" onclick="window.location.href='/testpage'" style="cursor:pointer;">
+					<div class="start"  th:onclick="|goToSelectContent('${story.id}')|" style="cursor:pointer;">
 						시작하기
 					</div>
 				</div>
