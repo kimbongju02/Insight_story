@@ -8,6 +8,6 @@ public interface ChatGPTService {
     String getApiKey(HttpSession session);
 
     String generateText(String prompt);
-    String Prompt();
+    String Prompt(String prompt);
     String continuePrompt(String prevStory, String choice);
 }

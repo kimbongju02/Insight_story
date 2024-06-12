@@ -27,12 +27,12 @@ function laod_start_story(id){
 
 async function create_chat_div(data) {
     await disable_history();
-    const part = document.createElement('div');
-    part.id = 'part-' + part_cnt;
-    part.setAttribute('data-value', part_cnt);
-    chat_div.appendChild(part);
-    await add_story(part, data['story']);
-    await add_dialogue(part, data['dialogue']);
+    const part_container = document.createElement('div');
+    part_container.id = 'part-' + part_cnt;
+    part_container.setAttribute('data-value', part_cnt);
+    chat_div.appendChild(part_container);
+    await add_story(part_container, data['story']);
+    await add_dialogue(part_container, data['dialogue']);
     await add_option(data['choice1'], data['choice2'], data['choice3']);
     
     select_button_event(part);
@@ -56,21 +56,21 @@ function enable_history(){
 
 function add_story(part, story) {
     return new Promise((resolve) => {
-        const story_container = document.createElement('div');
-        story_container.classList.add('story');
-        part.appendChild(story_container);
-        one_word_one_time(story_container, story).then(resolve);
+        const story_element = document.createElement('div');
+        story_element.classList.add('story');
+        part.appendChild(story_element);
+        one_word_one_time(story_element, story).then(resolve);
     });
 }
 
-function add_dialogue(part, dialogue){
+function add_dialogue(select_part_container, dialogue){
     return new Promise(async (resolve) => {
         for (const item of dialogue) {
-            const dialogue_container = document.createElement('div');
-            dialogue_container.classList.add('chat-bubble');
+            const dialogue_element = document.createElement('div');
+            dialogue_element.classList.add('chat-bubble');
             const dialogue_text = item.name + ": " + item.content;
-            part.appendChild(dialogue_container);
-            await one_word_one_time(dialogue_container, dialogue_text);
+            select_part_container.appendChild(dialogue_element);
+            await one_word_one_time(dialogue_element, dialogue_text);
         }
         resolve();
     });
@@ -78,29 +78,29 @@ function add_dialogue(part, dialogue){
 
 function add_option(choice1, choice2, choice3){
     return new Promise((resolve) => {
-        const option1_container = document.createElement('button');
-        const option2_container = document.createElement('button');
-        const option3_container = document.createElement('button');
+        const option1_element = document.createElement('button');
+        const option2_element = document.createElement('button');
+        const option3_element = document.createElement('button');
 
-        option1_container.id = 'option'+option_cnt;
-        option_cnt+=1;
-        option2_container.id = 'option'+option_cnt;
-        option_cnt+=1;
-        option3_container.id = 'option'+option_cnt;
-        option_cnt+=1;
-        options.appendChild(option1_container);
-        options.appendChild(option2_container);
-        options.appendChild(option3_container);
+        option1_element.id = 'option';
+        option2_element.id = 'option';
+        option3_element.id = 'option';
+        if(choice1!= null)
+            options.appendChild(option1_element);
+        if(choice2!= null)
+            options.appendChild(option2_element);
+        if(choice3!= null)
+            options.appendChild(option3_element);
 
-        option1_container.textContent = choice1;
-        option2_container.textContent = choice2;
-        option3_container.textContent = choice3;
+        option1_element.textContent = choice1;
+        option2_element.textContent = choice2;
+        option3_element.textContent = choice3;
 
         resolve();
     });
 }
 
-function select_button_event(part){
+function select_button_event(select_part_container){
     return new Promise((resolve) => {
         const buttons = document.querySelectorAll('.options button');
         buttons.forEach(button => {
@@ -110,7 +110,7 @@ function select_button_event(part){
                 my_select_option.classList.add('my-chat-bubble');
                 const select_button_text = click_button.textContent;
                 my_select_option.textContent = select_button_text;
-                part.appendChild(my_select_option);
+                select_part_container.appendChild(my_select_option);
                 add_history(select_button_text);
 
                 create_next_story();
@@ -161,16 +161,16 @@ function one_word_one_time(div, story){
 }
 
 function add_history(select_button_text){
-    const history_container = document.createElement('button');
-    history_container.id = "history-" + part_cnt;
-    history_container.setAttribute('data-value', part_cnt);
-    history_container.classList.add('info-box');
-    history.appendChild(history_container);
-    history_container.textContent = select_button_text;
+    const history_element = document.createElement('button');
+    history_element.id = "history-" + part_cnt;
+    history_element.setAttribute('data-value', part_cnt);
+    history_element.classList.add('info-box');
+    history_element.appendChild(history_element);
+    history_element.textContent = select_button_text;
 
     save_choice_history(select_button_text);
 
-    history_container.addEventListener('click', function() {
+    history_element.addEventListener('click', function() {
         const select_part_num = parseInt(this.getAttribute('data-value'));
         const prev_data = data_history[select_part_num];
         console.log("select_part_num: " + select_part_num+" part_cnt: " + part_cnt);
@@ -178,14 +178,14 @@ function add_history(select_button_text){
         document.querySelectorAll('.options button').forEach(button => button.remove());
         for(let i=part_cnt; i>=select_part_num; i--){
             console.log("delete part_cnt: " + i);
-            const partElement = document.getElementById('part-' + (i));
-            const historyElement = document.getElementById('history-' + (i));
+            const part_container = document.getElementById('part-' + (i));
+            const history_container = document.getElementById('history-' + (i));
             
-            if(partElement){
-                partElement.remove();
+            if(part_container){
+                part_container.remove();
             }
-            if(historyElement){
-                historyElement.remove();
+            if(history_container){
+                history_container.remove();
             }
             delete_data_history(i);
             delete_choice_history(i);
