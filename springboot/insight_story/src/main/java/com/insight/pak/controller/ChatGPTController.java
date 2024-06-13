@@ -77,8 +77,9 @@ public class ChatGPTController {
     @GetMapping("/generate/init/{id}")
     public StoryResponse getStory(@PathVariable("id") String id) throws JsonProcessingException {
         String select_story_prompt = storyController.load_select_story(id).getPrompt();
+        System.out.println("-------------------select_story_prompt---------------------\n"+select_story_prompt);
 
-        String initialPrompt = chatGPTService.Prompt();
+        String initialPrompt = chatGPTService.Prompt(select_story_prompt);
         String initialStory = chatGPTService.generateText(initialPrompt);
         initialStory = initialStory+select_story_prompt;
         System.out.println("-------------------send data---------------------\n"+initialStory);

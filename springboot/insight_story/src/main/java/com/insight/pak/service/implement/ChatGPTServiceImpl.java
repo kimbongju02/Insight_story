@@ -66,7 +66,7 @@ public class ChatGPTServiceImpl implements ChatGPTService {
     }
 
     @Override // 추가
-    public String Prompt() {
+    public String Prompt(String prompt) {
 
         return String.format("#명령문\n" +
         "나는 텍스트 게임을 너와 해보려고 해.\n"+
@@ -102,7 +102,7 @@ public class ChatGPTServiceImpl implements ChatGPTService {
         "인물 간의 대화가 많았으면 해.\n" +
         "그리고 인물 간 대화할 때 '이름':'대화 내용'양식을 꼭 써줘.\n" +
         "매번 이야기가 새롭게 시작되는 게 아니라, 선택지를 선택하는 부분에서는 멈췄다가 내가 선택하는 것에 따라 이야기가 계속 이어져야 해.\n" +
-        "\n");
+        "\n"+prompt);
     }
 
     @Override // 추가
