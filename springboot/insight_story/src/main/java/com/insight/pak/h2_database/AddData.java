@@ -11,7 +11,6 @@ import lombok.RequiredArgsConstructor;
 public class AddData {
     
     @Autowired
-    private StoryService storyService;
     private final StoryRepository storyRepository;
 
     String prompt = 
