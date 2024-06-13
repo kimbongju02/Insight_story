@@ -42,7 +42,7 @@ public class BasicMapping {
     public String indexPage(Model model, @PathVariable("id") String id) {
         Story story = storyController.load_select_story(id);
         model.addAttribute("story", story);
-        return "/index"; // index.html 템플릿을 렌더링합니다.
+        return "index"; // index.html 템플릿을 렌더링합니다.
     }
 	
 	@GetMapping("/api_key")
