@@ -30,11 +30,13 @@ public class ChatGPTServiceImpl implements ChatGPTService {
     @Autowired
     private RestTemplate restTemplate;
 
+    // 사용자가 입력한 apikey 저장
     @Override
     public void saveApiKey(HttpSession session, String apiKey) {
         session.setAttribute(API_KEY, apiKey);
     }
 
+    // 사용자가 입력한 api key 가져옴
     @Override
     public String getApiKey(HttpSession session) {
         return (String) session.getAttribute(API_KEY);
@@ -65,7 +67,7 @@ public class ChatGPTServiceImpl implements ChatGPTService {
                 .getContent();
     }
 
-    @Override // 추가
+    @Override // 첫 스토리 생성할 때 사용할 prompt
     public String Prompt(String prompt) {
 
         return String.format("#명령문\n" +
@@ -106,7 +108,7 @@ public class ChatGPTServiceImpl implements ChatGPTService {
         "\n"+prompt);
     }
 
-    @Override // 추가
+    @Override // 사용자가 선택할 경우 이전 스토리와 선택지와 연관된 다음 스토리 생성하는 prompt
     public String continuePrompt(String prevStory, String choice) {
         return String.format(
             "#명령문\n" +

@@ -37,6 +37,7 @@ public class BasicMapping {
         return "content"; // Content.html 파일명
     }
 	
+    // 사용자가 스토리를 클릭했을 때 상세 스토리 설명 페이지로 이동
 	@GetMapping("/index/{id}")
     public String indexPage(Model model, @PathVariable("id") String id) {
         Story story = storyController.load_select_story(id);

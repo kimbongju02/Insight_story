@@ -6,6 +6,10 @@ import org.springframework.web.bind.annotation.GetMapping;
 
 import lombok.RequiredArgsConstructor;
 
+/* 
+    database에 데이터 입력하는 부분
+    경로만 적으면 db에 데이터 저장
+*/
 @RequiredArgsConstructor
 @Controller
 public class AddData {
