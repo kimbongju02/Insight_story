@@ -1,5 +1,6 @@
 package com.insight.pak.service.implement;
 
+import com.insight.pak.config.ChatGPTConfig;
 import com.insight.pak.dto.ChatGPTRequest;
 import com.insight.pak.dto.ChatGPTResponse;
 import com.insight.pak.service.ChatGPTService;
@@ -7,6 +8,7 @@ import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
+import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.RestTemplate;
 
 /**
@@ -18,6 +20,8 @@ import org.springframework.web.client.RestTemplate;
 
 @Service
 public class ChatGPTServiceImpl implements ChatGPTService {
+
+    private ChatGPTConfig chatGPTConfig;
 
     @Value("${openai.model}")
     private String model;
@@ -33,8 +37,20 @@ public class ChatGPTServiceImpl implements ChatGPTService {
     // 사용자가 입력한 apikey 저장
     @Override
     public void saveApiKey(HttpSession session, String apiKey) {
-        session.setAttribute(API_KEY, apiKey);
+        if (!isValidApiKey(apiKey)) {
+            System.out.println("유효하지 않은 API KEY 입니다. (서비스 사용 불가)");
+        } else {
+            System.out.println("유효한 API KEY 입니다. (서비스 사용 가능)");
+            session.setAttribute(API_KEY, apiKey);
+        }
     }
+    // 사용자가 입력한 apikey 검증 메서드
+    private boolean isValidApiKey(String apiKey) {
+        // OpenAI API 키는 총 56자로 이루어진 문자열, 영문 대소문자, 숫자, 일부 특수문자를 포함.
+        String apiKeyPattern = "^[a-zA-Z0-9!@#$%^&*()-_=+\\[\\]{}|;:'\",.<>/?]{56}$";
+        return apiKey.matches(apiKeyPattern);
+    }
+
 
     // 사용자가 입력한 api key 가져옴
     @Override
@@ -175,4 +191,5 @@ public class ChatGPTServiceImpl implements ChatGPTService {
             "%s\n" +
             "-> %s번 선택", prevStory, choice);
     }
+
 }

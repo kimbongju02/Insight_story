@@ -3,13 +3,11 @@ package com.insight.pak;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import com.insight.pak.h2_database.Story;
 import com.insight.pak.h2_database.StoryController;
@@ -46,23 +44,35 @@ public class BasicMapping {
     }
 	
 	@GetMapping("/api_key")
-    public String apikey() {
-        return "api_key"; // Content.html 파일명
+    public String apikey(HttpSession session, Model model) {
+//        boolean isValid = chatGPTService.checkApiKey(session);
+//
+//        if (isValid) {
+//            model.addAttribute("apiKeyStatus", "올바른 API KEY입니다.");
+//        } else {
+//            model.addAttribute("apiKeyStatus", "올바르지 않은 API KEY입니다.");
+//        }
+        return "api_key"; // api_key.html 파일명
     }
 
     @GetMapping("/saveApiKey")
     public String getSaveApiKey() {
         return "apikey_test";
     }
- 
-    @ResponseBody
+
     @PostMapping("/saveApiKey")
-    public String saveApiKey(@RequestBody String api_key, HttpSession session, Model model) {
-        try{
-            chatGPTService.saveApiKey(session, api_key);
-            return "s";
-        }catch(Exception e){
-            return "e";
+    public String saveApiKey(@RequestParam("apiKey") String apiKey, HttpSession session, Model model) {
+        try {
+            chatGPTService.saveApiKey(session, apiKey);
+            model.addAttribute("apiKey", apiKey);
+            System.out.println("주입된 API_KEY:" + apiKey + "\n");
+            return "apikey_test";
+        } catch (IllegalArgumentException e) {
+            model.addAttribute("error", "유효하지 않은 API KEY 입니다. (서비스 사용 불가)");
+            return "apikey_test"; // 예외 발생 시 서버측에 에러 메세지 표시
+        } catch (Exception e) {
+            model.addAttribute("error", "서버 에러 발생!! (서비스 사용 불가)");
+            return "apikey_test";
         }
     }
 }
