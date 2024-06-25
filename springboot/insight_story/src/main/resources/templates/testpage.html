@@ -1,0 +1,35 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}">
+    <title>Content page</title>
+</head>
+<body>
+<div class="navbar">
+    <div class="navbar-logo">
+        <img src="insight-logo.png" alt="로고">
+        <p>Insight story</p>
+    </div>
+</div>
+<div class="container" th:id='${story_id}'>
+    <div class="main">
+        <div class="chat-container">
+            <div class="chat">
+                <!-- Chat Demension -->
+            </div>
+        </div>
+        <div class="options">
+            
+        </div>
+    </div>
+    <div class="history">
+    </div>
+</div>
+</div>
+<script src="/js/content.js">
+    
+</script>
+</body>
+</html>

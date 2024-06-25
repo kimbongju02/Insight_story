@@ -1,0 +1,155 @@
+@font-face {
+    font-family: 'Pretendard-Regular';
+    src: url('https://fastly.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Regular.woff') format('woff');
+    font-weight: 400;
+    font-style: normal;
+}
+
+
+a{
+	text-decoration-line: none;
+}
+
+body{
+	margin: 0;
+	width: 100%;
+}
+
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 2px 100px;
+    background-color:white;
+}
+
+.navbar-logo {
+    display: flex;
+    align-items: center;
+}
+
+.navbar-logo img {
+    max-width: 12%;
+}
+
+.navbar-logo p {
+    font-size: 1.3rem;
+    font-weight: 700;
+    padding: 0 0 0 5px;
+}
+
+#contents{
+	height: 750px;
+	background-color: rgb(255, 255, 255);
+}
+
+
+.box{
+  margin : 60px 0px 0px 345px;
+  width: 1222px;
+  height: 700px;
+  border : 1px solid rgb(183, 183, 183);
+  border-radius : 10px;
+  box-shadow: 0px 0px 5px 1px gray;
+}
+
+.img_box{
+  width: 487px;
+  height: 700px;
+  border-radius : 10px 0px 0px 10px;
+  background-size: cover;
+  background-position: center;
+  opacity: 0.7;
+  float: left;
+}
+.span_box{
+	width: 727px;
+	height: 30px;
+	display: inline-flex;
+	justify-content: flex-end;
+	align-items: center;
+	 }
+  
+.close{
+  width: 120px;
+  height: 7px;
+  padding : 23px 0px 0px 0px;
+  border-radius : 0px 10px 0px 10px;
+  background-color: #FFF;
+  color:  #d4d4d5;
+  line-height: 154px;
+  font-family: 'Pretendard-Regular';
+  font-size: 50px;
+  display: inline-flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+.keyword_box{
+  width: 727px;
+  height: 125px;
+  border-radius : 0px 10px 0px 0px;
+  background-color: #FFF;
+  line-height: 154px;
+  font-family: 'Pretendard-Regular';
+  font-size: 50px;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.story_box{
+width: 735px;
+  height: 408px;
+  padding : 8px 0px 0px 0px;
+  background-color: #FFF;
+  text-align: center;
+  line-height: 20px;
+  font-family: 'Pretendard-Regular';
+  font-size: 20px;
+  display: inline-flex;
+  justify-content: center;
+  align-items: flex-start;
+  word-wrap: break-word;
+}
+
+.start_box{
+  width: 735px;
+  height: 108px;
+  border-radius : 0px 0px 10px 0px;
+  background-color: #FFF;
+  text-align: center;
+  line-height: 548px;
+  font-family: 'Pretendard-Regular';
+  font-size: 40px;
+  display: inline-flex;
+  justify-content: flex-end;
+}
+
+.start{
+	width: 260px;
+	height: 70px;
+	margin: 20px 15px 0px 0px;
+	border-radius: 60px;
+	background-color: #6495ED;
+	color: white;
+	text-align: center;
+	line-height: 74px;
+	font-family: 'Pretendard-Regular';
+	font-size: 40px;
+	transition: background-color 0.3s ease;
+}
+
+.start:hover{
+	width: 260px;
+	height: 70px;
+	margin: 20px 15px 0px 0px;
+	border-radius: 60px;
+	background-color: #0056b3;
+	color: white;
+	text-align: center;
+	line-height: 74px;
+	font-family: 'Pretendard-Regular';
+	font-size: 40px;
+	
+}

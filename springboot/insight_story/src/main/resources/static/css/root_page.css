@@ -1,0 +1,122 @@
+@font-face {
+    font-family: 'Pretendard-Regular';
+    src: url('https://fastly.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Regular.woff') format('woff');
+    font-weight: 400;
+    font-style: normal;
+}
+
+a{
+	text-decoration-line: none;
+}
+
+body{
+	margin: 0;
+	width: 100%;
+}
+
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 2px 100px;
+    background-color:white;
+}
+
+.navbar-logo {
+    display: flex;
+    align-items: center;
+}
+
+.navbar-logo img {
+    max-width: 12%;
+}
+
+.navbar-logo p {
+    font-size: 1.3rem;
+    font-weight: 700;
+    padding: 0 0 0 5px;
+}
+
+
+#contents{
+	height: 100%;
+	background-color: #FFFFFF;
+}
+
+.container{
+	display: flex;
+}
+
+.left_box{
+  margin : 2% 0% 0% 15%;
+  width: 32%;
+  height: 100%;
+  border-radius : 10px;
+  background-size: cover;
+  background-position: center;
+  color: #FFFFFF;
+  float: left;
+  text-align: center;
+  text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px  1px 0 #000, 1px  1px 0 #000;
+  line-height: 260%;
+  font-family: 'Pretendard-Regular';
+  font-size: 90px;
+  transition: filter 0.3s;
+  filter: grayscale(100%);
+}
+
+.right_box{
+  margin : 2% 15% 0% 5%;
+  width: 32%;
+  height: 100%;
+  border-radius : 10px;
+  background-size: cover;
+  background-position: center;
+  color: #FFFFFF;
+  text-align: center;
+  text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px  1px 0 #000, 1px  1px 0 #000;
+  line-height: 260%;
+  font-family: 'Pretendard-Regular';
+  font-size: 90px;
+  transition: filter 0.3s;
+  filter: grayscale(100%);
+  
+}
+
+/* 호버 속성 */
+.left_box:hover{
+	filter: none;
+	cursor: pointer;
+}
+
+.right_box:hover{
+	filter: none;
+	cursor: pointer;
+}
+
+/* 모달 */
+.modal {
+	display: none; /* 숨겨진 상태로 시작 */
+	position: fixed;
+	z-index: 1;
+	left: 0;
+	top: 0;
+	width: 100%;
+	height: 100%;
+	border-radius : 10px;
+	overflow: auto;
+	background-color: rgb(0,0,0);
+	background-color: rgba(0,0,0,0.4);
+}
+
+/* 모달 콘텐츠 스타일 */
+.modal-content {
+	background-color: #fefefe;
+	margin: 15% auto; /* 중앙 정렬 */
+	padding: 20px;
+	border: 1px solid #888;
+	width: 80%;
+	max-width: 600px; /* 최대 너비 설정 */
+	border-radius : 10px;
+}
+

@@ -1,0 +1,44 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>Test Page</title>
+	<link rel="stylesheet" href="/css/index.css">
+
+	<script src='/js/index.js'>
+	    
+	</script>
+  </head>
+  <body>
+	<div class="navbar">
+	    <div class="navbar-logo">
+	        <img src="/img/insight-logo.png" alt="로고">
+	        <p>Insight story</p>
+	    </div>
+	</div>
+	
+	<div id="contents"> 
+		<div class="container">
+			<div class="box" th:id='${story.id}'>
+				<div id="image_box" >
+					<img class="img_box" th:src="${story.image}">
+				</div>
+				<div class="span_box">
+					<span class="close" onclick="goBack()" style="cursor:pointer;">&times;</span>
+				</div>
+				<div class="keyword_box">
+					<h1 id="keywordDisplay" th:text='${story.name}'></h1>
+				</div>
+				<div class="story_box">
+					<p id="storyDisplay" th:text='${story.summary}'></p>
+				</div>
+				<div class="start_box">
+					<div class="start"  th:onclick="|goToSelectContent('${story.id}')|" style="cursor:pointer;">
+						시작하기
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	</body>
+</html>

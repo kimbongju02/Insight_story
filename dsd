@@ -1,0 +1,180 @@
+[33mcommit a6a7cd3d221a8d584f56d4576cf471e62725eecd[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mcontent_js[m[33m)[m
+Author: kimbongju02 <qhdwn25@gmail.com>
+Date:   Thu Jun 6 20:08:36 2024 +0900
+
+    content_page history js
+
+[33mcommit c3ee1446b0dad018ad418173436ecd3a641623e7[m
+Author: kimbongju02 <qhdwn25@gmail.com>
+Date:   Thu Jun 6 20:01:01 2024 +0900
+
+    Revert "content history js"
+    
+    his reverts commit 3bede30bdbd3cc869808a6fd493b2745a01400ed.
+
+[33mcommit d097fcfbcf3aa04fe79679737d7d9f9d03f4b1f9[m
+Author: kimbongju02 <qhdwn25@gmail.com>
+Date:   Thu Jun 6 20:00:27 2024 +0900
+
+    content_page history js
+
+[33mcommit a26f5229d76919f41a75f63f8e5ccfdb6e2c341a[m
+Author: kimbongju02 <qhdwn25@gmail.com>
+Date:   Thu Jun 6 19:54:07 2024 +0900
+
+    content history js
+
+[33mcommit 4697ac44cd95adc8821495c7daf1b15593661ce4[m
+Author: kimbongju02 <qhdwn25@gmail.com>
+Date:   Thu Jun 6 19:53:06 2024 +0900
+
+    content history js
+
+[33mcommit 3bede30bdbd3cc869808a6fd493b2745a01400ed[m
+Author: kimbongju02 <qhdwn25@gmail.com>
+Date:   Thu Jun 6 19:52:18 2024 +0900
+
+    content history js
+
+[33mcommit 83b6c75c32621199c18c8543169004073cd2161b[m
+Author: kimbongju02 <qhdwn25@gmail.com>
+Date:   Thu Jun 6 19:07:04 2024 +0900
+
+    .
+
+[33mcommit 75d575dc2b583af6b5f07d300a21f12c0e1562ae[m
+Merge: 880491b 69d6747
+Author: kimbongju02 <qhdwn25@gmail.com>
+Date:   Thu Jun 6 10:04:01 2024 +0900
+
+    .
+
+[33mcommit 69d67477615fabaadd322ba9b1a0d230b3416052[m[33m ([m[1;31morigin/content_js[m[33m)[m
+Author: kimbongju02 <qhdwn25@gmail.com>
+Date:   Thu Jun 6 00:54:37 2024 +0900
+
+    js of content
+
+[33mcommit 880491ba15702408ebcecca291653f8d9b00a4c2[m
+Author: kimbongju02 <qhdwn25@gmail.com>
+Date:   Wed Jun 5 21:31:28 2024 +0900
+
+    add js to content_html
+
+[33mcommit 594bd3dc46f66eaf72499c8137d503b383b57532[m
+Author: kimbongju02 <qhdwn25@gmail.com>
+Date:   Wed Jun 5 21:30:17 2024 +0900
+
+    add js to content_html
+
+[33mcommit 31126c53c2411afb8cf00564f11e30b83dd28f85[m
+Author: kimbongju02 <qhdwn25@gmail.com>
+Date:   Wed Jun 5 21:27:14 2024 +0900
+
+    add js to content_html
+
+[33mcommit cff9b710433309b7b84f06ee7224ab91c0fa69c6[m[33m ([m[1;32mjeonginho-gpt-1[m[33m)[m
+Merge: 8834616 60c6f48
+Author: kimbongju02 <qhdwn25@gmail.com>
+Date:   Wed Jun 5 20:09:17 2024 +0900
+
+    .
+
+[33mcommit 60c6f48ae8d86f8a6ac07b3f5d79a13d39e4e20f[m[33m ([m[1;31morigin/jeonginho-gpt-1[m[33m)[m
+Author: jeonginh0 <stitch010913@gmail.com>
+Date:   Wed Jun 5 19:18:50 2024 +0900
+
+    front-back 7
+
+[33mcommit 88346164a41b6a530d45d27d968a6da84e648264[m
+Author: kimbongju02 <qhdwn25@gmail.com>
+Date:   Tue Jun 4 12:29:25 2024 +0900
+
+    .
+
+[33mcommit c3dcd22ad75f076959cc79d3adecda1d21446847[m
+Author: jeonginh0 <stitch010913@gmail.com>
+Date:   Tue Jun 4 11:02:27 2024 +0900
+
+    front-back 6
+
+[33mcommit 557f8c2a5789aee8ad908c8fcde14beda28f78b0[m
+Author: jeonginh0 <stitch010913@gmail.com>
+Date:   Mon Jun 3 18:13:40 2024 +0900
+
+    front-back 5
+
+[33mcommit 2b63fa9f719787135deaf6832fbe3bf7878e620c[m
+Author: jeonginh0 <stitch010913@gmail.com>
+Date:   Mon Jun 3 17:58:15 2024 +0900
+
+    front-back 4
+
+[33mcommit 4ce9cede87aba89e0bf2433bd97d8d3fe8d1ea7f[m
+Author: jeonginh0 <stitch010913@gmail.com>
+Date:   Mon Jun 3 16:19:05 2024 +0900
+
+    front-back 3
+
+[33mcommit feb76a2a37f804bf1b6e92dad321971714091b2d[m
+Author: jeonginh0 <stitch010913@gmail.com>
+Date:   Mon Jun 3 15:35:01 2024 +0900
+
+    front-back 2
+
+[33mcommit 37cc6b9b47a4e9975ca7becbd573494d2c3ef81d[m
+Author: jeonginh0 <stitch010913@gmail.com>
+Date:   Thu May 30 15:52:20 2024 +0900
+
+    front-back 1
+
+[33mcommit 733a932cb12103b8810b76f653adbce2c15534a9[m
+Author: jeonginh0 <stitch010913@gmail.com>
+Date:   Thu May 30 10:37:36 2024 +0900
+
+    prompt(Json) -> prompt(text(Json))
+
+[33mcommit 67ad32a6e68e8efb9ab7afcd2d5a654ae14f8185[m
+Author: jeonginh0 <stitch010913@gmail.com>
+Date:   Tue May 21 17:57:28 2024 +0900
+
+    gpt prompt service 수정
+
+[33mcommit 3e8dcacb275c1b31d65b5775aded63271e5af62c[m
+Author: jeonginh0 <stitch010913@gmail.com>
+Date:   Mon May 13 20:33:44 2024 +0900
+
+    view 구동을 위한 Controller 수정
+
+[33mcommit 9ed20b9cb0f12d872d5b8c863614a1cfb223178e[m[33m ([m[1;31morigin/version1[m[33m)[m
+Merge: fca908f 007ec20
+Author: kimbongju02 <106128768+kimbongju02@users.noreply.github.com>
+Date:   Mon May 13 14:25:08 2024 +0900
+
+    Merge pull request #3 from kimbongju02/jeonginho
+    
+    jeonginho
+
+[33mcommit 007ec2031519810c703d8c6950a0e2f7bb702204[m
+Author: jeonginh0 <stitch010913@gmail.com>
+Date:   Mon May 13 13:18:57 2024 +0900
+
+    jeonginho
+
+[33mcommit fca908f204e5d800427b7a70767e2a435a856c63[m
+Author: kimbongju02 <qhdwn25@gmail.com>
+Date:   Wed May 8 11:34:45 2024 +0900
+
+    Initial setting
+
+[33mcommit dd4fc589d6fea882f9a0bb3dbcc5b6d16c714863[m
+Author: kimbongju02 <qhdwn25@gmail.com>
+Date:   Wed May 8 11:31:51 2024 +0900
+
+    Initial setting
+
+[33mcommit 017d4c1ac0c12738fe09830148aec4e7b92d542d[m
+Author: kimbongju02 <106128768+kimbongju02@users.noreply.github.com>
+Date:   Mon Apr 8 14:11:53 2024 +0900
+
+    Initial commit

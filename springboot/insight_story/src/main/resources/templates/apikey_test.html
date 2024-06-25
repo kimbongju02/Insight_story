@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>OpenAI API Key 입력</title>
+</head>
+<body>
+<h1>OpenAI API Key 입력</h1>
+<form action="/saveApiKey" method="POST">
+    <label for="apiKey">API Key:</label>
+    <input type="text" id="apiKey" name="apiKey" required>
+    <button type="submit">제출</button>
+</form>
+
+<!-- API Key가 존재하면 화면에 표시 -->
+<div th:if="${apiKey != null}">
+    <h2>입력한 API Key:</h2>
+    <p th:text="${apiKey}"></p>
+</div>
+</body>
+</html>
