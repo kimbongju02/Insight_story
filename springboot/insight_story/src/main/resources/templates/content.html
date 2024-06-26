@@ -4,89 +4,65 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}">
+	<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500;700;900&display=swap" rel="stylesheet">
     <title>Content page</title>
 </head>
 <body>
-<div class="navbar">
-    <div class="navbar-logo">
-        <img src="insight-logo.png" alt="로고">
-        <p>Insight story</p>
-        <form id="storyForm" th:action="@{/content}" method="post">
-            <button type="submit">생성하기</button>
-        </form>
-    </div>
+<div class="header">
+    <a href="/"><img src="img/insight-logo.png" alt="로고"></a>
+	<div class="insight-story">
+		<p>Insight Story</p>
+	</div>
 </div>
+
 <div class="container">
-    <div class="main">
-        <div class="chat-container">
-            <div class="chat">
-                <div class="my-chat-bubble">
-                    <p>Hello!</p>
-                </div>
-                <div class="story">
-                    <p>-----------------------------story-----------------------------</p>
-<!--                    <p th:text="${story[홍설1]}"></p>-->
-                    <p th:if="${story != null}" th:text="${story[줄거리]}"></p>
-                </div>
-                <div class = "chat-bubble">
-                    <p th:if="${story != null}" th:text="${story[대화내용][홍설1]}"></p>
-                </div>
-                <div class = "chat-bubble">
-                    <p th:if="${story != null}" th:text="${story[선택지][첫번째]}"></p>
-                </div>
-                <div class="my-chat-bubble">
-                    <p>How was your day?</p>
-                </div>  
-            </div>
-        </div>
-        <div class="options">
-            <button onclick="insertText('선택지 1')">Option 1</button>
-            <button onclick="insertText('선택지 2')">Option 2</button>
-            <button onclick="insertText('선택지 3')">Option 3</button>
-        </div>
-    </div>
-    <div class="history">
-        <div class="info-box">
-            <p>history1</p>
-        </div>
-        <div class="info-box">
-            <p>history2</p>
-        </div>
-        <div class="info-box">
-            <p>history3</p>
-        </div>
-        <div class="info-box">
-            <p>history4</p>
-        </div>
-        <div class="info-box">
-            <p>history5</p>
-        </div>
-        <div class="info-box">
-            <p>history6</p>
-        </div>
-        <div class="info-box">
-            <p>history7</p>
-        </div>
-        <div class="info-box">
-            <p>history8</p>
-        </div>
-    </div>
-</div>
+<!--	<div style=background-image:url("img/a_whisper_in_the_dark.jpg"); alt="배경화면">-->
+    <div class="wrap">
+		<div class="chat-container">
+			<div class="chat">
+				<div class="story">
+					<p>나레이션 나레이션 여기다가 여기다가 나레이션을 적어요나레이션 나레이션 여기다가 여기다가 나레이션을 적어요나레이션 나레이션 여기다가 여기다가 나레이션을 적어요나레이션 나레이적어요나레이션 나레이션 여기다가 여기다가 나레이션을 적어요여기다가 나레이션을 적어요여기다가 나레이션을 적어요여기다가 나레이션을 적어요여기다가 나레이션을 적어요여기다가 나레이션을 적어요여기다가 나레이션을 적어요적어요여기다가 나레이션을 적어요적어요여기다가 나레이션을 적어요적어요여기다가 나레이션을 적어요</p>
+				</div>
+				<div class="content">
+					<div class="profile">
+					</div>
+					<div class="content1">
+						<p>대화 내용 대화 내용 대화 내용대화 내용 대화 내용 대화 내용대화 내용 대화 내용 대화 내용대화 내용 대화 내용 대화 내용대화 내용 대화 내용 대화 내용</p>
+					</div>
+				</div>
+					<div class="my-chat">
+						<p>dd</p>
+					</div>
+			</div>
+		</div>
+		
+		<div class="options">
+			<button>버튼 버튼 버튼</button>
+			<button>버튼 버튼 버튼</button>
+			<button>버튼 버튼 버튼</button>
+		</div>
+		
+		<div class="history-container">
+			<p>History</p>
+			<div class="history">
+				<div id="history1">
+					<p>1번 선택: 히스토리 내용 히스토리 내용 히스토리 내용</p>
+					<div class="circle"></div>
+				</div>
+				<div id="history2">
+					<p>2번 선택: 히스토리 내용 히스토리 내용 히스토리 내용</p>
+					<div class="circle"></div>
+					<div class="line"></div>
+				</div>
+			</div>
+		</div>
+	</div>
 </div>
 <script>
     window.onload = function() {
         var historyContainer = document.querySelector('.history');
         historyContainer.scrollTop = historyContainer.scrollHeight;
     };
-    function insertText(text) {
-        var chatContainer = document.querySelector('.chat');
-        var newChatBubble = document.createElement('div');
-        newChatBubble.classList.add('my-chat-bubble');
-        newChatBubble.innerHTML = `<p>${text}</p>`;
-        chatContainer.appendChild(newChatBubble);
-        // 스크롤을 맨 아래로 이동
-        chatContainer.scrollTop = chatContainer.scrollHeight;
-    }
 </script>
 </body>
 </html>

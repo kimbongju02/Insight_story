@@ -11,6 +11,11 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.fasterxml.jackson.core.JsonParseException;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.insight.pak.dto.StoryRequest;
+import com.insight.pak.dto.StoryResponse;
 import com.insight.pak.h2_database.Story;
 import com.insight.pak.h2_database.StoryController;
 import com.insight.pak.service.ChatGPTService;
@@ -35,6 +40,11 @@ public class BasicMapping {
     @GetMapping("/content")
     public String content() {
         return "content"; // Content.html 파일명
+    }
+    
+    @GetMapping("/testpage")
+    public String testpage() {
+        return "testpage"; // Content.html 파일명
     }
 	
     // 사용자가 스토리를 클릭했을 때 상세 스토리 설명 페이지로 이동
@@ -64,5 +74,12 @@ public class BasicMapping {
         }catch(Exception e){
             return "e";
         }
+    }
+    
+    @ResponseBody
+    @GetMapping("/load/image/story/{id}")
+    public String load_image_story( @PathVariable("id") String id){
+    	Story story = storyController.load_select_story(id);
+    	return story.getImage();
     }
 }

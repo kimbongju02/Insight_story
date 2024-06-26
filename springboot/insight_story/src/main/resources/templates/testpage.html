@@ -1,32 +1,40 @@
 <!doctype html>
-<html>
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}">
-    <title>Content page</title>
+	<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500;700;900&display=swap" rel="stylesheet">
+    <title>Test page</title>
 </head>
 <body>
-<div class="navbar">
-    <div class="navbar-logo">
-        <img src="insight-logo.png" alt="로고">
-        <p>Insight story</p>
-    </div>
+<div class="header">
+    <a href="/"><img src="img/insight-logo.png" alt="로고"></a>
+	<div class="insight-story">
+		<p>Insight Story</p>
+	</div>
 </div>
+
 <div class="container" th:id='${story_id}'>
-    <div class="main">
-        <div class="chat-container">
-            <div class="chat">
-                <!-- Chat Demension -->
-            </div>
-        </div>
-        <div class="options">
-            
-        </div>
-    </div>
-    <div class="history">
-    </div>
-</div>
+<!--	<div style=background-image:url("img/a_whisper_in_the_dark.jpg"); alt="배경화면">-->
+    <div class="wrap">
+		<div class="chat-container">
+			<div class="chat">
+				
+			</div>
+		</div>
+		
+		<div class="options">
+			
+		</div>
+		
+		<div class="history-container">
+			<p>History</p>
+			<div class="history">
+				
+			</div>
+		</div>
+	</div>
 </div>
 <script src="/js/content.js">
     

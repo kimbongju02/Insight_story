@@ -1,8 +1,7 @@
 const chat_div = document.querySelector('.chat');
 const options = document.querySelector('.options');
 const history = document.querySelector('.history');
-const background_container = document.querySelector('.container');
-const story_id = background_container.id;
+const story_id = document.querySelector('.container').id;
 
 var part_cnt = 0;
 const data_history = {};
@@ -10,7 +9,6 @@ const choice_history = {};
 var option_cnt=0;
 
 window.onload = function() {
-	load_image_story(story_id);
     laod_start_story(story_id);
 
     var historyContainer = document.querySelector('.history');
@@ -28,15 +26,6 @@ function laod_start_story(id){
     .catch(error => console.error('Error:', error));
 }
 
-function load_image_story(id){
-    fetch('/load/image/story/'+id)
-    .then(response => response.text())
-    .then(data => {
-        background_container.style.backgroundImage="url("+data+")";
-    })
-    .catch(error => console.error('Error:', error));
-}
-
 // 스토리를 생성할 때 스토리마다 div 영역을 생성하여 추가
 async function create_chat_div(data) {
     await disable_history();
@@ -48,14 +37,14 @@ async function create_chat_div(data) {
     await add_dialogue(part_container, data['dialogue']);
     await add_option(data['choice1'], data['choice2'], data['choice3']);
     
-    select_button_event(part_container);
+    select_button_event(part);
     save_data_history(data);
     enable_history();
 }
 
 // 스토리를 생성할 때 사용자가 분기 버튼을 클릭하지 못하도록 설정
 function disable_history(){
-    const history_button = document.querySelectorAll('.history p');
+    const history_button = document.querySelectorAll('.history button');
     history_button.forEach(function(button){
         button.disabled = true;
     })
@@ -63,7 +52,7 @@ function disable_history(){
 
 // 스토리 생성이 종료된 후 사용자가 분기 버튼을 클릭할 수 있도록 설정
 function enable_history(){
-    const history_button = document.querySelectorAll('.history p');
+    const history_button = document.querySelectorAll('.history button');
     history_button.forEach(function(button){
         button.disabled = false;
     })
@@ -79,44 +68,19 @@ function add_story(part, story) {
     });
 }
 
-
-/*function add_dialogue(select_part_container, dialogue){
+// create_chat_div 함수에 생성된 대화 영역을 추가
+function add_dialogue(select_part_container, dialogue){
     return new Promise(async (resolve) => {
         for (const item of dialogue) {
             const dialogue_element = document.createElement('div');
-            dialogue_element.classList.add('content');
+            dialogue_element.classList.add('chat-bubble');
             const dialogue_text = item.name + ": " + item.content;
             select_part_container.appendChild(dialogue_element);
             await one_word_one_time(dialogue_element, dialogue_text);
         }
         resolve();
     });
-}*/
-
-// create_chat_div 함수에 생성된 대화 영역을 추가
-function add_dialogue(select_part_container, dialogue){
-    return new Promise(async (resolve) => {
-        for (const item of dialogue) {
-			const dialogue_element = document.createElement('div');
-        	dialogue_element.classList.add('content');
-            const profile_element = document.createElement('div');
-            profile_element.classList.add('profile');
-            const content1_element = document.createElement('div');
-            content1_element.classList.add('content1');
-            const content1_p_element = document.createElement('p');
-            content1_p_element.classList.add('content1_p');
-
-			content1_element.appendChild(content1_p_element)
-            dialogue_element.appendChild(profile_element);
-            dialogue_element.appendChild(content1_element);
-            select_part_container.appendChild(dialogue_element);
-
-            await one_word_one_time(content1_p_element, item.content);
-        }
-        resolve();
-    });
 }
-
 
 // create_chat_div 함수에 생성된 선택지 영역을 추가
 function add_option(choice1, choice2, choice3){
@@ -125,9 +89,9 @@ function add_option(choice1, choice2, choice3){
         const option2_element = document.createElement('button');
         const option3_element = document.createElement('button');
 
-        option1_element.id = 'option_1';
-        option2_element.id = 'option_2';
-        option3_element.id = 'option_3';
+        option1_element.id = 'option';
+        option2_element.id = 'option';
+        option3_element.id = 'option';
         if(choice1!= null)
             options.appendChild(option1_element);
         if(choice2!= null)
@@ -152,19 +116,15 @@ function select_button_event(select_part_container){
             button.addEventListener('click', function() {
                 const click_button = document.getElementById(this.id);
                 const my_select_option = document.createElement('div');
-                my_select_option.classList.add('my-chat');
+                my_select_option.classList.add('my-chat-bubble');
                 const select_button_text = click_button.textContent;
-                const my_select_option_p_tag = document.createElement('p');
-                my_select_option_p_tag.textContent = select_button_text;
-                
-                my_select_option.appendChild(my_select_option_p_tag);
+                my_select_option.textContent = select_button_text;
                 select_part_container.appendChild(my_select_option);
 
                 // 사용자가 선택지 클릭 시 분기 영역에 선택지 추가
                 add_history(select_button_text);
 
-                //create_next_story();
-                laod_start_story(story_id);
+                create_next_story();
                 part_cnt += 1;
 
                 options.innerHTML = ''; 
@@ -215,37 +175,12 @@ function one_word_one_time(div, story){
 
 // 사용자가 선택지 클릭 시 분기 영역에 선택지 추가
 function add_history(select_button_text){
-    history_element = document.createElement('div');
+    const history_element = document.createElement('button');
     history_element.id = "history-" + part_cnt;
     history_element.setAttribute('data-value', part_cnt);
-    
-    history_text = (part_cnt+1)+'번 선택: '+select_button_text;
-    
-    if (part_cnt==0){
-		history_element.classList.add('history1');
-		history_p_tag = document.createElement('p');
-	    history_p_tag.textContent = history_text;
-	    history_circle = document.createElement('div');
-	    history_circle.classList.add('circle');
-	    
-	    history_element.appendChild(history_p_tag);
-	    history_element.appendChild(history_circle);
-	}else{
-		history_element.classList.add('history2');
-		history_p_tag = document.createElement('p');
-	    history_p_tag.textContent = history_text;
-	    history_circle = document.createElement('div');
-	    history_circle.classList.add('circle');
-	    history_line = document.createElement('div');
-	    history_line.classList.add('line');
-	    
-	    history_element.appendChild(history_p_tag);
-	    history_element.appendChild(history_circle);
-	    history_element.appendChild(history_line);
-	}
-	
-    
-    history.appendChild(history_element);
+    history_element.classList.add('info-box');
+    history_element.appendChild(history_element);
+    history_element.textContent = select_button_text;
 
     save_choice_history(select_button_text);
 
