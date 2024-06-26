@@ -1,58 +1,49 @@
 <!doctype html>
-<html>
-  <head>
-    <meta charset="UTF-8" />
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8" />
     <title>Root Page</title>
-	<link rel="stylesheet" href="css/root_page.css">
-	<!-- alert 창 꾸미기 -->
-	<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script> 
-	<script src='js/root_page.js'></script>
+    <link rel="stylesheet" href="css/root_page.css">
+    <script src='js/root_page2.js'></script>
 </head>
-  <body>
-	<div class="navbar">
-	    <div class="navbar-logo">
-	        <img src="/img/insight-logo.png" alt="로고">
-	        <p>Insight story</p>
-	        <form id="storyForm" th:action="@{/root_page}" method="post">
-	        </form>
-	    </div>
+<body>
+	<div class="container">
+		<div class="background-image">
+			<div class="middle-left">
+				<img src="/img/middle-left.png">
+			</div>
+			<div class="middle-left-2">
+				<img src="/img/middle-left-2.png">
+			</div>
+		</div>
+		<div class="contents">
+			<div class="logo">
+				<img src="/img/insight-logo.png" alt="로고" class="logo-img">
+			</div>
+			<div class="text">
+				<div class="subtitle">
+					<h3>생성형 AI를 이용한 Text Game</h3>
+				</div>
+				<div class="title">
+					<h1>Insight Story</h1>
+				</div>
+				<div class="index">
+					<p>여기다가 홈페이지 설명 및 API 입력 관련해서 적기여기다가 홈페이지 설명 및 API 입력 관련해서 적기여기다가 홈페이지 설명 및 API 입력 관련해서 적기여기다가 홈페이지 설명 및 API 입력 관련해서 적기여기다가 홈페이지 설명 및 API 입력 관련해서 적기여기다가 홈페이지 설명 및 API 입력 관련해서 적기</p>
+				</div>
+				<div class="apikey">
+					<form id="apiKeyForm" action="/list" method="get">
+						<div id="errorMessage" class="errorMessage" style="display: block;">유효하지 않은 키 입력</div>
+					    <div class="input-container">
+					        <label for="apiKeyInput"></label>
+					        <input type="text" id="apiKeyInput" name="apiKeyInput" pattern=".{56}" required placeholder="API를 입력하세요.">
+					        <span class="errorIcon" title="유효하지 않은 키 입력">&#9432;</span> <!-- HTML 엔터티로 i 아이콘 사용 -->
+					    </div>
+					    <button type="submit">API 키 등록</button>
+					</form>
+				</div>
+			</div>
+		</div>
 	</div>
-	
-	<div id="contents"> 
-		<div class="container">
-			<div class="left_box"  th:id='${story_list[0].id}' th:text='${story_list[0].name}' 
-			th:style="'background-image: url(' + ${story_list[0].image} + ')'" onclick="goToNextPage('1')" style="cursor:pointer;">
-			</div>
-			<div class="right_box" th:id='${story_list[1].id}' th:text='${story_list[1].name}' 
-			th:style="'background-image: url(' + ${story_list[1].image} + ')'" onclick="goToNextPage('2')" style="cursor:pointer;">
-			</div>
-		</div>
-		<div class="container">
-			<div class="left_box" th:id='${story_list[2].id}' th:text='${story_list[2].name}' 
-			th:style="'background-image: url(' + ${story_list[2].image} + ')'" onclick="goToNextPage('3')" style="cursor:pointer;">
-				#판타지
-			</div>
-			<div class="right_box" th:id='${story_list[3].id}' th:text='${story_list[3].name}' 
-			th:style="'background-image: url(' + ${story_list[3].image} + ')'" onclick="goToNextPage('4')" style="cursor:pointer;">
-				#로맨스
-			</div>
-		</div>
-		<div class="container">
-			<div class="left_box" th:id='${story_list[4].id}' th:text='${story_list[4].name}' 
-			th:style="'background-image: url(' + ${story_list[4].image} + ')'" onclick="goToNextPage('5')" style="cursor:pointer;">
-				#추리
-			</div>
-			<div class="right_box" th:id='${story_list[5].id}' th:text='${story_list[5].name}' 
-			th:style="'background-image: url(' + ${story_list[5].image} + ')'" onclick="goToNextPage('6')" style="cursor:pointer;">
-				#SF
-			</div>
-		</div>
-	</div>	
-	
-	<div id="keyModal" class="modal">
-	    <div class="modal-content">
-	        <iframe src="/api_key" frameborder="0" style="width: 100%; height: 232px;"></iframe>
-	    </div>
-	</div>
-  </body>
+	<script src='/js/api_key.js'></script>
+</body>
 </html>

@@ -1,0 +1,53 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8" />
+    <title>List Page</title>
+    <link rel="stylesheet" href="css/root_page.css">
+</head>
+<body>
+	<div class="header">
+	    <a href="/"><img src="img/insight-logo.png" alt="로고"></a>
+		<div class="insight-story">
+			<p>Insight Story</p>
+		</div>
+	</div>
+    
+    <div id="contents"> 
+        <div class="container">
+            <div class="left_box" th:id="${story_list[0].id}" th:text="${story_list[0].name}" 
+                th:style="'background-image: url(' + ${story_list[0].image} + ')'" onclick="goToNextPage('1')" style="cursor:pointer;">
+            </div>
+            <div class="right_box" th:id="${story_list[1].id}" th:text="${story_list[1].name}" 
+                th:style="'background-image: url(' + ${story_list[1].image} + ')'" onclick="goToNextPage('2')" style="cursor:pointer;">
+            </div>
+        </div>
+        <div class="container">
+            <div class="left_box" th:id="${story_list[2].id}" th:text="${story_list[2].name}" 
+                th:style="'background-image: url(' + ${story_list[2].image} + ')'" onclick="goToNextPage('3')" style="cursor:pointer;">
+                #판타지
+            </div>
+            <div class="right_box" th:id="${story_list[3].id}" th:text="${story_list[3].name}" 
+                th:style="'background-image: url(' + ${story_list[3].image} + ')'" onclick="goToNextPage('4')" style="cursor:pointer;">
+                #로맨스
+            </div>
+        </div>
+        <div class="container">
+            <div class="left_box" th:id="${story_list[4].id}" th:text="${story_list[4].name}" 
+                th:style="'background-image: url(' + ${story_list[4].image} + ')'" onclick="goToNextPage('5')" style="cursor:pointer;">
+                #추리
+            </div>
+            <div class="right_box" th:id="${story_list[5].id}" th:text="${story_list[5].name}" 
+                th:style="'background-image: url(' + ${story_list[5].image} + ')'" onclick="goToNextPage('6')" style="cursor:pointer;">
+                #SF
+            </div>
+        </div>
+    </div>    
+    
+    <div id="keyModal" class="modal">
+        <div class="modal-content">
+            <iframe src="/api_key" frameborder="0" style="width: 100%; height: 232px;"></iframe>
+        </div>
+    </div>
+</body>
+</html>

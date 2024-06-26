@@ -3,11 +3,16 @@ package com.insight.pak;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.ResponseBody;
+// 자체 추가 2줄
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.insight.pak.h2_database.Story;
 import com.insight.pak.h2_database.StoryController;
@@ -25,11 +30,17 @@ public class BasicMapping {
 
     @GetMapping("/")
     public String main(Model model) {
-        List<Story> story_list = storyController.load_all_data();
-        model.addAttribute("story_list", story_list);
         return "root_page";
     }
-
+    
+    // 리뉴얼용 코드 _ 올릴 때 지우기
+    @GetMapping("/list")
+    public String re(Model model) {
+    	// List<Story> story_list = storyController.load_all_data();
+    	// model.addAttribute("story_list", story_list);
+        return "/list";
+    }
+    
     @GetMapping("/content")
     public String content() {
         return "content"; // Content.html 파일명
@@ -43,36 +54,32 @@ public class BasicMapping {
         return "index"; // index.html 템플릿을 렌더링합니다.
     }
 	
+	// 리뉴얼용 코드 _ 올릴 떄 지우기
+	@GetMapping("/index2/{id}")
+    public String indexPage2(Model model, @PathVariable("id") String id) {
+        Story story = storyController.load_select_story(id);
+        model.addAttribute("story", story);
+        return "index2"; // index.html 템플릿을 렌더링합니다.
+    }
+	
 	@GetMapping("/api_key")
-    public String apikey(HttpSession session, Model model) {
-//        boolean isValid = chatGPTService.checkApiKey(session);
-//
-//        if (isValid) {
-//            model.addAttribute("apiKeyStatus", "올바른 API KEY입니다.");
-//        } else {
-//            model.addAttribute("apiKeyStatus", "올바르지 않은 API KEY입니다.");
-//        }
-        return "api_key"; // api_key.html 파일명
+    public String apikey() {
+        return "api_key"; // Content.html 파일명
     }
 
     @GetMapping("/saveApiKey")
     public String getSaveApiKey() {
         return "apikey_test";
     }
-
+ 
+    @ResponseBody
     @PostMapping("/saveApiKey")
-    public String saveApiKey(@RequestParam("apiKey") String apiKey, HttpSession session, Model model) {
-        try {
-            chatGPTService.saveApiKey(session, apiKey);
-            model.addAttribute("apiKey", apiKey);
-            System.out.println("주입된 API_KEY:" + apiKey + "\n");
-            return "apikey_test";
-        } catch (IllegalArgumentException e) {
-            model.addAttribute("error", "유효하지 않은 API KEY 입니다. (서비스 사용 불가)");
-            return "apikey_test"; // 예외 발생 시 서버측에 에러 메세지 표시
-        } catch (Exception e) {
-            model.addAttribute("error", "서버 에러 발생!! (서비스 사용 불가)");
-            return "apikey_test";
+    public String saveApiKey(@RequestBody String api_key, HttpSession session, Model model) {
+        try{
+            chatGPTService.saveApiKey(session, api_key);
+            return "s";
+        }catch(Exception e){
+            return "e";
         }
     }
 }

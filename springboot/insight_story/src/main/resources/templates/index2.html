@@ -1,0 +1,36 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>Index page</title>
+	<link rel="stylesheet" href="/css/index2.css">
+	<script src='/js/index.js'></script>
+  </head>
+  <body>
+	<div class="header">
+	    <a href="/"><img src="img/insight-logo.png" alt="로고"></a>
+		<div class="insight-story">
+			<p>Insight Story</p>
+		</div>
+	</div>
+	
+	<div class="contents">
+		<div class="left">
+			<div class="subtitle">여기 뭐적을까요? 장르?</div>
+			<div class="title">소설 제목 입력</div>
+			<div class="charater">등장인물: 신승우</div>
+			<div class="story">여기다가 배경 줄거리 적기여기다가 배경 줄거리 적기여기다가 배경 줄거리 적기여기다가 배경 줄거리 적기여기다가 배경 줄거리 적기여기다가 배경 줄거리 적기여기다가 배경 줄거리 적기여기다가 배경 줄거리 적기여기다가 배경 줄거리 적기만약에 배경 줄거리를 길게 하고 싶다면 Main Text 부분에다가 스크롤 넣어서 하세요  여기다가 스크롤 스크롤 스크롤 여기다가 스크롤 스크롤 스크롤여기다가 스크롤 스크롤 스크롤여기다가 스크롤 스크롤 스크롤여기다가 스크롤 스크롤 스크롤여기다가 스크롤 스크롤 스크롤여기다가 스크롤 스크롤 스크롤여기다가 스크롤 스크롤 스크롤 만약에 배경 줄거리를 길게 하고 싶다면 Main Text 부분에다가 스크롤 넣어서 하세요  여기다가 스크롤 스크롤 스크롤 여기다가 스크롤 스크롤 스크롤여기다가 스크롤 스크롤 스크롤여기다가 스크롤 스크롤 스크롤여기다가 스크롤 스크롤 스크롤여기다가 스크롤 스크롤 스크롤여기다가 스크롤 스크롤 스크롤여기다가 스크롤 스크롤 스크롤
+			</div>
+		</div>
+		<div class="right">
+			<div class="img-box">
+				<img class="img" th:src="${story.image}">
+			</div>
+			<div class="start"  th:onclick="|goToSelectContent('${story.id}')|" style="cursor:pointer;">
+				시작 버튼
+			</div>
+		</div>
+	</div>
+	</div>
+	</body>
+</html>
