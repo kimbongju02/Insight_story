@@ -1,44 +1,47 @@
 <!doctype html>
 <html>
-  <head>
-    <meta charset="utf-8" />
-    <title>Test Page</title>
+<head>
+	<meta charset="utf-8" />
+    <title>Index page</title>
 	<link rel="stylesheet" href="/css/index.css">
-
-	<script src='/js/index.js'>
-	    
-	</script>
-  </head>
-  <body>
-	<div class="navbar">
-	    <div class="navbar-logo">
-	        <img src="/img/insight-logo.png" alt="로고">
-	        <p>Insight story</p>
-	    </div>
+	<!-- 돌아가기 아이콘-->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+	<script src='/js/index.js'></script>
+</head>
+<body>
+	<div class="header">
+	    <a href="/"><img src="img/insight-logo.png" alt="로고"></a>
+		<div class="insight-story">
+			<p>Insight Story</p>
+		</div>
 	</div>
 	
-	<div id="contents"> 
-		<div class="container">
-			<div class="box" th:id='${story.id}'>
-				<div id="image_box" >
-					<img class="img_box" th:src="${story.image}">
+	<div class="container">
+	<!--	<div style=background-image:url("img/a_whisper_in_the_dark.jpg"); alt="배경화면">-->
+		<div class="back" onclick="history.back()" style="cursor:pointer;">
+			<div class="icon">
+				<i class="fa fa-angle-left fa-2x"></i>
+			</div>
+			<div class="back-text">돌아가기</div>
+		</div>
+		
+		<div class="contents">
+			<div class="left">
+				<div class="subtitle">여기 뭐적을까요? 장르?</div>
+				<div class="title">소설 제목 입력</div>
+				<div class="charater">등장인물: 신승우</div>
+				<div class="story">여기다가 배경 줄거리 적기여기다가 배경 줄거리 적기여기다가 배경 줄거리 적기여기다가 배경 줄거리 적기여기다가 배경 줄거리 적기여기다가 배경 줄거리 적기여기다가 배경 줄거리 적기여기다가 배경 줄거리 적기여기다가 배경 줄거리 적기만약에 배경 줄거리를 길게 하고 싶다면 Main Text 부분에다가 스크롤 넣어서 하세요  여기다가 스크롤 스크롤 스크롤 여기다가 스크롤 스크롤 스크롤여기다가 스크롤 스크롤 스크롤여기다가 스크롤 스크롤 스크롤여기다가 스크롤 스크롤 스크롤여기다가 스크롤 스크롤 스크롤여기다가 스크롤 스크롤 스크롤여기다가 스크롤 스크롤 스크롤 만약에 배경 줄거리를 길게 하고 싶다면 Main Text 부분에다가 스크롤 넣어서 하세요  여기다가 스크롤 스크롤 스크롤 여기다가 스크롤 스크롤 스크롤여기다가 스크롤 스크롤 스크롤여기다가 스크롤 스크롤 스크롤여기다가 스크롤 스크롤 스크롤여기다가 스크롤 스크롤 스크롤여기다가 스크롤 스크롤 스크롤여기다가 스크롤 스크롤 스크롤
 				</div>
-				<div class="span_box">
-					<span class="close" onclick="goBack()" style="cursor:pointer;">&times;</span>
+			</div>
+			<div class="right">
+				<div class="img-box">
+					<img class="img" th:src="${story.image}">
 				</div>
-				<div class="keyword_box">
-					<h1 id="keywordDisplay" th:text='${story.name}'></h1>
-				</div>
-				<div class="story_box">
-					<p id="storyDisplay" th:text='${story.summary}'></p>
-				</div>
-				<div class="start_box">
-					<div class="start"  th:onclick="|goToSelectContent('${story.id}')|" style="cursor:pointer;">
-						시작하기
-					</div>
+				<div class="start"  th:onclick="|goToSelectContent('${story.id}')|" style="cursor:pointer;">
+					시작 버튼
 				</div>
 			</div>
 		</div>
 	</div>
-	</body>
+</body>
 </html>

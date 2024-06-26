@@ -81,9 +81,11 @@ body {
 	width: 31.153vh;
     height: 30.47vh;
 	border-radius: 20px;
-	background-color: aqua;
-	text-align: center;/* 지우기 */
+	background-position: center center;
+    background-size: 100% 100%;
+    opacity: 0.45;
 }
+
 
 .down-box {
 	position: relative;
@@ -91,9 +93,10 @@ body {
 	width: 31.153vh;
     height: 30.47vh;
 	border-radius: 30px;
-	background-color: rgb(255, 255, 0);
-	text-align: center;/* 지우기 */
 	margin-top: 4vh;
+	background-position: center center;
+    background-size: 100% 100%;
+    opacity: 0.45;
 }
 
 .box-background {
@@ -131,8 +134,18 @@ body {
 
 }
 
+.up-box:hover {
+	opacity: 1;
+	transition: opacity 0.3s linear;
+}
+
 .up-box:hover .box-content {
 	opacity: 1;
+}
+
+.down-box:hover {
+	opacity: 1;
+	transition: opacity 0.3s linear;
 }
 
 .down-box:hover .box-content{

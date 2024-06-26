@@ -27,8 +27,8 @@
 	</div>
 	<div class="contents">
 		<div class="left">
-			<div class="up-box">
-				윗 박스
+			<div class="up-box" th:id="${story_list[5].id}" 
+				th:style="'background-image: url(' + ${story_list[5].image} + ')'" onclick="goToNextPage('6')" style="cursor:pointer;">
 				<div class="box-background"></div>
 				<div class="box-content">
 					<div class="box-title">#소설 제목</div>
@@ -39,8 +39,8 @@
 					</div>
 				</div>
 			</div>
-			<div class="down-box">
-				아래 박스
+			<div class="down-box" th:id="${story_list[3].id}" 
+				th:style="'background-image: url(' + ${story_list[3].image} + ')'" onclick="goToNextPage('4')" style="cursor:pointer;">
 				<div class="box-background"></div>
 				<div class="box-content">
 					<div class="box-title">#소설 제목</div>
@@ -53,8 +53,8 @@
 			</div>
 		</div>
 		<div class="mid">
-			<div class="up-box">
-				윗 박스
+			<div class="up-box" th:id="${story_list[4].id}" 
+				th:style="'background-image: url(' + ${story_list[4].image} + ')'" onclick="goToNextPage('5')" style="cursor:pointer;">
 				<div class="box-background"></div>
 				<div class="box-content">
 					<div class="box-title">#소설 제목</div>
@@ -65,8 +65,8 @@
 					</div>
 				</div>
 			</div>
-			<div class="down-box">
-				아래 박스
+			<div class="down-box" th:id="${story_list[2].id}" 
+				th:style="'background-image: url(' + ${story_list[2].image} + ')'" onclick="goToNextPage('3')" style="cursor:pointer;">
 				<div class="box-background"></div>
 				<div class="box-content">
 					<div class="box-title">#소설 제목</div>
@@ -79,8 +79,8 @@
 			</div>
 		</div>
 		<div class="right">
-			<div class="up-box">
-				윗 박스
+			<div class="up-box" th:id="${story_list[0].id}"
+				th:style="'background-image: url(' + ${story_list[0].image} + ')'" onclick="goToNextPage('1')" style="cursor:pointer;">
 				<div class="box-background"></div>
 				<div class="box-content">
 					<div class="box-title">#소설 제목</div>
@@ -91,8 +91,8 @@
 					</div>
 				</div>
 			</div>
-			<div class="down-box">
-				아래 박스
+			<div class="down-box" th:id="${story_list[1].id}" 
+				th:style="'background-image: url(' + ${story_list[1].image} + ')'" onclick="goToNextPage('2')" style="cursor:pointer;">
 				<div class="box-background"></div>
 				<div class="box-content">
 					<div class="box-title">#소설 제목</div>

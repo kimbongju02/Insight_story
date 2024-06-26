@@ -33,11 +33,10 @@ public class BasicMapping {
         return "root_page";
     }
     
-    // 리뉴얼용 코드 _ 올릴 때 지우기
     @GetMapping("/list")
     public String re(Model model) {
-    	// List<Story> story_list = storyController.load_all_data();
-    	// model.addAttribute("story_list", story_list);
+    	List<Story> story_list = storyController.load_all_data();
+    	model.addAttribute("story_list", story_list);
         return "/list";
     }
     
@@ -52,14 +51,6 @@ public class BasicMapping {
         Story story = storyController.load_select_story(id);
         model.addAttribute("story", story);
         return "index"; // index.html 템플릿을 렌더링합니다.
-    }
-	
-	// 리뉴얼용 코드 _ 올릴 떄 지우기
-	@GetMapping("/index2/{id}")
-    public String indexPage2(Model model, @PathVariable("id") String id) {
-        Story story = storyController.load_select_story(id);
-        model.addAttribute("story", story);
-        return "index2"; // index.html 템플릿을 렌더링합니다.
     }
 	
 	@GetMapping("/api_key")
