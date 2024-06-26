@@ -9,6 +9,7 @@ const data_history = {};
 const choice_history = {};
 var option_cnt=0;
 
+//history 영역 포커스 아래 고정
 window.onload = function() {
 	load_image_story(story_id);
     laod_start_story(story_id);
@@ -16,6 +17,18 @@ window.onload = function() {
     var historyContainer = document.querySelector('.history');
     historyContainer.scrollTop = historyContainer.scrollHeight;
 };
+
+//chat 영역 포커스 아래 고정
+document.addEventListener('DOMContentLoaded', function() {
+    var chatContainer = document.querySelector('.chat');
+    function scrollToBottom() {
+        chatContainer.scrollTop = chatContainer.scrollHeight;
+    }
+    //scrollToBottom();
+    
+    const observer = new MutationObserver(scrollToBottom);
+    observer.observe(chatContainer, { childList: true, subtree: true });
+});
 
 // 게임을 시작할 때 첫 스토리 설명 생성 함수
 function laod_start_story(id){
@@ -32,7 +45,7 @@ function load_image_story(id){
     fetch('/load/image/story/'+id)
     .then(response => response.text())
     .then(data => {
-        background_container.style.backgroundImage="url("+data+")";
+        background_container.style.backgroundImage='url("/img/background-shadow.png"), '+"url("+data+")";
     })
     .catch(error => console.error('Error:', error));
 }
@@ -101,6 +114,8 @@ function add_dialogue(select_part_container, dialogue){
         	dialogue_element.classList.add('content');
             const profile_element = document.createElement('div');
             profile_element.classList.add('profile');
+            const profile_p_element = document.createElement('p');
+            profile_p_element.classList.add('profile_p');
             const content1_element = document.createElement('div');
             content1_element.classList.add('content1');
             const content1_p_element = document.createElement('p');
@@ -108,10 +123,12 @@ function add_dialogue(select_part_container, dialogue){
 
 			content1_element.appendChild(content1_p_element)
             dialogue_element.appendChild(profile_element);
+            profile_element.appendChild(profile_p_element);
             dialogue_element.appendChild(content1_element);
             select_part_container.appendChild(dialogue_element);
 
             await one_word_one_time(content1_p_element, item.content);
+            await one_word_one_time(profile_p_element, item.name);
         }
         resolve();
     });

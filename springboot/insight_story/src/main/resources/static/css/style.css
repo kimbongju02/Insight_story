@@ -69,7 +69,7 @@ body {
 	width: 100%;
 	height: 947px;
 	/*opacity: 0.7;*/
-	/*background-image: url("/img/again_we_meet_2.jpg");*/
+	background-image: url("/img/background-shadow.png");
 	background-size: cover;
 }
 
@@ -92,7 +92,6 @@ body {
     text-align: center;
     word-wrap: break-word;
     padding: 20px 30px;
-    margin-top: 30px;
 }
 
 .story p {
@@ -142,7 +141,6 @@ body {
 }
 
 .history::-webkit-scrollbar-thumb {
-    height: 30%;
     background: #6B7C7A;
     border-radius: 10px;
 }
@@ -169,13 +167,13 @@ body {
 	text-shadow: 0px 0px 10px #1EECEC;
 }
 
-#history1 {
+.history1 {
 	display: flex;
 	justify-content: space-between;
 	padding-right: 10px;
 }
 
-#history2 {
+.history2 {
 	display: flex;
 	justify-content: space-between;
 }
@@ -198,7 +196,7 @@ body {
 
 .options {
 	display: flex;
-	position: absolute;
+	position: fixed;
 	justify-content: space-between;
 	align-items: center;
 	width: 70%; 
@@ -213,7 +211,7 @@ body {
     display: flex;
 	justify-content: center;
 	align-items: center;
-	padding: 10px 30px;
+	/*padding: 10px 30px;*/
 	gap: 10px;
 	background: #ABB4B3;
 	border: 1px solid #ABB4B3;
@@ -223,9 +221,10 @@ body {
 	font-family: 'Noto Sans KR';
 	font-style: normal;
 	font-weight: 700;
-	font-size: 20px;
+	font-size: 16px;
 	line-height: 29px;
-
+	width: 220px;
+	height: 50px;
 }
 
 .options button:hover {
@@ -235,37 +234,51 @@ body {
 }
 
 .profile {
-	width: 50px;
-	height: 50px;
-	background: #96E7E5;
-	border-radius: 10px;
-	margin: 30px 20px 20px 0px;
+	display: flex;
+    width: 55px;
+    height: 30px;
+    /* background: rgba(182, 182, 182, 0.3); */
+    border-radius: 10px;
+    margin: 30px 10px 20px 0px;
+}
+
+.profile p {
+    display: flex;
+    /* padding: 3px 3px 3px 5px; */
+    /* margin: 0; */
+    /* position: absolute; */
+    font-style: normal;
+    font-weight: 400;
+    font-size: 16px;
+    /* line-height: 29px; */
+    color: #FFFFFF;
+    opacity: 0.8;
 }
 
 .content1 {
 	display: grid;
-	grid-template-columns: minmax(100%, max-content) 1fr;
-	background: #383838;
-	border: 1px solid #A6A6A6;
-	box-shadow: 0px 0.190909px 0.572727px rgba(0, 0, 0, 0.11), 0px 1.01818px 2.29091px rgba(0, 0, 0, 0.13);
-	border-radius: 10px;
-	margin-top: 30px;
-	padding: 0 30px 0px 30px;
-	max-width: 35%;
+    grid-template-columns: minmax(100%, max-content) 1fr;
+    background: #383838;
+    border: 1px solid #A6A6A6;
+    box-shadow: 0px 0.190909px 0.572727px rgba(0, 0, 0, 0.11), 0px 1.01818px 2.29091px rgba(0, 0, 0, 0.13);
+    border-radius: 10px;
+    /* margin-top: 30px; */
+    padding: 0 30px 0px 30px;
+    max-width: 35%;
+    width: fit-content;
 }
 
 .content1 p {
 	font-family: 'Noto Sans KR';
 	font-style: normal;
 	font-weight: 400;
-	font-size: 20px;
+	font-size: 16px;
 	line-height: 29px;
 	color: #FFFFFF;
 	opacity: 0.8;
 }
 
 .my-chat {
-   	position: relative;
     display: flex;
     background: #383838;
     border: 1px solid #A6A6A6;
@@ -273,19 +286,21 @@ body {
     border-radius: 10px;
     grid-template-columns: minmax(100%, max-content) 1fr;
     margin-top: 30px;
+    margin-bottom: 30px;
     padding: 0 30px 0px 30px;
     max-width: 35%;
     margin-right: 30px;
     left: 55%;
     justify-content: flex-end;
+    float: right;
+    width: fit-content;
 }
 
 .my-chat p {
-	
 	font-family: 'Noto Sans KR';
 	font-style: normal;
 	font-weight: 400;
-	font-size: 20px;
+	font-size: 16px;
 	line-height: 29px;
 	color: #FFFFFF;
 	opacity: 0.8;
@@ -293,8 +308,8 @@ body {
 
 .content {
 	width: 100%;
-	display: flex;
-	flex-direction: row;
+    display: flex;
+    flex-direction: column;
 }
 .content_2 {
 	width: 100%;
