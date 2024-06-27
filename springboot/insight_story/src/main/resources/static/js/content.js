@@ -66,7 +66,7 @@ async function create_chat_div(data) {
     enable_history();
 }
 
-// 스토리를 생성할 때 사용자가 분기 버튼을 클릭하지 못하도록 설정
+/*// 스토리를 생성할 때 사용자가 분기 버튼을 클릭하지 못하도록 설정
 function disable_history(){
     const history_button = document.querySelectorAll('.history p');
     history_button.forEach(function(element){
@@ -81,6 +81,42 @@ function enable_history(){
         button.disabled = false;
     })
 }
+*/
+
+// 스토리 생성 중에 클릭을 막는 함수
+function disable_history() {
+    const history1_paragraphs = document.querySelectorAll('.history1');
+    history1_paragraphs.forEach(function(history1) {
+        history1.addEventListener('click', preventClick, true);
+        history1.style.pointerEvents = 'none';
+    });
+    const history2_paragraphs = document.querySelectorAll('.history2');
+    history2_paragraphs.forEach(function(history2) {
+        history2.addEventListener('click', preventClick, true);
+        history2.style.pointerEvents = 'none';
+    });
+}
+
+// 스토리 생성 후 클릭을 허용하는 함수
+function enable_history() {
+    const history1_paragraphs = document.querySelectorAll('.history1');
+    history1_paragraphs.forEach(function(history1) {
+        history1.removeEventListener('click', preventClick, true);
+        history1.style.pointerEvents = 'auto';
+    });
+    const history2_paragraphs = document.querySelectorAll('.history2');
+    history2_paragraphs.forEach(function(history2) {
+        history2.removeEventListener('click', preventClick, true);
+        history2.style.pointerEvents = 'auto';
+    });
+}
+
+// 클릭을 막는 이벤트 리스너
+function preventClick(event) {
+    event.stopPropagation();
+    event.preventDefault();
+}
+
 
 // create_chat_div 함수에 생성된 스토리 영역을 추가
 function add_story(part, story) {
