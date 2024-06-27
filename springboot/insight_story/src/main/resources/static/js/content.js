@@ -69,8 +69,8 @@ async function create_chat_div(data) {
 // 스토리를 생성할 때 사용자가 분기 버튼을 클릭하지 못하도록 설정
 function disable_history(){
     const history_button = document.querySelectorAll('.history p');
-    history_button.forEach(function(button){
-        button.disabled = true;
+    history_button.forEach(function(element){
+        element.style.userSelect = 'none';
     })
 }
 

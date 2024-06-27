@@ -1,5 +1,6 @@
 package com.insight.pak;
 
+import java.util.HashMap;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.insight.pak.dto.StoryRequest;
 import com.insight.pak.h2_database.Story;
 import com.insight.pak.h2_database.StoryController;
 import com.insight.pak.service.ChatGPTService;
@@ -70,11 +72,12 @@ public class BasicMapping {
  
     @ResponseBody
     @PostMapping("/saveApiKey")
-    public String saveApiKey(@RequestBody String api_key, HttpSession session, Model model) {
-        try{
-            chatGPTService.saveApiKey(session, api_key);
+    public String saveApiKey(@RequestBody HashMap<String, String> api_key, HttpSession session, Model model) {
+        if(chatGPTService.saveApiKey(session, api_key.get("key"))){
+            System.out.println("s");
             return "s";
-        }catch(Exception e){
+        }else{
+            System.out.println("e");
             return "e";
         }
     }

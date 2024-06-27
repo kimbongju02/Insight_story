@@ -7,6 +7,5 @@ function goBack() {
 function goToSelectContent(id){
         console.log(id);
         const url = "/content/"+id;
-        window.location.href = url;
-        
+        window.location.href = url; 
 }

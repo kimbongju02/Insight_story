@@ -12,21 +12,19 @@ async function api_key_register(api_key) {
             })
         });
         const data = await response.text(); // 응답을 텍스트 형식으로 받음
-        return data;
+        
+        if(data==="s")
+            goToList();
+        else{
+            error_element=document.getElementById("errorMessage");
+            error_element.textContent="유효하지 않은 키 입력";
+        }
     } catch (error) {
-        console.error('에러 발생:', error);
-        return 'error';
+        console.error('오류 발생:', error); // 네트워크 오류 등 예외 처리
     }
 }
 
-submitButton.onclick = async function() {
-    var apiKey = document.getElementById("apiKeyInput").value;
-    var api_key_set_result = await api_key_register(apiKey);
-    console.log(api_key_set_result);
-    if (api_key_set_result === 's') {
-        window.parent.postMessage('closeModal', '*');
-        window.parent.postMessage('success', '*');
-    } else {
-        window.parent.postMessage('error', '*');
-    }
-};
+function goToList(){
+    const url = "/list";
+    window.location.href = url; 
+}

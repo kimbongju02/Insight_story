@@ -32,8 +32,21 @@ public class ChatGPTServiceImpl implements ChatGPTService {
 
     // 사용자가 입력한 apikey 저장
     @Override
-    public void saveApiKey(HttpSession session, String apiKey) {
-        session.setAttribute(API_KEY, apiKey);
+    public Boolean saveApiKey(HttpSession session, String apiKey) {
+        if(isValidApiKey(apiKey))
+        {
+            session.setAttribute(API_KEY, apiKey);
+            return true;
+        }else{
+            return false;
+        }
+    }
+
+    // 사용자가 입력한 apikey 검증 메서드
+    private boolean isValidApiKey(String apiKey) {
+        // OpenAI API 키는 총 56자로 이루어진 문자열, 영문 대소문자, 숫자, 일부 특수문자를 포함.
+        String apiKeyPattern = "^[a-zA-Z0-9!@#$%^&*()-_=+\\[\\]{}|;:'\",.<>/?]{56}$";
+        return apiKey.matches(apiKeyPattern);
     }
 
     // 사용자가 입력한 api key 가져옴

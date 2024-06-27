@@ -28,82 +28,59 @@
 	<div class="contents">
 		<div class="left">
 			<div class="up-box" th:id="${story_list[5].id}" 
-				th:style="'background-image: url(' + ${story_list[5].image} + ')'" onclick="goToNextPage('6')" style="cursor:pointer;">
+				th:style="'background-image: url(' + ${story_list[5].image} + ')'" 
+				th:onclick="'goToNextPage('+ ${story_list[5].id} + ')'" style="cursor:pointer;">
 				<div class="box-background"></div>
 				<div class="box-content">
-					<div class="box-title">#소설 제목</div>
-					<div class="box-keyword">
-						<div class="keyword">#키워드1</div>
-						<div class="keyword">#키워드2</div>
-						<div class="keyword">#키워드3</div>
-					</div>
+					<div class="box-title" th:text="${story_list[5].name}"></div>
 				</div>
 			</div>
 			<div class="down-box" th:id="${story_list[3].id}" 
-				th:style="'background-image: url(' + ${story_list[3].image} + ')'" onclick="goToNextPage('4')" style="cursor:pointer;">
+				th:style="'background-image: url(' + ${story_list[3].image} + ')'" 
+				th:onclick="'goToNextPage('+ ${story_list[3].id} + ')'" style="cursor:pointer;">
 				<div class="box-background"></div>
 				<div class="box-content">
-					<div class="box-title">#소설 제목</div>
-					<div class="box-keyword">
-						<div class="keyword">#키워드1</div>
-						<div class="keyword">#키워드2</div>
-						<div class="keyword">#키워드3</div>
-					</div>
+					<div class="box-title" th:text="${story_list[3].name}"></div>
 				</div>
 			</div>
 		</div>
 		<div class="mid">
 			<div class="up-box" th:id="${story_list[4].id}" 
-				th:style="'background-image: url(' + ${story_list[4].image} + ')'" onclick="goToNextPage('5')" style="cursor:pointer;">
+				th:style="'background-image: url(' + ${story_list[4].image} + ')'" 
+				th:onclick="'goToNextPage('+ ${story_list[4].id} + ')'" style="cursor:pointer;">
 				<div class="box-background"></div>
 				<div class="box-content">
-					<div class="box-title">#소설 제목</div>
-					<div class="box-keyword">
-						<div class="keyword">#키워드1</div>
-						<div class="keyword">#키워드2</div>
-						<div class="keyword">#키워드3</div>
-					</div>
+					<div class="box-title" th:text="${story_list[4].name}"></div>
 				</div>
 			</div>
 			<div class="down-box" th:id="${story_list[2].id}" 
-				th:style="'background-image: url(' + ${story_list[2].image} + ')'" onclick="goToNextPage('3')" style="cursor:pointer;">
+				th:style="'background-image: url(' + ${story_list[2].image} + ')'" 
+				th:onclick="'goToNextPage('+ ${story_list[2].id} + ')'" style="cursor:pointer;">
 				<div class="box-background"></div>
 				<div class="box-content">
-					<div class="box-title">#소설 제목</div>
-					<div class="box-keyword">
-						<div class="keyword">#키워드1</div>
-						<div class="keyword">#키워드2</div>
-						<div class="keyword">#키워드3</div>
-					</div>
+					<div class="box-title" th:text="${story_list[2].name}"></div>
 				</div>
 			</div>
 		</div>
 		<div class="right">
 			<div class="up-box" th:id="${story_list[0].id}"
-				th:style="'background-image: url(' + ${story_list[0].image} + ')'" onclick="goToNextPage('1')" style="cursor:pointer;">
+				th:style="'background-image: url(' + ${story_list[0].image} + ')'" 
+				th:onclick="'goToNextPage('+ ${story_list[0].id} + ')'" style="cursor:pointer;">
 				<div class="box-background"></div>
 				<div class="box-content">
-					<div class="box-title">#소설 제목</div>
-					<div class="box-keyword">
-						<div class="keyword">#키워드1</div>
-						<div class="keyword">#키워드2</div>
-						<div class="keyword">#키워드3</div>
-					</div>
+					<div class="box-title" th:text="${story_list[0].name}"></div>
 				</div>
 			</div>
 			<div class="down-box" th:id="${story_list[1].id}" 
-				th:style="'background-image: url(' + ${story_list[1].image} + ')'" onclick="goToNextPage('2')" style="cursor:pointer;">
+				th:style="'background-image: url(' + ${story_list[1].image} + ')'" 
+				th:onclick="'goToNextPage('+ ${story_list[1].id} + ')'" style="cursor:pointer;">
 				<div class="box-background"></div>
 				<div class="box-content">
-					<div class="box-title">#소설 제목</div>
-					<div class="box-keyword">
-						<div class="keyword">#키워드1</div>
-						<div class="keyword">#키워드2</div>
-						<div class="keyword">#키워드3</div>
-					</div>
+					<div class="box-title" th:text="${story_list[1].name}"></div>
 				</div>
 			</div>
 		</div>
 	</div>
+	<script src='/js/root_page.js'></script>
 </body>
 </html>

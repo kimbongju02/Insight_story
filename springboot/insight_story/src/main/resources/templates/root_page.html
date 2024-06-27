@@ -4,7 +4,6 @@
     <meta charset="utf-8" />
     <title>Root Page</title>
     <link rel="stylesheet" href="css/root_page.css">
-    <script src='js/root_page2.js'></script>
 </head>
 <body>
 	<div class="container">
@@ -31,15 +30,12 @@
 					<p>여기다가 홈페이지 설명 및 API 입력 관련해서 적기여기다가 홈페이지 설명 및 API 입력 관련해서 적기여기다가 홈페이지 설명 및 API 입력 관련해서 적기여기다가 홈페이지 설명 및 API 입력 관련해서 적기여기다가 홈페이지 설명 및 API 입력 관련해서 적기여기다가 홈페이지 설명 및 API 입력 관련해서 적기</p>
 				</div>
 				<div class="apikey">
-					<form id="apiKeyForm" action="/list" method="get">
-						<div id="errorMessage" class="errorMessage" style="display: block;">유효하지 않은 키 입력</div>
-					    <div class="input-container">
-					        <label for="apiKeyInput"></label>
-					        <input type="text" id="apiKeyInput" name="apiKeyInput" pattern=".{56}" required placeholder="API를 입력하세요.">
-					        <span class="errorIcon" title="유효하지 않은 키 입력">&#9432;</span> <!-- HTML 엔터티로 i 아이콘 사용 -->
-					    </div>
-					    <button type="submit">API 키 등록</button>
-					</form>
+					<div id="errorMessage" class="errorMessage" style="display: block;"></div>
+					<div class="input-container">
+						<label for="apiKeyInput"></label>
+						<input type="text" id="apiKeyInput" name="apiKeyInput" pattern=".{56}" required placeholder="API를 입력하세요.">
+					</div>
+					<button onclick="api_key_register(document.getElementById('apiKeyInput').value)">API 키 등록</button>
 				</div>
 			</div>
 		</div>
