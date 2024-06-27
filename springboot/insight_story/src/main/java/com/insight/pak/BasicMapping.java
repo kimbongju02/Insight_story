@@ -11,11 +11,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.fasterxml.jackson.core.JsonParseException;
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.insight.pak.dto.StoryRequest;
-import com.insight.pak.dto.StoryResponse;
 import com.insight.pak.h2_database.Story;
 import com.insight.pak.h2_database.StoryController;
 import com.insight.pak.service.ChatGPTService;
