@@ -9,30 +9,28 @@ const data_history = {};
 const choice_history = {};
 var option_cnt=0;
 
-//history 영역 포커스 아래 고정
+// history 영역 포커스 아래 고정
 window.onload = function() {
-	load_image_story(story_id);
+    load_image_story(story_id);
     laod_start_story(story_id);
 
     var historyContainer = document.querySelector('.history');
     historyContainer.scrollTop = historyContainer.scrollHeight;
 };
 
-//chat 영역 포커스 아래 고정
+// chat 영역 포커스 아래 고정
 document.addEventListener('DOMContentLoaded', function() {
     var chatContainer = document.querySelector('.chat');
     function scrollToBottom() {
         chatContainer.scrollTop = chatContainer.scrollHeight;
     }
-    //scrollToBottom();
-    
+
     const observer = new MutationObserver(scrollToBottom);
     observer.observe(chatContainer, { childList: true, subtree: true });
 });
 
 // 게임을 시작할 때 첫 스토리 설명 생성 함수
 function laod_start_story(id){
-    // fetch('/api/story')
     fetch('/generate/init/'+id)
     .then(response => response.json())
     .then(data => {
@@ -66,48 +64,21 @@ async function create_chat_div(data) {
     enable_history();
 }
 
-/*// 스토리를 생성할 때 사용자가 분기 버튼을 클릭하지 못하도록 설정
-function disable_history(){
-    const history_button = document.querySelectorAll('.history p');
-    history_button.forEach(function(button){
-        button.disabled = true;
-    })
-}
-
-// 스토리 생성이 종료된 후 사용자가 분기 버튼을 클릭할 수 있도록 설정
-function enable_history(){
-    const history_button = document.querySelectorAll('.history p');
-    history_button.forEach(function(button){
-        button.disabled = false;
-    })
-}
-*/
-
 // 스토리 생성 중에 클릭을 막는 함수
 function disable_history() {
-    const history1_paragraphs = document.querySelectorAll('.history1');
-    history1_paragraphs.forEach(function(history1) {
-        history1.addEventListener('click', preventClick, true);
-        history1.style.pointerEvents = 'none';
-    });
-    const history2_paragraphs = document.querySelectorAll('.history2');
-    history2_paragraphs.forEach(function(history2) {
-        history2.addEventListener('click', preventClick, true);
-        history2.style.pointerEvents = 'none';
+    const history_paragraphs = document.querySelectorAll('.history1, .history2');
+    history_paragraphs.forEach(function(history) {
+        history.addEventListener('click', preventClick, true);
+        history.style.pointerEvents = 'none';
     });
 }
 
 // 스토리 생성 후 클릭을 허용하는 함수
 function enable_history() {
-    const history1_paragraphs = document.querySelectorAll('.history1');
-    history1_paragraphs.forEach(function(history1) {
-        history1.removeEventListener('click', preventClick, true);
-        history1.style.pointerEvents = 'auto';
-    });
-    const history2_paragraphs = document.querySelectorAll('.history2');
-    history2_paragraphs.forEach(function(history2) {
-        history2.removeEventListener('click', preventClick, true);
-        history2.style.pointerEvents = 'auto';
+    const history_paragraphs = document.querySelectorAll('.history1, .history2');
+    history_paragraphs.forEach(function(history) {
+        history.removeEventListener('click', preventClick, true);
+        history.style.pointerEvents = 'auto';
     });
 }
 
@@ -116,7 +87,6 @@ function preventClick(event) {
     event.stopPropagation();
     event.preventDefault();
 }
-
 
 // create_chat_div 함수에 생성된 스토리 영역을 추가
 function add_story(part, story) {
@@ -128,26 +98,12 @@ function add_story(part, story) {
     });
 }
 
-
-/*function add_dialogue(select_part_container, dialogue){
-    return new Promise(async (resolve) => {
-        for (const item of dialogue) {
-            const dialogue_element = document.createElement('div');
-            dialogue_element.classList.add('content');
-            const dialogue_text = item.name + ": " + item.content;
-            select_part_container.appendChild(dialogue_element);
-            await one_word_one_time(dialogue_element, dialogue_text);
-        }
-        resolve();
-    });
-}*/
-
 // create_chat_div 함수에 생성된 대화 영역을 추가
 function add_dialogue(select_part_container, dialogue){
     return new Promise(async (resolve) => {
         for (const item of dialogue) {
-			const dialogue_element = document.createElement('div');
-        	dialogue_element.classList.add('content');
+            const dialogue_element = document.createElement('div');
+            dialogue_element.classList.add('content');
             const profile_element = document.createElement('div');
             profile_element.classList.add('profile');
             const profile_p_element = document.createElement('p');
@@ -157,7 +113,7 @@ function add_dialogue(select_part_container, dialogue){
             const content1_p_element = document.createElement('p');
             content1_p_element.classList.add('content1_p');
 
-			content1_element.appendChild(content1_p_element)
+            content1_element.appendChild(content1_p_element)
             dialogue_element.appendChild(profile_element);
             profile_element.appendChild(profile_p_element);
             dialogue_element.appendChild(content1_element);
@@ -170,7 +126,6 @@ function add_dialogue(select_part_container, dialogue){
     });
 }
 
-
 // create_chat_div 함수에 생성된 선택지 영역을 추가
 function add_option(choice1, choice2, choice3){
     return new Promise((resolve) => {
@@ -181,11 +136,11 @@ function add_option(choice1, choice2, choice3){
         option1_element.id = 'option_1';
         option2_element.id = 'option_2';
         option3_element.id = 'option_3';
-        if(choice1!= null)
+        if(choice1 != null)
             options.appendChild(option1_element);
-        if(choice2!= null)
+        if(choice2 != null)
             options.appendChild(option2_element);
-        if(choice3!= null)
+        if(choice3 != null)
             options.appendChild(option3_element);
 
         option1_element.textContent = choice1;
@@ -216,7 +171,6 @@ function select_button_event(select_part_container){
                 // 사용자가 선택지 클릭 시 분기 영역에 선택지 추가
                 add_history(select_button_text);
 
-                //create_next_story();
                 laod_start_story(story_id);
                 part_cnt += 1;
 
@@ -224,14 +178,13 @@ function select_button_event(select_part_container){
             });
         });
     });
-};
+}
 
-// 사용자가 선택지 버튼 클릭 시 다음 스토리 생성을 요청
+// 사용자가 선택지 클릭 시 다음 스토리 생성을 요청
 function create_next_story(){
     fetch("/generate/story", {
         method: 'POST',
         body: JSON.stringify({
-            //data: data_history[part_cnt-1],
             data: JSON.stringify(data_history[part_cnt]),
             choice: choice_history[part_cnt],
         }),
@@ -267,64 +220,128 @@ function one_word_one_time(div, story){
 }
 
 // 사용자가 선택지 클릭 시 분기 영역에 선택지 추가
-function add_history(select_button_text){
-    history_element = document.createElement('div');
+function add_history(select_button_text) {
+    const history_element = document.createElement('div');
     history_element.id = "history-" + part_cnt;
     history_element.setAttribute('data-value', part_cnt);
     
-    history_text = (part_cnt+1)+'번 선택: '+select_button_text;
+    const history_text = (part_cnt + 1) + '번 선택: ' + select_button_text;
     
-    if (part_cnt==0){
-		history_element.classList.add('history1');
-		history_p_tag = document.createElement('p');
-	    history_p_tag.textContent = history_text;
-	    history_circle = document.createElement('div');
-	    history_circle.classList.add('circle');
-	    
-	    history_element.appendChild(history_p_tag);
-	    history_element.appendChild(history_circle);
-	}else{
-		history_element.classList.add('history2');
-		history_p_tag = document.createElement('p');
-	    history_p_tag.textContent = history_text;
-	    history_circle = document.createElement('div');
-	    history_circle.classList.add('circle');
-	    history_line = document.createElement('div');
-	    history_line.classList.add('line');
-	    
-	    history_element.appendChild(history_p_tag);
-	    history_element.appendChild(history_circle);
-	    history_element.appendChild(history_line);
-	}
-	
-    
+    if (part_cnt == 0) {
+        history_element.classList.add('history1');
+        var history_p_tag = document.createElement('p'); // 수정된 부분
+        history_p_tag.textContent = history_text;
+        const history_circle = document.createElement('div');
+        history_circle.classList.add('circle');
+        
+        history_element.appendChild(history_p_tag);
+        history_element.appendChild(history_circle);
+    } else {
+        history_element.classList.add('history2');
+        var history_p_tag = document.createElement('p'); // 수정된 부분
+        history_p_tag.textContent = history_text;
+        const history_circle = document.createElement('div');
+        history_circle.classList.add('circle');
+        const history_line = document.createElement('div');
+        history_line.classList.add('line');
+        
+        history_element.appendChild(history_p_tag);
+        history_element.appendChild(history_circle);
+        history_element.appendChild(history_line);
+    }
+
+    history_element.addEventListener('click', function() {
+        confirmGoBack(history_element, history_text); // 수정된 부분
+    });
+
     history.appendChild(history_element);
 
     save_choice_history(select_button_text);
+}
 
-    history_element.addEventListener('click', function() {
-        const select_part_num = parseInt(this.getAttribute('data-value'));
+// 분기 클릭시 대화상자 이벤트
+function confirmGoBack(history_element, select_button_text) {
+    createModal(select_button_text); // 모달 생성 시 선택지 텍스트를 전달
+
+    // 모달 엘리먼트 가져오기
+    const modal = document.getElementById("myModal");
+    const span = document.getElementsByClassName("close")[0];
+    const submitBtn = document.getElementById("submitBtn");
+    const cancelBtn = document.getElementById("cancelBtn");
+
+    // 제출 버튼 클릭 시
+    submitBtn.onclick = function() {
+        modal.style.display = "none";
+        const select_part_num = parseInt(history_element.getAttribute('data-value'));
         const prev_data = data_history[select_part_num];
-        console.log("select_part_num: " + select_part_num+" part_cnt: " + part_cnt);
+        console.log("select_part_num: " + select_part_num + " part_cnt: " + part_cnt);
 
         document.querySelectorAll('.options button').forEach(button => button.remove());
-        for(let i=part_cnt; i>=select_part_num; i--){
+        for (let i = part_cnt; i >= select_part_num; i--) {
             console.log("delete part_cnt: " + i);
-            const part_container = document.getElementById('part-' + (i));
-            const history_container = document.getElementById('history-' + (i));
+            const part_container = document.getElementById('part-' + i);
+            const history_container = document.getElementById('history-' + i);
             
-            if(part_container){
+            if (part_container) {
                 part_container.remove();
             }
-            if(history_container){
+            if (history_container) {
                 history_container.remove();
             }
             delete_data_history(i);
             delete_choice_history(i);
         }
         part_cnt = select_part_num;
-        create_chat_div(prev_data)
-    });
+        create_chat_div(prev_data);
+    }
+
+    // 취소 버튼 클릭 시
+    cancelBtn.onclick = function() {
+        modal.style.display = "none";
+    }
+
+    // 모달 바깥을 클릭하면 모달을 닫음
+    window.onclick = function(event) {
+        if (event.target == modal) {
+            modal.style.display = "none";
+        }
+    }
+
+    // <span> 엘리먼트를 클릭하면 모달을 닫음
+    span.onclick = function() {
+        modal.style.display = "none";
+    }
+}
+
+// 모달을 동적으로 생성하는 함수
+function createModal(text) {
+    // 기존 모달을 제거
+    const existingModal = document.getElementById("myModal");
+    if (existingModal) {
+        existingModal.remove();
+    }
+
+    const modalHtml = `
+        <div id="myModal" class="modal">
+            <div class="modal-content">
+                <span class="close">&times;</span>
+                <p>${text}의 선택지를 변경하시겠습니까?</p>
+                <div class="button-container">
+                    <button id="submitBtn">확인</button>
+                    <button id="cancelBtn">취소</button>
+                </div>
+            </div>
+        </div>
+    `;
+    document.body.insertAdjacentHTML('beforeend', modalHtml);
+
+    // 모달 엘리먼트 가져오기
+    modal = document.getElementById("myModal");
+    span = document.getElementsByClassName("close")[0];
+    submitBtn = document.getElementById("submitBtn");
+    cancelBtn = document.getElementById("cancelBtn");
+
+    modal.style.display = "flex";
 }
 
 // 분기를 클릭하여 돌아갈 때 스토리 전달을 위해 사용하는 함수들
