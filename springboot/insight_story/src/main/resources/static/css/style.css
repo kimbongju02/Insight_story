@@ -275,14 +275,15 @@ body {
 
 .profile {
 	display: flex;
-    width: 55px;
+    /* width: 55px; */
     height: 30px;
     /* background: rgba(182, 182, 182, 0.3); */
     border-radius: 10px;
-    margin: 30px 10px 20px 0px;
+    margin: 30px 10px 5px 0px;
 }
 
 .profile p {
+    align-items: center;
     display: flex;
     /* padding: 3px 3px 3px 5px; */
     /* margin: 0; */
@@ -290,9 +291,10 @@ body {
     font-style: normal;
     font-weight: 400;
     font-size: 16px;
-    /* line-height: 29px; */
+    line-height: 29px;
     color: #FFFFFF;
     opacity: 0.8;
+    max-width: 35%;
 }
 
 .content1 {
