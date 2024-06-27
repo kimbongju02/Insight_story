@@ -63,21 +63,23 @@ public class ChatGPTServiceImpl implements ChatGPTService {
          * prompt : 챗봇에 입력될 문장이나 질문 파라미터
          * */
         ChatGPTRequest request = new ChatGPTRequest(model, prompt);
-
-        /**
-         * ChatGPTResponse 객체 생성
-         * apiURL : 요청을 보낼 API의 URL이 전달되는 파라미터
-         * request : 요청 객체 파라미터
-         * ChatGPTResponse.class : 요청을 보낸 후 받을 응답의 타입 클래스 파라미터
-         * */
-        ChatGPTResponse response = restTemplate.postForObject(apiURL, request, ChatGPTResponse.class);
-
-        // 생성된 텍스트를 반환.
-        return response
+        
+        try{
+            /**
+             * ChatGPTResponse 객체 생성
+             * apiURL : 요청을 보낼 API의 URL이 전달되는 파라미터
+             * request : 요청 객체 파라미터
+             * ChatGPTResponse.class : 요청을 보낸 후 받을 응답의 타입 클래스 파라미터
+             * */
+            ChatGPTResponse response = restTemplate.postForObject(apiURL, request, ChatGPTResponse.class);
+            return response
                 .getChoices()
                 .get(0)
                 .getMessage()
                 .getContent();
+        }catch(Exception e){
+            return "API Error";
+        }
     }
 
     @Override // 첫 스토리 생성할 때 사용할 prompt

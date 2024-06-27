@@ -206,16 +206,23 @@ function one_word_one_time(div, story){
     return new Promise((resolve) => {
         let index = 0;
         const interval = 10;
-
-        const intervalId = setInterval(() => {
-            if (index < story.length) {
-                div.textContent += story[index];
-                index++;
-            } else {
-                clearInterval(intervalId);
-                resolve();
+        try {
+            if (story === null) {
+                throw new TypeError();
             }
-        }, interval);
+            const intervalId = setInterval(() => {
+                if (index < story.length) {
+                    div.textContent += story[index];
+                    index++;
+                } else {
+                    clearInterval(intervalId);
+                    resolve();
+                }
+            }, interval);
+        } catch (TypeError) {
+            createRootModal();
+        }
+        
     });
 }
 
@@ -402,6 +409,41 @@ function createHomeModal() {
     // <span> 엘리먼트를 클릭하면 모달을 닫음
     span.onclick = function() {
         modal.style.display = "none";
+    }
+}
+
+// 메인화면으로 이동 모달 생성
+function createRootModal() {
+    // 기존 모달을 제거
+    const existingModal = document.getElementById("myModal");
+    if (existingModal) {
+        existingModal.remove();
+    }
+
+    const modalHtml = `
+        <div id="myModal" class="modal">
+            <div class="modal-content">
+                <span class="close">&times;</span>
+                <p>GPT API KEY 입력이 잘못되었습니다. 시작 페이지로 돌아갑니다.</p>
+                <div class="button-container">
+                    <button id="homeSubmitBtn">확인</button>
+                </div>
+            </div>
+        </div>
+    `;
+    document.body.insertAdjacentHTML('beforeend', modalHtml);
+
+    // 모달 엘리먼트 가져오기
+    const modal = document.getElementById("myModal");
+    const span = document.getElementsByClassName("close")[0];
+    const homeSubmitBtn = document.getElementById("homeSubmitBtn");
+
+    modal.style.display = "flex";
+
+    // 확인 버튼 클릭 시
+    homeSubmitBtn.onclick = function() {
+        modal.style.display = "none";
+        window.location.href = '/';
     }
 }
 

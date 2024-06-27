@@ -73,25 +73,31 @@ public class ChatGPTController {
     @ResponseBody
     @GetMapping("/generate/init/{id}")
     public StoryResponse getStory(@PathVariable("id") String id) throws JsonProcessingException {
+        ObjectMapper objectMapper = new ObjectMapper();
+        StoryResponse storyResponse = new StoryResponse();
+
         String select_story_prompt = storyController.load_select_story(id).getPrompt();
-        System.out.println("-------------------select_story_prompt---------------------\n"+select_story_prompt);
+        //System.out.println("-------------------select_story_prompt---------------------\n"+select_story_prompt);
 
         String initialPrompt = chatGPTService.Prompt(select_story_prompt);
         String initialStory = chatGPTService.generateText(initialPrompt);
         //String initialStory = test_story;
+        if(initialStory=="API Error"){
+            return storyResponse;
+        }
         if (initialStory.startsWith("출력문:")) {
             initialStory = initialStory.substring(4);
         }
-        System.out.println("-------------------create init story---------------------\n"+initialStory);
+        //System.out.println("-------------------create init story---------------------\n"+initialStory);
 
-        ObjectMapper objectMapper = new ObjectMapper();
-        StoryResponse storyResponse = new StoryResponse();
+        
         // JSON 형식 확인 및 JSON 데이터를 객체로 변환
         try {
             new ObjectMapper().readTree(initialStory);
             storyResponse = objectMapper.readValue(initialStory, StoryResponse.class);
         } catch (JsonParseException e) { // JSON 형식 오류
-            System.out.println("JSON 형식 오류: " + e.getMessage());
+            //System.out.println("JSON 형식 오류: " + e.getMessage());
+            return getStory(id);
         } catch (Exception e) { // JSON 데이터를 객체로 변환 오류
             e.printStackTrace();
         }
@@ -105,12 +111,12 @@ public class ChatGPTController {
     public StoryResponse get_next_story(@RequestBody StoryRequest storyRequest)  throws JsonProcessingException {
         String data = storyRequest.getData();
         String choice = storyRequest.getChoice();
-        System.out.println("-------------------recieve story to html---------------------\n"+data);
-        System.out.println("-------------------recieve choice to html---------------------\n"+choice);
+        //System.out.println("-------------------recieve story to html---------------------\n"+data);
+        //System.out.println("-------------------recieve choice to html---------------------\n"+choice);
 
         String continuePrompt = chatGPTService.continuePrompt(data, choice);
         String nextStory = chatGPTService.generateText(continuePrompt);
-        System.out.println("-------------------send data about next story---------------------\n"+nextStory);
+        //System.out.println("-------------------send data about next story---------------------\n"+nextStory);
 
         ObjectMapper objectMapper = new ObjectMapper();
         StoryResponse storyResponse = new StoryResponse();
@@ -119,7 +125,8 @@ public class ChatGPTController {
             new ObjectMapper().readTree(nextStory);
             storyResponse = objectMapper.readValue(nextStory, StoryResponse.class);
         } catch (JsonParseException e) { // JSON 형식 오류
-            System.out.println("JSON 형식 오류: " + e.getMessage());
+            //System.out.println("JSON 형식 오류: " + e.getMessage());
+            return get_next_story(storyRequest);
         } catch (Exception e) { // JSON 데이터를 객체로 변환 오류
             e.printStackTrace();
         }
