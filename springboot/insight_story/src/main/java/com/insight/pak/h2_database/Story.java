@@ -27,4 +27,7 @@ public class Story {
 
     @Column(length = 100)
     private String image;
+
+    @Column(length = 100)
+    private String image_char;
 }

@@ -105,18 +105,39 @@ body {
 }
 
 .story {
-	display: flex;
-	justify-content: center;
+    display: flex;
+    justify-content: center;
     align-items: flex-start;
     width: 663px;
     height: 483px;
     margin-top: 44px;
-    padding: 20px 35px;
     border-radius: 15px;
+    overflow: auto;
     background-color: #45514F;
     opacity: 0.56;
     font-size: 24px;
 }    
+
+.story-text {
+	height: 424px;
+    overflow: auto;
+    padding: 16px 20px;
+    margin-top: 10px;
+}
+
+.story-text::-webkit-scrollbar {
+	width: 6px;
+}
+
+.story-text::-webkit-scrollbar-thumb {
+	background-color: #6B7C7A;
+	border-radius: 10px;
+}
+        
+.story-text::-webkit-scrollbar-track {
+	background-color: #45514F;
+	border-radius: 15px;
+}
 
 .right {
 	display: flex;

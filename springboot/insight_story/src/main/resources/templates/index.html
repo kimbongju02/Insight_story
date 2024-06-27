@@ -10,7 +10,7 @@
 </head>
 <body>
 	<div class="header">
-	    <a href="/"><img src="img/insight-logo.png" alt="로고"></a>
+	    <a href="/"><img src="/img/insight-logo.png" alt="로고"></a>
 		<div class="insight-story">
 			<p>Insight Story</p>
 		</div>
@@ -28,12 +28,13 @@
 		<div class="contents">
 			<div class="left">
 				<div class="title" th:text="${story.name}"></div>
-				<div class="story" th:text="${story.summary}">
+				<div class="story">
+					<div class="story-text" th:text="${story.summary}"></div>
 				</div>
 			</div>
 			<div class="right">
 				<div class="img-box">
-					<img class="img" th:src="${story.image}">
+					<img class="img" th:src="${story.image_char}">
 				</div>
 				<div class="start"  th:onclick="|goToSelectContent('${story.id}')|" style="cursor:pointer;">
 					시작 버튼
