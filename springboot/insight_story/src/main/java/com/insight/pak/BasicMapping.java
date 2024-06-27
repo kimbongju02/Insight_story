@@ -10,6 +10,9 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.ResponseBody;
+// 자체 추가 2줄
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.insight.pak.h2_database.Story;
 import com.insight.pak.h2_database.StoryController;
@@ -27,11 +30,16 @@ public class BasicMapping {
 
     @GetMapping("/")
     public String main(Model model) {
-        List<Story> story_list = storyController.load_all_data();
-        model.addAttribute("story_list", story_list);
         return "root_page";
     }
-
+    
+    @GetMapping("/list")
+    public String re(Model model) {
+    	List<Story> story_list = storyController.load_all_data();
+    	model.addAttribute("story_list", story_list);
+        return "/list";
+    }
+    
     @GetMapping("/content")
     public String content() {
         return "content"; // Content.html 파일명
