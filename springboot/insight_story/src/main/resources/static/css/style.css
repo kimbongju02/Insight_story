@@ -372,7 +372,6 @@ body {
     align-items: center;
 }
 
-/* 모달 내용 스타일 */
 .modal-content {
     background-color: #383838;
     padding: 20px;
@@ -395,8 +394,8 @@ body {
 }
 
 .modal-content p {
-	text-align: center;
-	color: #ffffff;
+    text-align: center;
+    color: #ffffff;
     opacity: 0.8;
 }
 
@@ -415,14 +414,13 @@ button {
     cursor: pointer;
 }
 
-#submitBtn {
-	margin-left: 180px;
+#submitBtn, #homeSubmitBtn {
+	margin-left: 175px;
     background-color: #527875;
     color: white;
 }
 
-
-#cancelBtn {
+#cancelBtn, #homeCancelBtn {
     background-color: #383838;
     color: white;
     border: 1px solid #888;

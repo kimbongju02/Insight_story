@@ -336,12 +336,73 @@ function createModal(text) {
     document.body.insertAdjacentHTML('beforeend', modalHtml);
 
     // 모달 엘리먼트 가져오기
-    modal = document.getElementById("myModal");
-    span = document.getElementsByClassName("close")[0];
-    submitBtn = document.getElementById("submitBtn");
-    cancelBtn = document.getElementById("cancelBtn");
+    const modal = document.getElementById("myModal");
+    const span = document.getElementsByClassName("close")[0];
+    const submitBtn = document.getElementById("submitBtn");
+    const cancelBtn = document.getElementById("cancelBtn");
 
     modal.style.display = "flex";
+}
+
+// home-button 클릭 시 모달 표시
+const homeButton = document.querySelector('.home-button');
+homeButton.addEventListener('click', function(event) {
+    event.preventDefault();
+    createHomeModal();
+});
+
+// 메인화면으로 이동 모달 생성
+function createHomeModal() {
+    // 기존 모달을 제거
+    const existingModal = document.getElementById("myModal");
+    if (existingModal) {
+        existingModal.remove();
+    }
+
+    const modalHtml = `
+        <div id="myModal" class="modal">
+            <div class="modal-content">
+                <span class="close">&times;</span>
+                <p>메인화면으로 이동하시겠습니까?</p>
+                <div class="button-container">
+                    <button id="homeSubmitBtn">확인</button>
+                    <button id="homeCancelBtn">취소</button>
+                </div>
+            </div>
+        </div>
+    `;
+    document.body.insertAdjacentHTML('beforeend', modalHtml);
+
+    // 모달 엘리먼트 가져오기
+    const modal = document.getElementById("myModal");
+    const span = document.getElementsByClassName("close")[0];
+    const homeSubmitBtn = document.getElementById("homeSubmitBtn");
+    const homeCancelBtn = document.getElementById("homeCancelBtn");
+
+    modal.style.display = "flex";
+
+    // 확인 버튼 클릭 시
+    homeSubmitBtn.onclick = function() {
+        modal.style.display = "none";
+        window.location.href = '/';
+    }
+
+    // 취소 버튼 클릭 시
+    homeCancelBtn.onclick = function() {
+        modal.style.display = "none";
+    }
+
+    // 모달 바깥을 클릭하면 모달을 닫음
+    window.onclick = function(event) {
+        if (event.target == modal) {
+            modal.style.display = "none";
+        }
+    }
+
+    // <span> 엘리먼트를 클릭하면 모달을 닫음
+    span.onclick = function() {
+        modal.style.display = "none";
+    }
 }
 
 // 분기를 클릭하여 돌아갈 때 스토리 전달을 위해 사용하는 함수들
