@@ -12,7 +12,7 @@ var option_cnt=0;
 //history 영역 포커스 아래 고정
 window.onload = function() {
 	load_image_story(story_id);
-    laod_start_story(story_id);
+    load_start_story(story_id);
 
     var historyContainer = document.querySelector('.history');
     historyContainer.scrollTop = historyContainer.scrollHeight;
@@ -31,7 +31,7 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 // 게임을 시작할 때 첫 스토리 설명 생성 함수
-function laod_start_story(id){
+function load_start_story(id){
     // fetch('/api/story')
     fetch('/generate/init/'+id)
     .then(response => response.json())
@@ -216,8 +216,8 @@ function select_button_event(select_part_container){
                 // 사용자가 선택지 클릭 시 분기 영역에 선택지 추가
                 add_history(select_button_text);
 
-                //create_next_story();
-                laod_start_story(story_id);
+                create_next_story();
+                
                 part_cnt += 1;
 
                 options.innerHTML = ''; 

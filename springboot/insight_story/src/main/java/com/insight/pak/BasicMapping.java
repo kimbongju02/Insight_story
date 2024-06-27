@@ -41,16 +41,6 @@ public class BasicMapping {
     	model.addAttribute("story_list", story_list);
         return "/list";
     }
-    
-    @GetMapping("/content")
-    public String content() {
-        return "content"; // Content.html 파일명
-    }
-    
-    @GetMapping("/testpage")
-    public String testpage() {
-        return "testpage"; // Content.html 파일명
-    }
 	
     // 사용자가 스토리를 클릭했을 때 상세 스토리 설명 페이지로 이동
 	@GetMapping("/index/{id}")

@@ -5,63 +5,39 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}">
 	<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500;700;900&display=swap" rel="stylesheet">
-    <title>Content page</title>
+    <title>Test page</title>
 </head>
 <body>
 <div class="header">
-    <a href="/"><img src="//img/insight-logo.png" alt="로고"></a>
+    <a href="/"><img src="img/insight-logo.png" alt="로고"></a>
 	<div class="insight-story">
 		<p>Insight Story</p>
 	</div>
 </div>
 
-<div class="container">
+<div class="container" th:id='${story_id}'>
+<!--	<div style=background-image:url("img/a_whisper_in_the_dark.jpg"); alt="배경화면">-->
     <div class="wrap">
 		<div class="chat-container">
 			<div class="chat">
-				<div class="story">
-					<p>나레이션 나레이션 여기다가 여기다가 나레이션을 적어요나레이션 나레이션 여기다가 여기다가 나레이션을 적어요나레이션 나레이션 여기다가 여기다가 나레이션을 적어요나레이션 나레이적어요나레이션 나레이션 여기다가 여기다가 나레이션을 적어요여기다가 나레이션을 적어요여기다가 나레이션을 적어요여기다가 나레이션을 적어요여기다가 나레이션을 적어요여기다가 나레이션을 적어요여기다가 나레이션을 적어요적어요여기다가 나레이션을 적어요적어요여기다가 나레이션을 적어요적어요여기다가 나레이션을 적어요</p>
-				</div>
-				<div class="content">
-					<div class="profile">
-					</div>
-					<div class="content1">
-						<p>대화 내용 대화 내용 대화 내용대화 내용 대화 내용 대화 내용대화 내용 대화 내용 대화 내용대화 내용 대화 내용 대화 내용대화 내용 대화 내용 대화 내용</p>
-					</div>
-				</div>
-					<div class="my-chat">
-						<p>dd</p>
-					</div>
+				
 			</div>
 		</div>
 		
 		<div class="options">
-			<button>버튼 버튼 버튼</button>
-			<button>버튼 버튼 버튼</button>
-			<button>버튼 버튼 버튼</button>
+			
 		</div>
 		
 		<div class="history-container">
 			<p>History</p>
 			<div class="history">
-				<div class="history1">
-					<p>1번 선택: 히스토리 내용 히스토리 내용 히스토리 내용</p>
-					<div class="circle"></div>
-				</div>
-				<div class="history2">
-					<p>2번 선택: 히스토리 내용 히스토리 내용 히스토리 내용</p>
-					<div class="circle"></div>
-					<div class="line"></div>
-				</div>
+				
 			</div>
 		</div>
 	</div>
 </div>
-<script>
-    window.onload = function() {
-        var historyContainer = document.querySelector('.history');
-        historyContainer.scrollTop = historyContainer.scrollHeight;
-    };
+<script src="/js/content.js">
+    
 </script>
 </body>
 </html>
