@@ -33,4 +33,7 @@ public class Story {
 
     @Column(length = 50)
     private String character;
+    
+    @Column(length = 50)
+    private String genre;
 }

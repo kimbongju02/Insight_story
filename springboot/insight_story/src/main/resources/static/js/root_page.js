@@ -1,3 +1,5 @@
+
+
 // 모달 열기
 window.onload = function() {
     var modal = document.getElementById("keyModal");
@@ -30,3 +32,5 @@ window.onload = function() {
 function goToNextPage(keyword) {
     window.location.href = "/index/"+keyword;
 }
+
+

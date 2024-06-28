@@ -43,7 +43,7 @@ function load_image_story(id){
     fetch('/load/image/story/'+id)
     .then(response => response.text())
     .then(data => {
-        background_container.style.backgroundImage="url(\""+data+"\")";
+        background_container.style.backgroundImage='url("/img/background-shadow.png"), '+"url("+data+")";
     })
     .catch(error => console.error('Error:', error));
 }
@@ -205,7 +205,7 @@ function create_next_story(){
 function one_word_one_time(div, story){
     return new Promise((resolve) => {
         let index = 0;
-        const interval = 10;
+        const interval = 30;
         try {
             if (story === null) {
                 throw new TypeError();

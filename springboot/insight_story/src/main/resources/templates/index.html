@@ -18,7 +18,8 @@
 		</div>
 	</a>
 	
-	<div class="container" >
+	<div class="container" th:style="'background-image: url(\'/img/background-shadow.png\'), url(' + ${story.getImage} + ');'">
+		
 		<div class="back" onclick="history.back()" style="cursor:pointer;">
 			<div class="icon">
 				<i class="fa fa-angle-left fa-2x"></i>
