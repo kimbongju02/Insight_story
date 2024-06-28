@@ -1,6 +1,8 @@
 package com.insight.pak.dto;
 
 import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
 /**
  * Choice
@@ -10,6 +12,8 @@ import lombok.Data;
  * */
 
 @Data
+@Getter
+@Setter
 public class Choice {
     private Message message;
 }

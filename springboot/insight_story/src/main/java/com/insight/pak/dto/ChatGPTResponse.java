@@ -2,7 +2,9 @@ package com.insight.pak.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import java.util.List;
 
@@ -17,6 +19,8 @@ import java.util.List;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
+@Getter
+@Setter
 public class ChatGPTResponse {
     private String story;
     private List<Choice> choices;
@@ -27,5 +31,8 @@ public class ChatGPTResponse {
     public static class Choice {
         private int index;
         private Message message;
+		public Message getMessage() {
+			return message;
+		}
     }
 }

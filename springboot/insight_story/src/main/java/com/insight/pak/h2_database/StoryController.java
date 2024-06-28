@@ -8,10 +8,10 @@ import org.springframework.stereotype.Controller;
 
 import lombok.RequiredArgsConstructor;
 
-@RequiredArgsConstructor
+
 @Controller
 public class StoryController {
-    @Autowired
+	@Autowired
     private StoryService storyService;
 
     // db에서 모든 스토리 값 가져옴

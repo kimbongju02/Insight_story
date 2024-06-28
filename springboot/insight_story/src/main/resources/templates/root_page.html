@@ -8,12 +8,7 @@
 <body>
 	<div class="container">
 		<div class="background-image">
-			<div class="middle-left">
-				<img src="/img/middle-left.png">
-			</div>
-			<div class="middle-left-2">
-				<img src="/img/middle-left-2.png">
-			</div>
+
 		</div>
 		<div class="contents">
 			<div class="logo">
@@ -27,15 +22,21 @@
 					<h1>Insight Story</h1>
 				</div>
 				<div class="index">
-					<p>여기다가 홈페이지 설명 및 API 입력 관련해서 적기여기다가 홈페이지 설명 및 API 입력 관련해서 적기여기다가 홈페이지 설명 및 API 입력 관련해서 적기여기다가 홈페이지 설명 및 API 입력 관련해서 적기여기다가 홈페이지 설명 및 API 입력 관련해서 적기여기다가 홈페이지 설명 및 API 입력 관련해서 적기</p>
+					<p>
+						이 홈페이지는 GPT 3.5 turbo를 기반으로 텍스트 게임을 수행합니다. <br>
+						게임을 플레이하기 위해서는 GPT API 키 입력이 필요합니다.<br>
+						다양한 스토리로 특별한 경험을 즐겨보세요.
+					</p>
 				</div>
 				<div class="apikey">
+					<p><a href="https://velog.io/@bong02/OpenAI-API-KEY-%EB%B0%9C%EA%B8%89-%EB%B0%A9%EB%B2%95" style="color: antiquewhite;">GPT API 키 발급 방법</a></p>	
 					<div id="errorMessage" class="errorMessage" style="display: block;"></div>
 					<div class="input-container">
 						<label for="apiKeyInput"></label>
 						<input type="text" id="apiKeyInput" name="apiKeyInput" pattern=".{56}" required placeholder="API를 입력하세요.">
 					</div>
 					<button onclick="api_key_register(document.getElementById('apiKeyInput').value)">API 키 등록</button>
+					
 				</div>
 			</div>
 		</div>

@@ -1,6 +1,7 @@
 package com.insight.pak.config;
 
 import jakarta.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -16,10 +17,9 @@ import org.springframework.web.client.RestTemplate;
 
 @Configuration
 public class ChatGPTConfig {
-
+  
     private final HttpSession httpSession;
-
-    @Autowired
+    
     public ChatGPTConfig(HttpSession httpSession) {
         this.httpSession = httpSession;
     }

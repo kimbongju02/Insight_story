@@ -22,7 +22,6 @@ body {
 	width: 100%;
 	padding: 10px 0 10px 0;
 	background: #0F0F12;
-	color: #84B9B3;
 }
 
 .header img {
@@ -32,6 +31,20 @@ body {
 	flex: none;
 	order: 0;
 	flex-grow: 0;
+}
+
+.insight-story {
+	width: 260px;
+	height: 57px;
+	font-family: 'Noto Sans KR';
+	font-style: normal;
+	font-weight: 700;
+	font-size: 40px;
+	line-height: 58px;
+	display: flex;
+	align-items: center;
+	text-align: center;
+	color: #84B9B3;
 }
 
 .middle-left {

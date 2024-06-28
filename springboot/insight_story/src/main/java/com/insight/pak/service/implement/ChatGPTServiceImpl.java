@@ -4,6 +4,8 @@ import com.insight.pak.dto.ChatGPTRequest;
 import com.insight.pak.dto.ChatGPTResponse;
 import com.insight.pak.service.ChatGPTService;
 import jakarta.servlet.http.HttpSession;
+import lombok.RequiredArgsConstructor;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
@@ -26,7 +28,6 @@ public class ChatGPTServiceImpl implements ChatGPTService {
     private String apiURL;
 
     private static final String API_KEY = "openAiApiKey";
-
     @Autowired
     private RestTemplate restTemplate;
 
@@ -78,6 +79,7 @@ public class ChatGPTServiceImpl implements ChatGPTService {
                 .getMessage()
                 .getContent();
         }catch(Exception e){
+        	System.out.println(e);
             return "API Error";
         }
     }

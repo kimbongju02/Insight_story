@@ -11,24 +11,21 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.ResponseBody;
-// 자체 추가 2줄
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import com.insight.pak.dto.StoryRequest;
 import com.insight.pak.h2_database.Story;
 import com.insight.pak.h2_database.StoryController;
 import com.insight.pak.service.ChatGPTService;
 
 import jakarta.servlet.http.HttpSession;
+import lombok.RequiredArgsConstructor;
 
 @Controller
 public class BasicMapping {
-
-    @Autowired
-    private ChatGPTService chatGPTService;
-    @Autowired
-    private StoryController storyController;
+	
+	@Autowired
+	private ChatGPTService chatGPTService;
+	@Autowired
+	private StoryController storyController;
 
     @GetMapping("/")
     public String main(Model model) {
@@ -39,7 +36,7 @@ public class BasicMapping {
     public String re(Model model) {
     	List<Story> story_list = storyController.load_all_data();
     	model.addAttribute("story_list", story_list);
-        return "/list";
+        return "list";
     }
 	
     // 사용자가 스토리를 클릭했을 때 상세 스토리 설명 페이지로 이동

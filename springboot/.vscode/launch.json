@@ -1,0 +1,14 @@
+{
+    "configurations": [
+        {
+            "type": "java",
+            "name": "Spring Boot-InsightStoryApplication<insight_story>",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "mainClass": "com.insight.pak.InsightStoryApplication",
+            "projectName": "insight_story",
+            "args": "",
+            "envFile": "${workspaceFolder}/.env"
+        }
+    ]
+}

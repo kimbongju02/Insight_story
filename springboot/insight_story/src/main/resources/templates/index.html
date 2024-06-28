@@ -16,27 +16,26 @@
 		</div>
 	</div>
 	
-	<div class="container">
-	<!--	<div style=background-image:url("img/a_whisper_in_the_dark.jpg"); alt="배경화면">-->
+	<div class="container" >
 		<div class="back" onclick="history.back()" style="cursor:pointer;">
 			<div class="icon">
 				<i class="fa fa-angle-left fa-2x"></i>
 			</div>
 			<div class="back-text">돌아가기</div>
 		</div>
-		
 		<div class="contents">
 			<div class="left">
-				<div class="title" th:text="${story.name}"></div>
+				<div class="title" th:text="${story.getName}"></div>
+				<div class="charater" th:text="'등장인물:  '+ ${story.getCharacter}"></div>
 				<div class="story">
-					<div class="story-text" th:text="${story.summary}"></div>
+					<div class="story-text" th:text="${story.getSummary}"></div>
 				</div>
 			</div>
 			<div class="right">
 				<div class="img-box">
-					<img class="img" th:src="${story.image_char}">
+					<img class="img" th:src="${story.getImage_char}">
 				</div>
-				<div class="start"  th:onclick="|goToSelectContent('${story.id}')|" style="cursor:pointer;">
+				<div class="start"  th:onclick="|goToSelectContent('${story.getId}')|" style="cursor:pointer;">
 					시작 버튼
 				</div>
 			</div>

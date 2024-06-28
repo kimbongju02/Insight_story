@@ -1,6 +1,9 @@
 package com.insight.pak.dto;
 
 import lombok.Data;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -13,6 +16,9 @@ import java.util.List;
  * message
  * */
 @Data
+@Getter
+@Setter
+@NoArgsConstructor
 public class ChatGPTRequest {
     private String model;
     private List<Message> messages;
@@ -22,4 +28,5 @@ public class ChatGPTRequest {
         this.messages = new ArrayList<>();
         this.messages.add(new Message("user", prompt));
     }
+
 }

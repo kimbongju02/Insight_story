@@ -7,11 +7,11 @@ import org.springframework.stereotype.Service;
 
 import lombok.RequiredArgsConstructor;
 
-@RequiredArgsConstructor
+
 @Service
 public class StoryService {
-    @Autowired
-    private final StoryRepository storyRepository;
+	@Autowired
+    private StoryRepository storyRepository;
 
     // db에서 모든 스토리 값 가져옴
     public List<Story> find_all() {

@@ -43,7 +43,7 @@ function load_image_story(id){
     fetch('/load/image/story/'+id)
     .then(response => response.text())
     .then(data => {
-        background_container.style.backgroundImage='url("/img/background-shadow.png"), '+"url("+data+")";
+        background_container.style.backgroundImage="url(\""+data+"\")";
     })
     .catch(error => console.error('Error:', error));
 }

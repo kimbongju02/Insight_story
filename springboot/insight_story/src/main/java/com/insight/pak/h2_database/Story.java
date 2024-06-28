@@ -30,4 +30,7 @@ public class Story {
 
     @Column(length = 100)
     private String image_char;
+
+    @Column(length = 50)
+    private String character;
 }
